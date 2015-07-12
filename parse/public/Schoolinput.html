@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- momentjs -->
+        <script src="bootstrap-editable/js/moment.min.js"></script>
+        <script src="vendors/jquery.dataTables.min.js"></script>
+        <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+        <script src="bootstrap-editable/js/address.js"></script>
+        <script type="text/javascript" src="vendors/parse.js"></script>
+        <style type="text/css">
+            body {
+                padding-top: 50px;
+                padding-bottom: 30px;
+            }
+        
+        table.table > tbody > tr > td {
+            height: 30px;
+            vertical-align: middle;
+        }
+        /* address.js css style for address*/
+        .editable-address {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .editable-address span {
+            width: 70px;
+            display: inline-block;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="msg" class="alert"></div>
+        <table id="user" class="table table-bordered table-striped" style="clear: both">
+            <tbody>
+                <tr>
+                    <td width="20%" align="right">学校名称</td>
+                    <td width="25%">School Name</td>
+                    <td width="55%"><a href="#" class="myeditable" id="schoolname" data-type="text" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">学校地址</td>
+                    <td>School Address</td>
+                    <td><a href="#" id="schooladdress" class="myeditable" data-type="address" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">学校联系电话</td>
+                    <td>School Phone Number</td>
+                    <td><a href="#" id="schoolphonenumber" class="myeditable" data-type="number" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">校长</td>
+                    <td>Principal</td>
+                    <td><a href="#" id="principal" class="myeditable" data-type="text"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">电子邮箱</td>
+                    <td>Email Address</td>
+                    <td><a href="#" id="email" class="myeditable" data-type="email"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">学校网址</td>
+                    <td>School Website</td>
+                    <td><a href="#" id="schoolwebsite" class="myeditable" data-type="url"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">学区</td>
+                    <td>School District</td>
+                    <td><a href="#" id="schooldistrict" class="myeditable" data-type="select" data-value=""></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button id="save-btn" class="btn btn-primary">保存 / Save</button>
+            <button id="reset-btn" class="btn pull-right">重置 / Reset</button>
+        </div>
+        <script>
+            $(function(){
+              //initialize Parse
+              Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+              //defaults
+              //$.fn.editable.defaults.url = '/post';
+              
+              //editables
+              $('#schoolname').editable({
+                  name: 'schoolname',
+                                      url : '',
+                  validate: function(value) {
+                  if($.trim(value) == ''){ return 'This field is required';
+                  }
+                  },
+                                      success: function(response, newValue) {
+                                      console.log(newValue);
+                                      }
+              });
+              $('#schooladdress').editable({
+                                     value: {
+                                     city: "San Diego",
+                                     street: "",
+                                     zipcode: "92129"
+                                     },
+                                     validate: function(value) {
+                                     if(value.city == '') return 'city is required!';
+                                     },
+                                     display: function(value) {
+                                     if(!value) {
+                                     $(this).empty();
+                                     return;
+                                     }
+                                     var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ', ' + $('<div>').text(value.zipcode).html();
+                                     $(this).html(html);
+                                     }
+              });
+              $('#schoolphonenumber').editable();
+              $('#principal').editable();
+              $('#email').editable();
+              $('#schoolwebsite').editable();
+              $('#schooldistrict').editable({
+                                 prepend: "not selected",
+                                 source: [
+                                          {value: "Poway Unified School District", text: 'Poway Unified School District'},
+                                          {value: "San Diego Unified School District", text: 'San Diego Unified School District'},
+                                          {value: "Del Mar Union School District", text: 'Del Mar Union School District'}
+                                          ],
+                                 display: function(value, sourceData) {
+                                 var colors = {"": "gray", 1: "green", 2: "blue"},
+                                 elem = $.grep(sourceData, function(o){return o.value == value;});
+                                 
+                                 if(elem.length) {
+                                 $(this).text(elem[0].text);
+                                 } else {
+                                 $(this).empty();
+                                 }
+                                 }
+                                 });
+          
+              
+              $('#user .editable').on('hidden', function(e, reason){
+                  if(reason === 'save' || reason === 'nochange') {
+                  var $next = $(this).closest('tr').next().find('.editable');
+                  if($('#autoopen').is(':checked')) {
+                  setTimeout(function() {
+                             $next.editable('show');
+                             }, 300); 
+                  } else {
+                  $next.focus();
+                  } 
+                  }
+              });
+              
+              });
+              // save button validation
+              $('#save-btn').click(function() {
+                    var values = $('.myeditable').editable('submit',{
+                         ajaxOptions: {
+                         dataType: 'json' //assuming json response
+                         },
+                         success: function(data, config) {
+                         console.log(data);
+                         if(data && data.id) {  //record created, response like {"id": 2}
+                         //set pk
+                         $(this).editable('option', 'pk', data.id);
+                         //remove unsaved class
+                         $(this).removeClass('editable-unsaved');
+                         //show messages
+                         var msg = 'New school created! Now editables submit individually.';
+                         $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+                         $('#save-btn').hide();
+                         $(this).off('save.newuser');
+                         } else if(data && data.errors){ 
+                         //server-side validation error, response like {"errors": {"username": "username already exist"} }
+                         config.error.call(this, data.errors);
+                         }               
+                         },
+                         error: function(errors) {
+                         var msg = '';
+                         if(errors && errors.responseText) { //ajax error, errors = xhr object
+                         msg = errors.responseText;
+                         } else { //validation error (client-side or server-side)
+                         $.each(errors, function(k, v) { msg += k+": "+v+"<br>"; });
+                         } 
+                         $('#msg').removeClass('alert-success').addClass('alert-error').html(msg).show();
+                         }
+                         });
+                         var School = Parse.Object.extend("School");
+                         var school = new School();
+                                   for(key in values){
+                                   if (values.hasOwnProperty(key)){
+                                   school.set(key,values[key]);
+                                   }
+                                   }
+                                   school.save(null, {
+                                   success: function(school) {
+                                      // Execute any logic that should take place after the object is saved.
+                                      alert('New school saved.');
+                                      },
+                                      error: function(school, error) {
+                                      // Execute any logic that should take place if the save fails.
+                                      // error is a Parse.Error with an error code and message.
+                                      alert('Failed to create new object, with error code: ' + error.message);
+                                      }
+                                    });
+            });
+            // reset button
+            $('#reset-btn').click(function() {
+              $('.myeditable').editable('setValue', null)  //clear values
+              .editable('option', 'pk', null)          //clear pk
+              .removeClass('editable-unsaved');        //remove bold css
+              });
+        </script>
+    </body>
+</html>

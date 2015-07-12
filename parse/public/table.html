@@ -1,0 +1,328 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- momentjs -->
+        <script src="bootstrap-editable/js/moment.min.js"></script>
+        <script src="vendors/jquery.dataTables.min.js"></script>
+        <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+        <script src="bootstrap-editable/js/address.js"></script>
+        <script type="text/javascript" src="vendors/parse.js"></script>
+        <style type="text/css">
+            body {
+                padding-top: 50px;
+                padding-bottom: 30px;
+            }
+        
+        table.table > tbody > tr > td {
+            height: 30px;
+            vertical-align: middle;
+        }
+        /* address.js css style for address*/
+        .editable-address {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .editable-address span {
+            width: 70px;
+            display: inline-block;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="msg" class="alert"></div>
+        <table id="user" class="table table-bordered table-striped" style="clear: both">
+            <tbody>
+                <tr>
+                    <td width="35%">Last Name / 姓</td>
+                    <td width="65%"><a href="#" class="myeditable" id="lastname" data-type="text" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td>First Name / 名</td>
+                    <td><a href="#" id="firstname" class="myeditable" data-type="text" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td>Gender / 性别</td>
+                    <td><a href="#" id="sex" class="myeditable" data-type="select" data-value=""></a></td>
+                </tr>
+                <tr>
+                    <td>Birthday / 生日</td>
+                    <td><a href="#" id="dob" class="myeditable" data-type="combodate" data-value="2010-10-29" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY"></a></td>
+                </tr>
+                <tr>
+                    <td>School / 学校</td>
+                    <td><a href="#" id="school" class="myeditable" data-type="select" data-source="/groups"></a></td>
+                </tr>
+                <tr>
+                    <td>Grade / 年纪</td>
+                    <td><a href="#" id="grade" class="myeditable" data-type="select" data-value=""></a></td>
+                </tr>
+                <tr>
+                    <td>Room Number / 教室</td>
+                    <td><a href="#" id="roomnumber" class="myeditable" data-type="text"></a></td>
+                </tr>
+                <tr>
+                    <td>Home Address / 家庭地址</td>
+                    <td><a href="#" id="address" class="myeditable" data-type="address" ></a></td>
+                </tr>
+                <tr>
+                    <td>Contact / 联系人</td>
+                    <td><a href="#" id="contact" class="myeditable" data-type="text" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td>Primary Phone Number/ 电话</td>
+                    <td><a href="#" id="phonenumber" class="myeditable" data-type="number" data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td>Secondary Phone Number / 备用电话</td>
+                    <td><a href="#" id="altphonenumber" class="myeditable" data-type="number"></a></td>
+                </tr>
+                <tr>
+                    <td>Secondary Email / 电子邮箱</td>
+                    <td><a href="#" id="email" class="myeditable" data-type="email"></a></td>
+                </tr>
+                <tr>
+                    <td>Secondary Phone Number / 备用电子邮箱</td>
+                    <td><a href="#" id="altemail" class="myeditable" data-type="email"></a></td>
+                </tr>
+                <tr>
+                    <td>1st Day @ School / 入学日期</td>
+                    <td><a href="#" id="firstdayatschool" class="myeditable" data-type="combodate" data-value="2015-02-23" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY"></a></td>
+                </tr>
+                <tr>
+                    <td>Contact Method: Text (Default) or Email / 联系方式：短信(默认)或者电子邮箱</td>
+                    <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="1"></a></td>
+                </tr>
+                <tr>
+                    <td>Select2 (dropdown mode)</td>
+                    <td><a href="#" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country"></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button id="save-btn" class="btn btn-primary">保存新学生</button>
+            <button id="reset-btn" class="btn pull-right">重置</button>
+        </div>
+        <script>
+            $(function(){
+              //initialize Parse
+              Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+              //defaults
+              //$.fn.editable.defaults.url = '/post';
+              
+              //editables
+              $('#lastname').editable({
+                  name: 'lastname',
+                                      url : '',
+                  validate: function(value) {
+                  if($.trim(value) == ''){ return 'This field is required';
+                  }
+                  },
+                                      success: function(response, newValue) {
+                                      console.log(newValue);
+                                      }
+              });
+              
+              $('#firstname').editable({
+                                       url : '',
+                   validate: function(value) {
+                        if($.trim(value) == ''){ return 'This field is required';
+                        }
+                   }
+               });
+              
+              $('#sex').editable({
+                 prepend: "not selected",
+                 source: [
+                          {value: "Male", text: 'Male'},
+                          {value: "Female", text: 'Female'}
+                          ],
+                 display: function(value, sourceData) {
+                 var colors = {"": "gray", 1: "green", 2: "blue"},
+                 elem = $.grep(sourceData, function(o){return o.value == value;});
+                 
+                 if(elem.length) {
+                 $(this).text(elem[0].text);
+                 } else {
+                 $(this).empty();
+                 }
+             }
+             });
+              $('#grade').editable({
+                 prepend: "not selected",
+                 source: [
+                          {value: "TK", text: 'TK'},
+                          {value: "K", text: 'K'},
+                          {value: "1", text: 'Grade 1'},
+                          {value: "2", text: 'Grade 2'},
+                          {value: "3", text: 'Grade 3'},
+                          {value: "4", text: 'Grade 4'},
+                          {value: "5", text: 'Grade 5'},
+                          {value: "6", text: 'Grade 6'}
+                          ],
+                 display: function(value, sourceData) {
+                 var colors = {"": "gray", 1: "green", 2: "blue"},
+                 elem = $.grep(sourceData, function(o){return o.value == value;});
+                 
+                 if(elem.length) {
+                 $(this).text(elem[0].text);
+                 } else {
+                 $(this).empty();
+                 }
+                 }
+              });
+              $('#status').editable();
+              
+              $('#school').editable({
+                                   showbuttons: false
+               });
+              
+              $('#vacation').editable({
+                                      datepicker: {
+                                      todayBtn: 'linked'
+                                      }
+                                      });
+              
+              $('#dob').editable();
+              $('#roomnumber').editable();
+              $('#contact').editable();
+              $('#phonenumber').editable();
+              $('#altphonenumber').editable();
+              $('#email').editable();
+              $('#altemail').editable();
+              $('#firstdayatschool').editable();
+              $('#contactmethod').editable({
+                     source: [
+                              {value: 1, text: 'Text 短信'},
+                              {value: 2, text: 'Email 电子邮箱'}
+                              ],
+                     display: function(value, sourceData) {
+                     elem = $.grep(sourceData, function(o){return o.value == value;});
+                     
+                     if(elem.length) {
+                     $(this).text(elem[0].text);
+                     } else {
+                     $(this).empty();
+                     }
+             }
+             });
+
+              
+              
+              var countries = [];
+              $.each({"BD": "Bangladesh", "BE": "Belgium", "BF": "Burkina Faso", "BG": "Bulgaria", "BA": "Bosnia and Herzegovina", "BB": "Barbados", "WF": "Wallis and Futuna", "BL": "Saint Bartelemey", "BM": "Bermuda", "BN": "Brunei Darussalam", "BO": "Bolivia", "BH": "Bahrain", "BI": "Burundi", "BJ": "Benin", "BT": "Bhutan", "JM": "Jamaica", "BV": "Bouvet Island", "BW": "Botswana", "WS": "Samoa", "BR": "Brazil", "BS": "Bahamas", "JE": "Jersey", "BY": "Belarus", "O1": "Other Country", "LV": "Latvia", "RW": "Rwanda", "RS": "Serbia", "TL": "Timor-Leste", "RE": "Reunion", "LU": "Luxembourg", "TJ": "Tajikistan", "RO": "Romania", "PG": "Papua New Guinea", "GW": "Guinea-Bissau", "GU": "Guam", "GT": "Guatemala", "GS": "South Georgia and the South Sandwich Islands", "GR": "Greece", "GQ": "Equatorial Guinea", "GP": "Guadeloupe", "JP": "Japan", "GY": "Guyana", "GG": "Guernsey", "GF": "French Guiana", "GE": "Georgia", "GD": "Grenada", "GB": "United Kingdom", "GA": "Gabon", "SV": "El Salvador", "GN": "Guinea", "GM": "Gambia", "GL": "Greenland", "GI": "Gibraltar", "GH": "Ghana", "OM": "Oman", "TN": "Tunisia", "JO": "Jordan", "HR": "Croatia", "HT": "Haiti", "HU": "Hungary", "HK": "Hong Kong", "HN": "Honduras", "HM": "Heard Island and McDonald Islands", "VE": "Venezuela", "PR": "Puerto Rico", "PS": "Palestinian Territory", "PW": "Palau", "PT": "Portugal", "SJ": "Svalbard and Jan Mayen", "PY": "Paraguay", "IQ": "Iraq", "PA": "Panama", "PF": "French Polynesia", "BZ": "Belize", "PE": "Peru", "PK": "Pakistan", "PH": "Philippines", "PN": "Pitcairn", "TM": "Turkmenistan", "PL": "Poland", "PM": "Saint Pierre and Miquelon", "ZM": "Zambia", "EH": "Western Sahara", "RU": "Russian Federation", "EE": "Estonia", "EG": "Egypt", "TK": "Tokelau", "ZA": "South Africa", "EC": "Ecuador", "IT": "Italy", "VN": "Vietnam", "SB": "Solomon Islands", "EU": "Europe", "ET": "Ethiopia", "SO": "Somalia", "ZW": "Zimbabwe", "SA": "Saudi Arabia", "ES": "Spain", "ER": "Eritrea", "ME": "Montenegro", "MD": "Moldova, Republic of", "MG": "Madagascar", "MF": "Saint Martin", "MA": "Morocco", "MC": "Monaco", "UZ": "Uzbekistan", "MM": "Myanmar", "ML": "Mali", "MO": "Macao", "MN": "Mongolia", "MH": "Marshall Islands", "MK": "Macedonia", "MU": "Mauritius", "MT": "Malta", "MW": "Malawi", "MV": "Maldives", "MQ": "Martinique", "MP": "Northern Mariana Islands", "MS": "Montserrat", "MR": "Mauritania", "IM": "Isle of Man", "UG": "Uganda", "TZ": "Tanzania, United Republic of", "MY": "Malaysia", "MX": "Mexico", "IL": "Israel", "FR": "France", "IO": "British Indian Ocean Territory", "FX": "France, Metropolitan", "SH": "Saint Helena", "FI": "Finland", "FJ": "Fiji", "FK": "Falkland Islands (Malvinas)", "FM": "Micronesia, Federated States of", "FO": "Faroe Islands", "NI": "Nicaragua", "NL": "Netherlands", "NO": "Norway", "NA": "Namibia", "VU": "Vanuatu", "NC": "New Caledonia", "NE": "Niger", "NF": "Norfolk Island", "NG": "Nigeria", "NZ": "New Zealand", "NP": "Nepal", "NR": "Nauru", "NU": "Niue", "CK": "Cook Islands", "CI": "Cote d'Ivoire", "CH": "Switzerland", "CO": "Colombia", "CN": "China", "CM": "Cameroon", "CL": "Chile", "CC": "Cocos (Keeling) Islands", "CA": "Canada", "CG": "Congo", "CF": "Central African Republic", "CD": "Congo, The Democratic Republic of the", "CZ": "Czech Republic", "CY": "Cyprus", "CX": "Christmas Island", "CR": "Costa Rica", "CV": "Cape Verde", "CU": "Cuba", "SZ": "Swaziland", "SY": "Syrian Arab Republic", "KG": "Kyrgyzstan", "KE": "Kenya", "SR": "Suriname", "KI": "Kiribati", "KH": "Cambodia", "KN": "Saint Kitts and Nevis", "KM": "Comoros", "ST": "Sao Tome and Principe", "SK": "Slovakia", "KR": "Korea, Republic of", "SI": "Slovenia", "KP": "Korea, Democratic People's Republic of", "KW": "Kuwait", "SN": "Senegal", "SM": "San Marino", "SL": "Sierra Leone", "SC": "Seychelles", "KZ": "Kazakhstan", "KY": "Cayman Islands", "SG": "Singapore", "SE": "Sweden", "SD": "Sudan", "DO": "Dominican Republic", "DM": "Dominica", "DJ": "Djibouti", "DK": "Denmark", "VG": "Virgin Islands, British", "DE": "Germany", "YE": "Yemen", "DZ": "Algeria", "US": "United States", "UY": "Uruguay", "YT": "Mayotte", "UM": "United States Minor Outlying Islands", "LB": "Lebanon", "LC": "Saint Lucia", "LA": "Lao People's Democratic Republic", "TV": "Tuvalu", "TW": "Taiwan", "TT": "Trinidad and Tobago", "TR": "Turkey", "LK": "Sri Lanka", "LI": "Liechtenstein", "A1": "Anonymous Proxy", "TO": "Tonga", "LT": "Lithuania", "A2": "Satellite Provider", "LR": "Liberia", "LS": "Lesotho", "TH": "Thailand", "TF": "French Southern Territories", "TG": "Togo", "TD": "Chad", "TC": "Turks and Caicos Islands", "LY": "Libyan Arab Jamahiriya", "VA": "Holy See (Vatican City State)", "VC": "Saint Vincent and the Grenadines", "AE": "United Arab Emirates", "AD": "Andorra", "AG": "Antigua and Barbuda", "AF": "Afghanistan", "AI": "Anguilla", "VI": "Virgin Islands, U.S.", "IS": "Iceland", "IR": "Iran, Islamic Republic of", "AM": "Armenia", "AL": "Albania", "AO": "Angola", "AN": "Netherlands Antilles", "AQ": "Antarctica", "AP": "Asia/Pacific Region", "AS": "American Samoa", "AR": "Argentina", "AU": "Australia", "AT": "Austria", "AW": "Aruba", "IN": "India", "AX": "Aland Islands", "AZ": "Azerbaijan", "IE": "Ireland", "ID": "Indonesia", "UA": "Ukraine", "QA": "Qatar", "MZ": "Mozambique"}, function(k, v) {
+                     countries.push({id: k, text: v});
+                     }); 
+              $('#country').editable({
+                                     source: countries,
+                                     select2: {
+                                     width: 200,
+                                     placeholder: 'Select country',
+                                     allowClear: true
+                                     } 
+              });
+              
+              
+              
+              $('#address').editable({
+                     value: {
+                     city: "San Diego",
+                     address: "",
+                     zipcode: "92129"
+                     },
+                     validate: function(value) {
+                     if(value.city == '') return 'city is required!'; 
+                     },
+                     display: function(value) {
+                     if(!value) {
+                     $(this).empty();
+                     return; 
+                     }
+                     var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ', ' + $('<div>').text(value.zipcode).html();
+                     $(this).html(html);
+                     }
+                });
+              
+              
+              
+              $('#user .editable').on('hidden', function(e, reason){
+                  if(reason === 'save' || reason === 'nochange') {
+                  var $next = $(this).closest('tr').next().find('.editable');
+                  if($('#autoopen').is(':checked')) {
+                  setTimeout(function() {
+                             $next.editable('show');
+                             }, 300); 
+                  } else {
+                  $next.focus();
+                  } 
+                  }
+              });
+              
+              });
+              // save button validation
+              $('#save-btn').click(function() {
+                    var values = $('.myeditable').editable('submit',{
+                         ajaxOptions: {
+                         dataType: 'json' //assuming json response
+                         },
+                         success: function(data, config) {
+                         console.log(data);
+                         if(data && data.id) {  //record created, response like {"id": 2}
+                         //set pk
+                         $(this).editable('option', 'pk', data.id);
+                         //remove unsaved class
+                         $(this).removeClass('editable-unsaved');
+                         //show messages
+                         var msg = 'New user created! Now editables submit individually.';
+                         $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+                         $('#save-btn').hide();
+                         $(this).off('save.newuser');
+                         } else if(data && data.errors){ 
+                         //server-side validation error, response like {"errors": {"username": "username already exist"} }
+                         config.error.call(this, data.errors);
+                         }               
+                         },
+                         error: function(errors) {
+                         var msg = '';
+                         if(errors && errors.responseText) { //ajax error, errors = xhr object
+                         msg = errors.responseText;
+                         } else { //validation error (client-side or server-side)
+                         $.each(errors, function(k, v) { msg += k+": "+v+"<br>"; });
+                         } 
+                         $('#msg').removeClass('alert-success').addClass('alert-error').html(msg).show();
+                         }
+                         });
+                         var Student = Parse.Object.extend("Student");
+                         var student = new Student();
+                                   for(key in values){
+                                   if (values.hasOwnProperty(key)){
+                                   student.set(key,values[key]);
+                                   }
+                                   }
+                                   student.save(null, {
+                                   success: function(gameScore) {
+                                      // Execute any logic that should take place after the object is saved.
+                                      alert('New object created with objectId: ' + student.id);
+                                      },
+                                      error: function(gameScore, error) {
+                                      // Execute any logic that should take place if the save fails.
+                                      // error is a Parse.Error with an error code and message.
+                                      alert('Failed to create new object, with error code: ' + error.message);
+                                      }
+                                    });
+            });
+            // reset button
+            $('#reset-btn').click(function() {
+              $('.myeditable').editable('setValue', null)  //clear values
+              .editable('option', 'pk', null)          //clear pk
+              .removeClass('editable-unsaved');        //remove bold css
+              });
+            
+        </script>
+    </body>
+</html>
