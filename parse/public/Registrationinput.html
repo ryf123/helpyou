@@ -81,10 +81,17 @@
                                      },
                                      ]
                            });
+                         var currentdate = new Date();
+                         var currentday= currentdate.getDate()-1;
 						 $('#table .registration').datepicker({
-							multidate: true,
-							daysOfWeekDisabled: "0,6"
-							});
+                                                              todayHighlight: true,
+                                                              todayBtn: true,
+                                                              clearBtn: true,
+                                                              multidate: true,
+                                                              daysOfWeekDisabled: "0,6",
+                                                              startDate: "-"+currentday+"d",
+                                                              endDate: "+2m "+"-"+currentday+"d"+" -1d",
+                        });
 							$('#table .registration').datepicker()
 								.on('changeDate', function(e){
 									this.innerHTML = $(this).datepicker('getFormattedDate')
