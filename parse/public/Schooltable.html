@@ -1,0 +1,184 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
+		<link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <!-- Latest compiled and minified js -->
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="vendors/parse.js"></script>
+        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+        <script src="bootstrap-editable/js/moment.min.js"></script>
+        <script src="vendors/bootstrap-datepicker.js"></script>
+    </head>
+    <table id="table" data-show-footer="true" data-detail-view="true">
+    </table>
+    <script>
+        // load initial data from database
+        Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+        Parse.Cloud.run('getstudent', {}, {
+                        success: function(schooldata) {
+                        var stringify_data = JSON.stringify(schooldata);
+                        stringify_data = JSON.parse(stringify_data);
+                        $('#table').bootstrapTable({
+                           search : 'true',
+                           data: stringify_data,
+                           columns: [
+                                     {
+                                     width: '5%',
+                                     field: 'schoolname',
+                                     title: '学校名称',
+                                     sortable:'true',
+                                     footerFormatter: totalNameFormatter
+                                     },
+                                     {
+                                     width: '7%',
+                                     field: 'schooldistrict',
+                                     title: '学区',
+                                     sortable:'true'
+                                     },
+                                     {
+                                     width: '5%',
+                                     field: 'schooldismissaltime',
+                                     title: '放学时间',
+                                     sortable:'true',
+                                     },
+                                     {
+                                     width: '5%',
+                                     field: 'schooldismissaltimeerday',
+                                     title: '放学时间（特殊）-星期',
+                                     sortable:'true'
+                                     },
+                                     {
+                                     width: '5%',
+                                     field: 'schooldismissaltimeer',
+                                     title: '放学时间（特殊）',
+                                     sortable:'true'
+                                     },
+                                     {
+                                     width: '40%',
+                                     field: 'schoolerdate',
+                                     title: '放学时间（特殊）-日期',
+                                     sortable:'true',
+                                     class: 'schoolerdate'
+                                     },
+                                     {
+                                     width: '10%',
+                                     field: 'schoolphonenumber',
+                                     title: '学校联系电话',
+                                     sortable:'true'
+                                     }
+                                     ]
+                           });
+						 $('#table .schoolerdate').datepicker({
+                                                              startView: 1,
+                                                              clearBtn: true,
+                                                              multidate: true,
+                                                              daysOfWeekDisabled: "0,6",
+                        });
+							$('#table .schoolerdate').datepicker()
+								.on('changeDate', function(e){
+									this.innerHTML = $(this).datepicker('getFormattedDate')
+							});	
+                  
+                    },
+                        error: function(error) {
+                        alert("error");
+                        }
+        });
+    // draw the edit button
+        function operateeditFormatter(value, row, index) {
+        return [
+                '<a class="edit" href="javascript:void(0)" title="edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>'
+                ].join('');
+        }
+        // draw the delete button
+        function operateremoveFormatter(value, row, index) {
+            return [
+                    '<a class="remove ml10" href="javascript:void(0)" title="remove">',
+                    '<i class="glyphicon glyphicon-remove"></i>',
+                    '</a>'
+                    ].join('');
+        }
+        // edit button event
+        window.operateEvents = {
+            
+            
+            // Edit/save button Event
+            
+            'click .edit': function (e, value, row, index) {
+                var button = "#table tr[data-index='"+index+"'] td .edit i";
+                var trindex = "#table tr[data-index='"+index+"'] td";
+                $(trindex).slice( 0, -2 ).editable('toggleDisabled'); // toggle disable
+                //if ok button is clicked
+                if($(button).attr("class") == "glyphicon glyphicon-ok"){
+                    $(button).attr("class","glyphicon glyphicon-edit");
+                    //get the values of the row
+                    var values = $(trindex).slice( 0, -2 ).editable('submit',{
+                        ajaxOptions: {
+                        dataType: 'json' //assuming json response
+                        },
+                        success: function(data, config) {
+                        
+                        },
+                        error: function(errors) {
+                        }
+                    });
+                    // run cloud code to save the object
+                    var myobjectid = row["objectId"];
+                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
+                        success: function() {
+                                    console.log("Saved!");
+                        },
+                        error: function(error) {
+                                    alert("Can't save, try again");
+                        }
+                    });
+                }
+                else{
+                    // if it's the first time, then editable does not exist
+                    // then enable the edit
+                    if($(trindex).slice( 0,1).hasClass("editable-disabled") == true){
+                        $(trindex).slice( 0, -2 ).editable('toggleDisabled');
+                    }
+                    $(button).attr("class","glyphicon glyphicon-ok");
+                // do not selec the last two items which are edit and remove
+                $(trindex).slice( 0, -2 ).editable({
+                    title: 'enter name',
+                    mode: 'inline'
+                });
+                console.log(value, row, index);
+                }
+            },
+            
+            
+            //Remove button Event
+            
+            'click .remove': function (e, value, row, index) {
+                if (confirm("确定要删除吗？") == true) {
+                    var myobjectid = row["objectId"];
+                    var studentid = row["studentid"];
+                    Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
+                                    success: function() {
+                                    $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
+                                    console.log("Delete!");
+                                    },
+                                    error: function(error) {
+                                    alert("Delete failed");
+                        }
+                    });
+                }
+            }
+        };
+        // this is used to display "Total:"+ number
+        function totalNameFormatter(data) {
+            return "Total : "+data.length;
+        }
+    </script>
+</html>
