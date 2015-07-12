@@ -2096,29 +2096,29 @@ Makes editable any HTML element on the page. Applied as jQuery method.
                             type: 'POST'
                         };                        
                     }                    
-
+                     return values;
                     // ajax success callabck (response 200 OK)
-                    ajaxOptions.success = typeof config.success === 'function' ? function(response) {
-                            config.success.call($elems, response, config);
-                        } : $.noop;
-                                  
-                    // ajax error callabck
-                    ajaxOptions.error = typeof config.error === 'function' ? function() {
-                             config.error.apply($elems, arguments);
-                        } : $.noop;
-                       
-                    // extend ajaxOptions    
-                    if(config.ajaxOptions) { 
-                        $.extend(ajaxOptions, config.ajaxOptions);
-                    }
-                    
-                    // extra data 
-                    if(config.data) {
-                        $.extend(ajaxOptions.data, config.data);
-                    }                     
-                    
-                    // perform ajax request
-                    $.ajax(ajaxOptions);
+//                    ajaxOptions.success = typeof config.success === 'function' ? function(response) {
+//                            config.success.call($elems, response, config);
+//                        } : $.noop;
+//                                  
+//                    // ajax error callabck
+//                    ajaxOptions.error = typeof config.error === 'function' ? function() {
+//                             config.error.apply($elems, arguments);
+//                        } : $.noop;
+//                       
+//                    // extend ajaxOptions    
+//                    if(config.ajaxOptions) { 
+//                        $.extend(ajaxOptions, config.ajaxOptions);
+//                    }
+//                    
+//                    // extra data 
+//                    if(config.data) {
+//                        $.extend(ajaxOptions.data, config.data);
+//                    }                     
+//                    
+//                    // perform ajax request
+//                    $.ajax(ajaxOptions);
                 } else { //client-side validation error
                     if(typeof config.error === 'function') {
                         config.error.call($elems, errors);
