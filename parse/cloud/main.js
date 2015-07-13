@@ -53,6 +53,7 @@ Parse.Cloud.define("saveobject", function(request, response) {
     var values = request.params.objectvalue;
     var objectid = request.params.objectid;
     var Myobject = Parse.Object.extend(objectname);
+                   console.log(request.params);
     if(objectid == ""){ // first need to check if the objectId exist
     var myinstance = new Myobject();
     for(key in values){
@@ -64,11 +65,13 @@ Parse.Cloud.define("saveobject", function(request, response) {
         success: function(myinstance) {
         // Execute any logic that should take place after the object is saved.
                     console.log(objectname + " obj saved successfully");
+                    response.success();
         },
-        error: function(gameScore, error) {
+        error: function(myinstance, error) {
         // Execute any logic that should take place if the save fails.
         // error is a Parse.Error with an error code and message.
             console.log("Failed to save: " + objectname);
+            response.error(error);
         }
     });
     }// end of if
@@ -86,17 +89,20 @@ Parse.Cloud.define("saveobject", function(request, response) {
                      success: function(myinstance) {
                      // Execute any logic that should take place after the object is saved.
                      console.log(objectname + " obj saved successfully");
+                     response.success();
                      },
                      error: function(gameScore, error) {
                      // Execute any logic that should take place if the save fails.
                      // error is a Parse.Error with an error code and message.
-                     console.log("Failed to save: " + objectname);
+                         console.log("Failed to save: " + objectname);
+                         response.error();
                      }
                  });
          },
          error: function(object, error) {
          // The object was not retrieved successfully.
          // error is a Parse.Error with an error code and message.
+                 response.error(error);
          }
      });
     }
