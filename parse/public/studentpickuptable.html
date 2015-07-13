@@ -18,6 +18,7 @@
                         <script src="assets/scripts.js"></script>
                         <script type="text/javascript" src="vendors/jquery.mjs.nestedSortable.js"></script>
                         <script src="vendors/application.js"></script>
+						<script type="text/javascript" src="vendors/parse.js"></script>
                         </head>
     
     <body>
@@ -201,12 +202,9 @@
                         <div class="block-content collapse in">
                         <div class ="row">
                             <div id="connected">
+								<!--draggable school list -->
                                 <div class="span5">
                                     <ol class="simple_with_animation vertical sortable schools" drag="false">
-                                    <li><div>11:40 USD 3</div></li>
-                                    <li><div>11:30 UCSD 3</div></li>
-                                    <li><div>11:45 SDSU 1</div></li>
-                                    <li><div>12:00 Miramar college 2</div></li>
                                     </ol>
                                     </div>
                                 <div class="span5">
@@ -237,9 +235,6 @@
                                     </li>
                                     </ol>
                                 </div>
-                                <div class="span5">
-                                    <pre id="serialize_output2"/>
-                                </div>
                             </div>
                         </div>
                         <div class="span10">
@@ -253,6 +248,27 @@
             
         </div>
     </div>
+	<script>
+	$(function(){
+		Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+		Parse.Cloud.run('getobject', {objectname: 'School'}, {
+		success: function(schools) {
+				var schoolsource = [];
+				schools = JSON.parse(JSON.stringify(schools));
+				for(index in schools){
+				var name = schools[index]["schoolname"];
+				var schooldismissaltime = schools[index]["schooldismissaltime"];
+				schoolinfo = "<li><div>"+name+":"+schooldismissaltime+"</div></li>";
+				$(".schools").append(schoolinfo);
+				}
+				
+		  },
+			error: function(error) {
+				console.log(error);
+		   }
+		});
+	});
+	</script>
     </body>
     
 </html>
