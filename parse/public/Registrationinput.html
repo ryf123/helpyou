@@ -29,6 +29,7 @@
                            data: stringify_data,
                            columns: [
                                      {
+                                     class: 'studentid',
                                      width: '5%',
                                      field: 'studentid',
                                      title: '学号',
@@ -60,7 +61,7 @@
                                      sortable:'true'
                                      },
                                      {
-                                     width: '40%',
+                                     width: '30%',
                                      field: 'registrationdate',
                                      title: '注册日期',
                                      sortable:'true',
@@ -79,6 +80,13 @@
                                      title: '联系电话',
                                      sortable:'true'
                                      },
+                                     {
+                                     width: '10%',
+                                     field: 'operate',
+                                     title: '保存',
+                                     formatter:"operatesaveFormatter",
+                                     events:"operateEvents"
+                                     },
                                      ]
                            });
 						 $('#table .registration').datepicker({
@@ -87,65 +95,61 @@
 							});
 							$('#table .registration').datepicker()
 								.on('changeDate', function(e){
-									this.innerHTML = $(this).datepicker('getFormattedDate')
-							});	
-                        //$('#table .registration').editable({
-							//tpl: "<input type='text' class='form-control'></input>",
-							//viewformat: "dd.mm.yyyy",
-							//type: "date",
-							//datepicker: {
-								//multidate: true,
-								//daysOfWeekDisabled: "0,6"
-							//}
-						//});
+                                    this.innerHTML = $(this).datepicker('getFormattedDate');
+							});
+                            $('#table .registration').datepicker()
+                                .on('hide', function(e){
+                                    var studentidele = $(this).parent();
+                                    var studentid = studentidele.find(".studentid");
+                                    this.innerHTML = $(this).datepicker('getFormattedDate');
+                            });
                     },
                         error: function(error) {
                         alert("error");
                         }
         });
     // draw the edit button
-        function operateeditFormatter(value, row, index) {
+        function operatesaveFormatter(value, row, index) {
         return [
-                '<a class="edit" href="javascript:void(0)" title="edit">',
-                '<i class="glyphicon glyphicon-edit"></i>',
+                '<a class="save" href="javascript:void(0)" title="save">',
+                '<i class="glyphicon glyphicon-ok"></i>',
                 '</a>'
                 ].join('');
-        }
-        // draw the delete button
-        function operateremoveFormatter(value, row, index) {
-            return [
-                    '<a class="remove ml10" href="javascript:void(0)" title="remove">',
-                    '<i class="glyphicon glyphicon-remove"></i>',
-                    '</a>'
-                    ].join('');
         }
         // edit button event
         window.operateEvents = {
             
             
             // Edit/save button Event
-            
-            'click .edit': function (e, value, row, index) {
-                var button = "#table tr[data-index='"+index+"'] td .edit i";
-                var trindex = "#table tr[data-index='"+index+"'] td";
-                $(trindex).slice( 0, -2 ).editable('toggleDisabled'); // toggle disable
-                //if ok button is clicked
-                if($(button).attr("class") == "glyphicon glyphicon-ok"){
-                    $(button).attr("class","glyphicon glyphicon-edit");
-                    //get the values of the row
-                    var values = $(trindex).slice( 0, -2 ).editable('submit',{
-                        ajaxOptions: {
-                        dataType: 'json' //assuming json response
-                        },
-                        success: function(data, config) {
-                        
-                        },
-                        error: function(errors) {
+            'click .save': function (e, value, row, index) {
+                    var d = new Date();
+                    var month = d.getMonth()+1;
+                    var year = d.getFullYear();
+                    var nextmonth = month+1;
+                    var monthname1 = "register"+year+""+month;
+                    var monthname2 = "register"+year+""+nextmonth;
+                    var months = [monthname1,monthname2];
+                    var month1 = [];
+                    var month2 = [];
+                    var objectid = row["objectId"];
+                    var studentid = row["studentid"];
+                    var registerdate = $(this).parent().parent().find(".registration").html();
+                    registerdatearray = registerdate.split(",");
+                    for (var i = 0; i < registerdatearray.length; i++){
+                        var date = registerdatearray[i];
+                        var re = new RegExp(month+"\/[0-9]+\/"+year);
+                        var match = date.match(re);
+                        if(match != undefined){
+                            month1.push(date);
                         }
-                    });
-                    // run cloud code to save the object
-                    var myobjectid = row["objectId"];
-                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
+                        else{
+                            month2.push(date);
+                        }
+                    }
+                    var myobjectvalue = {'studentid':studentid};
+                    myobjectvalue[monthname1] = month1.join();
+                    myobjectvalue[monthname2] = month2.join();
+                    Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
                         success: function() {
                                     console.log("Saved!");
                         },
@@ -153,21 +157,7 @@
                                     alert("Can't save, try again");
                         }
                     });
-                }
-                else{
-                    // if it's the first time, then editable does not exist
-                    // then enable the edit
-                    if($(trindex).slice( 0,1).hasClass("editable-disabled") == true){
-                        $(trindex).slice( 0, -2 ).editable('toggleDisabled');
-                    }
-                    $(button).attr("class","glyphicon glyphicon-ok");
-                // do not selec the last two items which are edit and remove
-                $(trindex).slice( 0, -2 ).editable({
-                    title: 'enter name',
-                    mode: 'inline'
-                });
-                console.log(value, row, index);
-                }
+                
             },
             
             
