@@ -12,51 +12,41 @@
 
 
 <body class="nav-md">
-
     <div class="container body">
-
-
         <div class="main_container">
             <!-- page content -->
             <div class="right_col" role="main">
-
                 <div class="">
                     <div class="row">
-
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_content">
-
-
                                     <!-- Smart Wizard -->
-                                    <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
+                                    <p><br><br><br>Please input school information below!<br>Thank you!</p>
                                     <div id="wizard" class="form_wizard wizard_horizontal">
                                         <ul class="wizard_steps">
                                             <li>
                                                 <a href="#step-1">
                                                     <span class="step_no">1</span>
-                                                    <span class="step_descr">
-                                            Step 1<br />
-                                            <small>Step 1 description</small>
-                                        </span>
+                                                    <span class="step_descr">School Basic Info</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#step-2">
                                                     <span class="step_no">2</span>
-                                                    <span class="step_descr">
-                                            Step 2<br />
-                                            <small>Step 2 description</small>
-                                        </span>
+                                                    <span class="step_descr">School Dismissal Time (Regular)</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#step-3">
                                                     <span class="step_no">3</span>
-                                                    <span class="step_descr">
-                                            Step 3<br />
-                                            <small>Step 3 description</small>
-                                        </span>
+                                                    <span class="step_descr">School Dismissal Time (Special)</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-4">
+                                                    <span class="step_no">4</span>
+                                                    <span class="step_descr">Review</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -64,47 +54,101 @@
                                             <form class="form-horizontal form-label-left">
 
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
-                                                    </label>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schoolname" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schooladdress">Address / 地址 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolcity">City / 城市 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schoolzip" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                 <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                                        <input type="text" class="form-control" data-inputmask="'mask' : '(999) 999-9999'">
+                                                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                            </div>
+                                                </div>
+                                                 <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolprincipal">Principal / 校长 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                 <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail">Email / 邮箱 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="email" id="schoolemail" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                 <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolwebsite">Website / 网址 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                 <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select class="form-control">
+                                                            <option>PUSD - Poway Unified School District</option>
+                                                            <option>SDUSD - San Diego Unified School District</option>
+                                                            <option>DMUSD - Del Mar Union School District</option>
+                                                            <option>SBSD - Solana Beach School District</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School Dismissal Time / 放学</label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select class="form-control">
+                                                            <option>10</option>
+                                                            <option>11</option>
+                                                            <option>12</option>
+                                                            <option>13</option>
+                                                            <option>14</option>
+                                                            <option>15</option>
+                                                            <option>16</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
-                                                    </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div id="gender" class="btn-group" data-toggle="buttons">
+                                                        <div id="time" class="btn-group" data-toggle="buttons">
                                                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                                <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                                                                <input type="radio" name="time" value="AM"> &nbsp; AM &nbsp;
                                                             </label>
                                                             <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                                <input type="radio" name="gender" value="female" checked=""> Female
+                                                                <input type="radio" name="time" value="PM" checked=""> PM
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                                                    </div>
-                                                </div>
-
-                                            </form>
+                                                </form>
 
                                         </div>
                                         <div id="step-2">
@@ -212,7 +256,8 @@
 }
 /**-------**/
 </style>
-
+    <!-- input mask -->
+    <script src="vendors/jquery.inputmask.js"></script>
     <script src="vendors/js/bootstrap.min.js"></script>
     <!-- form wizard -->
     <script type="text/javascript">
@@ -236,6 +281,13 @@
 
         });
     </script>
+    <!-- input_mask -->
+    <script>
+        $(document).ready(function () {
+                          $(":input").inputmask();
+                          });
+        </script>
+    <!-- /input mask -->
 
 </body>
 
