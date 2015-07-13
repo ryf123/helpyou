@@ -29,140 +29,110 @@
                            data: stringify_data,
                            columns: [
                                      {
-                                     class: 'studentid',
                                      width: '5%',
-                                     field: 'studentid',
-                                     title: '学号',
+                                     field: 'schoolname',
+                                     title: '学校名称',
                                      sortable:'true',
                                      footerFormatter: totalNameFormatter
                                      },
                                      {
                                      width: '7%',
-                                     field: 'school',
-                                     title: '学校',
+                                     field: 'schooldistrict',
+                                     title: '学区',
                                      sortable:'true'
                                      },
                                      {
                                      width: '5%',
-                                     field: 'firstname',
-                                     title: '名',
+                                     field: 'schooldismissaltime',
+                                     title: '放学时间',
                                      sortable:'true',
                                      },
                                      {
                                      width: '5%',
-                                     field: 'lastname',
-                                     title: '姓',
+                                     field: 'schooldismissaltimeerday',
+                                     title: '放学时间（特殊）-星期',
                                      sortable:'true'
                                      },
                                      {
                                      width: '5%',
-                                     field: 'grade',
-                                     title: '年级',
+                                     field: 'schooldismissaltimeer',
+                                     title: '放学时间（特殊）',
                                      sortable:'true'
                                      },
                                      {
-                                     width: '30%',
-                                     field: 'registrationdate',
-                                     title: '注册日期',
+                                     width: '40%',
+                                     field: 'schoolerdate',
+                                     title: '放学时间（特殊）-日期',
                                      sortable:'true',
-                                     class: 'registration'
-                                     
-                                     },
-                                     {
-                                     width: '7%',
-                                     field: 'contact',
-                                     title: '联系人',
-                                     sortable:'true'
+                                     class: 'schoolerdate'
                                      },
                                      {
                                      width: '10%',
-                                     field: 'phonenumber',
-                                     title: '联系电话',
+                                     field: 'schoolphonenumber',
+                                     title: '学校联系电话',
                                      sortable:'true'
-                                     },
-                                     {
-                                     width: '10%',
-                                     field: 'operate',
-                                     title: '保存',
-                                     formatter:"operatesaveFormatter",
-                                     events:"operateEvents"
-                                     },
+                                     }
                                      ]
                            });
-                         var currentdate = new Date();
-                         var currentday= currentdate.getDate()-1;
-						 $('#table .registration').datepicker({
-                                                              todayHighlight: true,
-                                                              todayBtn: true,
+						 $('#table .schoolerdate').datepicker({
+                                                              startView: 1,
                                                               clearBtn: true,
                                                               multidate: true,
                                                               daysOfWeekDisabled: "0,6",
-                                                              startDate: "-"+currentday+"d",
-                                                              endDate: "+2m "+"-"+currentday+"d"+" -1d",
                         });
-							$('#table .registration').datepicker()
+							$('#table .schoolerdate').datepicker()
 								.on('changeDate', function(e){
-<<<<<<< HEAD
-                                    this.innerHTML = $(this).datepicker('getFormattedDate');
-							});
-                            $('#table .registration').datepicker()
-                                .on('hide', function(e){
-                                    var studentidele = $(this).parent();
-                                    var studentid = studentidele.find(".studentid");
-                                    this.innerHTML = $(this).datepicker('getFormattedDate');
-                            });
-=======
 									this.innerHTML = $(this).datepicker('getFormattedDate')
 							});	
                   
->>>>>>> origin/master
                     },
                         error: function(error) {
                         alert("error");
                         }
         });
     // draw the edit button
-        function operatesaveFormatter(value, row, index) {
+        function operateeditFormatter(value, row, index) {
         return [
-                '<a class="save" href="javascript:void(0)" title="save">',
-                '<i class="glyphicon glyphicon-ok"></i>',
+                '<a class="edit" href="javascript:void(0)" title="edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
                 '</a>'
                 ].join('');
+        }
+        // draw the delete button
+        function operateremoveFormatter(value, row, index) {
+            return [
+                    '<a class="remove ml10" href="javascript:void(0)" title="remove">',
+                    '<i class="glyphicon glyphicon-remove"></i>',
+                    '</a>'
+                    ].join('');
         }
         // edit button event
         window.operateEvents = {
             
             
             // Edit/save button Event
-            'click .save': function (e, value, row, index) {
-                    var d = new Date();
-                    var month = d.getMonth()+1;
-                    var year = d.getFullYear();
-                    var nextmonth = month+1;
-                    var monthname1 = "register"+year+""+month;
-                    var monthname2 = "register"+year+""+nextmonth;
-                    var months = [monthname1,monthname2];
-                    var month1 = [];
-                    var month2 = [];
-                    var objectid = row["objectId"];
-                    var studentid = row["studentid"];
-                    var registerdate = $(this).parent().parent().find(".registration").html();
-                    registerdatearray = registerdate.split(",");
-                    for (var i = 0; i < registerdatearray.length; i++){
-                        var date = registerdatearray[i];
-                        var re = new RegExp(month+"\/[0-9]+\/"+year);
-                        var match = date.match(re);
-                        if(match != undefined){
-                            month1.push(date);
+            
+            'click .edit': function (e, value, row, index) {
+                var button = "#table tr[data-index='"+index+"'] td .edit i";
+                var trindex = "#table tr[data-index='"+index+"'] td";
+                $(trindex).slice( 0, -2 ).editable('toggleDisabled'); // toggle disable
+                //if ok button is clicked
+                if($(button).attr("class") == "glyphicon glyphicon-ok"){
+                    $(button).attr("class","glyphicon glyphicon-edit");
+                    //get the values of the row
+                    var values = $(trindex).slice( 0, -2 ).editable('submit',{
+                        ajaxOptions: {
+                        dataType: 'json' //assuming json response
+                        },
+                        success: function(data, config) {
+                        
+                        },
+                        error: function(errors) {
                         }
-                        else{
-                            month2.push(date);
-                        }
-                    }
-                    var myobjectvalue = {'studentid':studentid};
-                    myobjectvalue[monthname1] = month1.join();
-                    myobjectvalue[monthname2] = month2.join();
-                    Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                    });
+                    // run cloud code to save the object
+                    var myobjectid = row["objectId"];
+                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
                         success: function() {
                                     console.log("Saved!");
                         },
@@ -170,7 +140,21 @@
                                     alert("Can't save, try again");
                         }
                     });
-                
+                }
+                else{
+                    // if it's the first time, then editable does not exist
+                    // then enable the edit
+                    if($(trindex).slice( 0,1).hasClass("editable-disabled") == true){
+                        $(trindex).slice( 0, -2 ).editable('toggleDisabled');
+                    }
+                    $(button).attr("class","glyphicon glyphicon-ok");
+                // do not selec the last two items which are edit and remove
+                $(trindex).slice( 0, -2 ).editable({
+                    title: 'enter name',
+                    mode: 'inline'
+                });
+                console.log(value, row, index);
+                }
             },
             
             

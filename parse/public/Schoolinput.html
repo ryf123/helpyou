@@ -41,8 +41,8 @@
             <tbody>
                 <tr>
                     <td width="20%" align="right">学校名称</td>
-                    <td width="25%">School Name</td>
-                    <td width="55%"><a href="#" class="myeditable" id="schoolname" data-type="text" data-placeholder="Required"></a></td>
+                    <td width="20%">School Name</td>
+                    <td width="25%"><a href="#" class="myeditable" id="schoolname" data-type="text" data-placeholder="Required"></a></td>
                 </tr>
                 <tr>
                     <td align="right">学校地址</td>
@@ -74,6 +74,26 @@
                     <td>School District</td>
                     <td><a href="#" id="schooldistrict" class="myeditable" data-type="select" data-value=""></a></td>
                 </tr>
+                <tr>
+                    <td align="right">放学时间</td>
+                    <td>School Dismissal Time</td>
+                    <td><a href="#" id="schooldismissaltime" class="myeditable" data-type="combodate" data-template="HH:mm" data-format="HH:mm" data-viewformat="HH:mm" data-pk="1"  data-placeholder="Required"></a></td>
+                </tr>
+                <tr>
+                    <td align="right">放学时间（特殊）</td>
+                    <td>School Dismissal Time (Early Release)</td>
+                    <td><a href="#" id="schooldismissaltimeer" class="myeditable" data-type="combodate" data-template="HH:mm" data-format="HH:mm" data-viewformat="HH:mm" data-pk="1"  ></a></td>
+                </tr>
+<!--                <tr>-->
+<!--                    <td align="right">放学时间</td>-->
+<!--                    <td>School Dismissal Time</td>-->
+<!--                    <td><a href="#" id="schooldismissaltimeday" data-type="checklist" data-value="2,3"></a></td>-->
+<!--                </tr>-->
+                <tr>
+                <td align="right">放学时间（特殊）-星期</td>
+                <td>School Dismissal Time (Early Release) -Day</td>
+                <td><a href="#" id="schooldismissaltimeerday" class="myeditable" data-type="select" data-value="" ></a></td>
+                </tr>
             </tbody>
         </table>
         <div>
@@ -87,6 +107,8 @@
               //defaults
               //$.fn.editable.defaults.url = '/post';
               
+              //turn to inline mode
+              $.fn.editable.defaults.mode = 'inline';
               //editables
               $('#schoolname').editable({
                   name: 'schoolname',
@@ -139,6 +161,38 @@
                                  }
                                  }
                                  });
+              $('#schooldismissaltimeday').editable({
+                                                    value: [2,3],
+                                                    source: [
+                                                             {value: "Monday", text: 'Monday'},
+                                                             {value: "Tuesday", text: 'Tuesday'},
+                                                             {value: "Wednesday", text: 'Wednesday'},
+                                                             {value: "Thursday", text: 'Thursday'},
+                                                             {value: "Friday", text: 'Friday'}
+                                                    ]
+              });
+              $('#schooldismissaltime').editable();
+              $('#schooldismissaltimeerday').editable({
+                                            prepend: "not selected",
+                                            source: [
+                                                     {value: "Monday", text: 'Monday'},
+                                                     {value: "Tuesday", text: 'Tuesday'},
+                                                     {value: "Wednesday", text: 'Wednesday'},
+                                                     {value: "Thursday", text: 'Thursday'},
+                                                     {value: "Friday", text: 'Friday'}
+                                                     ],
+                                            display: function(value, sourceData) {
+                                            var colors = {"": "gray", 1: "green", 2: "blue"},
+                                            elem = $.grep(sourceData, function(o){return o.value == value;});
+                                            
+                                            if(elem.length) {
+                                            $(this).text(elem[0].text);
+                                            } else {
+                                            $(this).empty();
+                                            }
+                                            }
+                                            });
+              $('#schooldismissaltimeer').editable();
           
               
               $('#user .editable').on('hidden', function(e, reason){
@@ -199,6 +253,9 @@
                                    success: function(school) {
                                       // Execute any logic that should take place after the object is saved.
                                       alert('New school saved.');
+                                               $('.myeditable').editable('setValue', null)  //clear values
+                                               .editable('option', 'pk', null)          //clear pk
+                                               .removeClass('editable-unsaved');        //remove bold css
                                       },
                                       error: function(school, error) {
                                       // Execute any logic that should take place if the save fails.
