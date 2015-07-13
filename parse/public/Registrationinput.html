@@ -18,6 +18,13 @@
     <table id="table" data-show-footer="true" data-detail-view="true">
     </table>
     <script>
+        // constants
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var year = d.getFullYear();
+        var nextmonth = month+1;
+        var monthname1 = "register"+year+""+month;
+        var monthname2 = "register"+year+""+nextmonth;
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
         Parse.Cloud.run('getstudent', {}, {
@@ -89,6 +96,27 @@
                                      },
                                      ]
                            });
+                         var tabledata = $('#table').bootstrapTable("getData");
+                         // loop through tr elements
+                         var i= 0;
+                         $('#table tr').each(function(){
+                            // the first row is table head, skip it
+                            if(i != 0){
+                                             var registerdate = "";
+                                             var monthdata1 = $('#table').bootstrapTable("getData")[i-1][monthname1];
+                                             var monthdata2 = $('#table').bootstrapTable("getData")[i-1][monthname2];
+                                             if(monthdata1 != undefined){
+                                                 registerdate+=monthdata1;
+                                             }
+                                             if(monthdata2 != undefined){
+                                             registerdate = registerdate +","+monthdata2;
+                                             }
+                                             if(registerdate != ""){
+                                                 $(this).find(".registration")[0].innerHTML = registerdate;
+                                             }
+                            }
+                            i++;
+                         });
                          var currentdate = new Date();
                          var currentday= currentdate.getDate()-1;
 						 $('#table .registration').datepicker({
@@ -104,11 +132,20 @@
 								.on('changeDate', function(e){
                                     this.innerHTML = $(this).datepicker('getFormattedDate');
 							});
+                            // show the preselected date
                             $('#table .registration').datepicker()
                                 .on('show', function(e){
-                                    var predate1 = new Date("08/30/2015");
-                                    var predate2 = new Date("08/29/2015");
-                                    $(this).datepicker('setDate',[predate1,predate2]);
+                                    var registerarray = this.innerHTML.split(",");
+                                    var datearray = [];
+                                    // if there is not date yet, then registerdate is undefined
+                                    if(registerarray[0] != "-"){
+                                    for (var i = 0; i < registerarray.length; i++){
+                                        datearray.push(new Date(registerarray[i]))
+                                    }
+                                    }
+                                    if(datearray.length != 0){
+                                        $(this).datepicker('setDate',datearray);
+                                    }
                             });
                         
                     },
@@ -130,13 +167,6 @@
             
             // Edit/save button Event
             'click .save': function (e, value, row, index) {
-                    var d = new Date();
-                    var month = d.getMonth()+1;
-                    var year = d.getFullYear();
-                    var nextmonth = month+1;
-                    var monthname1 = "register"+year+""+month;
-                    var monthname2 = "register"+year+""+nextmonth;
-                    var months = [monthname1,monthname2];
                     var month1 = [];
                     var month2 = [];
                     var objectid = row["objectId"];
