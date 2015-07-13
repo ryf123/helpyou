@@ -105,11 +105,12 @@
                                     this.innerHTML = $(this).datepicker('getFormattedDate');
 							});
                             $('#table .registration').datepicker()
-                                .on('hide', function(e){
-                                    var studentidele = $(this).parent();
-                                    var studentid = studentidele.find(".studentid");
-                                    this.innerHTML = $(this).datepicker('getFormattedDate');
+                                .on('show', function(e){
+                                    var predate1 = new Date("08/30/2015");
+                                    var predate2 = new Date("08/29/2015");
+                                    $(this).datepicker('setDate',[predate1,predate2]);
                             });
+                        
                     },
                         error: function(error) {
                         alert("error");
