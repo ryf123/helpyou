@@ -20,7 +20,7 @@
     <script>
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-        Parse.Cloud.run('getstudent', {}, {
+        Parse.Cloud.run('getobject', {objectname: "School"}, {
                         success: function(schooldata) {
                         var stringify_data = JSON.stringify(schooldata);
                         stringify_data = JSON.parse(stringify_data);
@@ -71,11 +71,34 @@
                                      field: 'schoolphonenumber',
                                      title: '学校联系电话',
                                      sortable:'true'
-                                     }
+                                     },
+                                     {
+                                     width: '10%',
+                                     field: 'operate',
+                                     title: '保存',
+                                     formatter:"operatesaveFormatter",
+                                     events:"operateEvents"
+                                     },
                                      ]
                            });
+                        var tabledata = $('#table').bootstrapTable("getData");
+                        // loop through tr elements
+                        var i= 0;
+                        $('#table tr').each(function(){
+                            // the first row is table head, skip it
+                            if(i != 0){
+                            var registerdate = "";
+                            var schoolerdate = $('#table').bootstrapTable("getData")[i-1]["schoolerdate"];
+                            if(schoolerdate != undefined){
+                            $(this).find(".schoolerdate")[0].innerHTML = schoolerdate;
+                            }
+                            }
+                            i++;
+                         });
 						 $('#table .schoolerdate').datepicker({
                                                               startView: 1,
+                                                              //startDate: "-1d",
+                                                              //endDate: "+1y",
                                                               clearBtn: true,
                                                               multidate: true,
                                                               daysOfWeekDisabled: "0,6",
@@ -83,20 +106,35 @@
 							$('#table .schoolerdate').datepicker()
 								.on('changeDate', function(e){
 									this.innerHTML = $(this).datepicker('getFormattedDate')
-							});	
+							});
+                        // show the preselected date
+                        $('#table .schoolerdate').datepicker()
+                        .on('show', function(e){
+                            var schoolerdatearray = this.innerHTML.split(",");
+                            var datearray = [];
+                            // if there is not date yet, then registerdate is undefined
+                            if(schoolerdatearray[0] != "-"){
+                            for (var i = 0; i < schoolerdatearray.length; i++){
+                            datearray.push(new Date(schoolerdatearray[i]))
+                            }
+                            }
+                            if(datearray.length != 0){
+                            $(this).datepicker('setDate',datearray);
+                            }
+                            });
                   
                     },
                         error: function(error) {
                         alert("error");
                         }
         });
-    // draw the edit button
-        function operateeditFormatter(value, row, index) {
-        return [
-                '<a class="edit" href="javascript:void(0)" title="edit">',
-                '<i class="glyphicon glyphicon-edit"></i>',
-                '</a>'
-                ].join('');
+        // draw the save button
+        function operatesaveFormatter(value, row, index) {
+            return [
+                    '<a class="save" href="javascript:void(0)" title="save">',
+                    '<i class="glyphicon glyphicon-ok"></i>',
+                    '</a>'
+                    ].join('');
         }
         // draw the delete button
         function operateremoveFormatter(value, row, index) {
@@ -110,71 +148,23 @@
         window.operateEvents = {
             
             
+            
             // Edit/save button Event
-            
-            'click .edit': function (e, value, row, index) {
-                var button = "#table tr[data-index='"+index+"'] td .edit i";
-                var trindex = "#table tr[data-index='"+index+"'] td";
-                $(trindex).slice( 0, -2 ).editable('toggleDisabled'); // toggle disable
-                //if ok button is clicked
-                if($(button).attr("class") == "glyphicon glyphicon-ok"){
-                    $(button).attr("class","glyphicon glyphicon-edit");
-                    //get the values of the row
-                    var values = $(trindex).slice( 0, -2 ).editable('submit',{
-                        ajaxOptions: {
-                        dataType: 'json' //assuming json response
-                        },
-                        success: function(data, config) {
-                        
-                        },
-                        error: function(errors) {
-                        }
-                    });
-                    // run cloud code to save the object
-                    var myobjectid = row["objectId"];
-                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
-                        success: function() {
-                                    console.log("Saved!");
-                        },
-                        error: function(error) {
-                                    alert("Can't save, try again");
-                        }
-                    });
-                }
-                else{
-                    // if it's the first time, then editable does not exist
-                    // then enable the edit
-                    if($(trindex).slice( 0,1).hasClass("editable-disabled") == true){
-                        $(trindex).slice( 0, -2 ).editable('toggleDisabled');
-                    }
-                    $(button).attr("class","glyphicon glyphicon-ok");
-                // do not selec the last two items which are edit and remove
-                $(trindex).slice( 0, -2 ).editable({
-                    title: 'enter name',
-                    mode: 'inline'
-                });
-                console.log(value, row, index);
-                }
+            'click .save': function (e, value, row, index) {
+                var objectid = row["objectId"];
+                var schoolerdate = $(this).parent().parent().find(".schoolerdate").html();
+                var myobjectvalue = {};
+                myobjectvalue["schoolerdate"] = schoolerdate;
+                Parse.Cloud.run('saveobject', { objectname: 'School', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                                success: function() {
+                                console.log("Saved!");
+                                },
+                                error: function(error) {
+                                alert("Can't save, try again");
+                                }
+                                });
+                                
             },
-            
-            
-            //Remove button Event
-            
-            'click .remove': function (e, value, row, index) {
-                if (confirm("确定要删除吗？") == true) {
-                    var myobjectid = row["objectId"];
-                    var studentid = row["studentid"];
-                    Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
-                                    success: function() {
-                                    $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
-                                    console.log("Delete!");
-                                    },
-                                    error: function(error) {
-                                    alert("Delete failed");
-                        }
-                    });
-                }
-            }
         };
         // this is used to display "Total:"+ number
         function totalNameFormatter(data) {
