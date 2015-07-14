@@ -6,6 +6,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
     <script src="vendors/inputmask.js"></script>
     <script src="vendors/jquery.inputmask.js"></script>
+    <script src="vendors/bootstrap-datepicker.js"></script>
 </head>
 <body class="nav-md">
     <div class="container body">
@@ -38,85 +40,79 @@
                                             <li>
                                                 <a href="#step-2">
                                                     <span class="step_no">2</span>
-                                                    <span class="step_descr">School Dismissal Time (Regular)</span>
+                                                    <span class="step_descr">School Dismissal Time (TK)</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#step-3">
                                                     <span class="step_no">3</span>
-                                                    <span class="step_descr">School Dismissal Time (Special)</span>
+                                                    <span class="step_descr">School Dismissal Time (K)</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#step-4">
                                                     <span class="step_no">4</span>
-                                                    <span class="step_descr">Review</span>
+                                                    <span class="step_descr">School Dismissal Time (G1-5)</span>
                                                 </a>
                                             </li>
                                         </ul>
                                         <div id="step-1">
                                             <form class="form-horizontal form-label-left">
-
                                                 <div class="form-group">
+<!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" id="schoolname" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
-                                                <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schooladdress">Address / 地址 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" id="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolcity">City / 城市 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" id="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                <br>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-3" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolzip" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                        <input type="text" id="schoolzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
+                                                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                    </div>
                                                 </div>
-                                                 <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" class="form-control" id="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                 <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolprincipal">Principal / 校长 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" id="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                 <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail">Email / 邮箱 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="email" id="schoolemail" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                 <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolwebsite">Website / 网址 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <input type="text" id="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
-                                                            </div>
+                                                    </div>
                                                 </div>
-                                                 <br>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区</label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+<!--                                                    若在学区输入页面输入学校，则此选项应删除-->
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <select class="form-control">
                                                             <option>PUSD - Poway Unified School District</option>
                                                             <option>SDUSD - San Diego Unified School District</option>
@@ -125,32 +121,184 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School Dismissal Time / 放学</label>
-                                                    <div class='input-group date' id='schooldismisstime'>
-                                                        <input type='text' class="form-control" name="startDate" />
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
                                                 </form>
-
                                         </div>
                                         <div id="step-2">
-                                            <h2 class="StepTitle">Step 2 Content</h2>
-                                            <p>
-                                                do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Does TK has different schedule <span class="required">*</span></span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="radio" id="TKscheduleY">
+                                                            <input type="radio" class="flat" value="Y" checked="" required /> 有 / Yes
+                                                        </div>
+                                                        <div class="radio" id="TKscheduleN">
+                                                            <input type="radio" class="flat" value="N" /> 无 / No
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group" id="TKDT">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">TK Dismissal Time <span class="required">*</span></span></label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class='input-group date ' id='TKDismissalTime'>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                            <input type='text' class="form-control" name="startDate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <div id="step-3">
-                                            <h2 class="StepTitle">Step 3 Content</h2>
-                                            <p>
-                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
+                                            <form class="form-horizontal form-label-left">
+                                                <form class="form-horizontal form-label-left">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Does K has different schedule <span class="required">*</span></label>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="radio" id="KscheduleY">
+                                                                <input type="radio" class="flat" value="Y" checked="" required /> 有 / Yes
+                                                            </div>
+                                                            <div class="radio" id="KscheduleN">
+                                                                <input type="radio" class="flat" value="N" /> 无 / No
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group" id='KintroductoryD'>
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class='input-daterange input-group' id='Kintroductorydays'>
+                                                                <input type="text" class="input-sm form-control" name="start" />
+                                                                <span class="input-group-addon">to</span>
+                                                                <input type="text" class="input-sm form-control" name="end" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group" id="KIDSDT">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">KIDS Dismissal Time <span class="required">*</label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class='input-group date ' id='KIDSDismissalTime'>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                <input type='text' class="form-control" name="startDate" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group" id="KrDTweekday">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class="radio" id="KrDTWD">
+                                                                <label><input type="checkbox" class="js-switch"> Monday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Tuesday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Wednesday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Thursday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Friday</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" id="KrDT">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <span class="required">*</span></label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class='input-group date ' id='KrDismissalTime'>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                <input type='text' class="form-control" name="startDate" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group" id="KtbdDTweekday">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Weekday </label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class="radio" id="KtbdDTWD">
+                                                                <label><input type="radio" class="js-switch"> Monday</label>
+                                                                <label><input type="radio" class="js-switch"> Tuesday</label>
+                                                                <label><input type="radio" class="js-switch"> Wednesday</label>
+                                                                <label><input type="radio" class="js-switch"> Thursday</label>
+                                                                <label><input type="radio" class="js-switch"> Friday</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" id="KtbdDT">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time </label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class='input-group date ' id='KtbdDismissalTime'>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                <input type='text' class="form-control" name="startDate" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group" id='KtbdDTdate'>
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Date </label>
+                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                            <div class='input-group date ' id='KtbdDismissalTimedate'>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                <input type='text' class="form-control" name="startDate" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </form>
                                         </div>
-
-                                    </div>
+                                        <div id="step-4">
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group" id="GrDTweekday">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class="checkbox" id="GrDTWD">
+                                                            <label><input type="checkbox" class="js-switch"> Monday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Tuesday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Wednesday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Thursday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Friday</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group" id="GrDT">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <span class="required">*</span></label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class='input-group date ' id='GrDismissalTime'>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                            <input type='text' class="form-control" name="startDate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group" id="GtbdDTweekday">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Weekday </label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class="radio" id="GtbdDTWD">
+                                                            <label><input type="radio" class="js-switch"> Monday</label>
+                                                            <label><input type="radio" class="js-switch"> Tuesday</label>
+                                                            <label><input type="radio" class="js-switch"> Wednesday</label>
+                                                            <label><input type="radio" class="js-switch"> Thursday</label>
+                                                            <label><input type="radio" class="js-switch"> Friday</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group" id="GtbdDT">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time </label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class='input-group date ' id='GtbdDismissalTime'>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                            <input type='text' class="form-control" name="startDate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group" id='GtbdDTdate'>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Date </span></label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class='input-group date ' id='GtbdDismissalTimedate'>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                            <input type='text' class="form-control" name="startDate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </form>
+                                        </div>
                                     <!-- End SmartWizard Content -->
                                 </div>
                             </div>
@@ -242,26 +390,86 @@
 }
 /**-------**/
 </style>
-    <!-- input mask -->
-    
+
     <!-- form wizard -->
     <script type="text/javascript">
-            $(document).ready(function () {
-            $("#schooldismisstime").datetimepicker({
-            format: 'LT'
-            });
-            //input mask
-            $("#phonenumber").inputmask();
-            // Smart Wizard 	
-                          $('#wizard').smartWizard({
-                                                   onFinish:onFinishCallback,
-                                                   transitionEffect: 'slide'
-                          });
+        $(document).ready(function () {
+                          //Datetimepicker
+                          $("#TKDismissalTime").datetimepicker({
+                                                               format: 'LT',
+                                                               });
+                          $("#KIDSDismissalTime").datetimepicker({
+                                                                 format: 'LT',
+                                                                 });
+                          $("#KrDismissalTime").datetimepicker({
+                                                                 format: 'LT',
+                                                                 });
+                          $("#KtbdDismissalTime").datetimepicker({
+                                                                 format: 'LT',
+                                                                 });
+                          $("#GrDismissalTime").datetimepicker({
+                                                                 format: 'LT',
+                                                                 });
+                          $("#GtbdDismissalTime").datetimepicker({
+                                                                 format: 'LT',
+                                                                 });
+                          //Date picker
+                          $("#KtbdDismissalTimedate").datepicker({
+                                                              startView: 1,
+                                                              clearBtn: true,
+                                                              multidate: true,
+                                                              daysOfWeekDisabled: "0,6"
+                                                             });
+                          $("#GtbdDismissalTimedate").datepicker({
+                                                             startView: 1,
+                                                             clearBtn: true,
+                                                             multidate: true,
+                                                             daysOfWeekDisabled: "0,6"
+                                                             });
+                          //Date range picker
+                          $("#Kintroductorydays").datepicker({
+                                                             startView: 1,
+                                                             clearBtn: true,
+                                                             daysOfWeekDisabled: "0,6"
+                                                             });
+                          //input mask
+                            $("#phonenumber").inputmask();
+                            $("#schoolzip").inputmask();
+                          //Smart Wizard
+                            $('#wizard').smartWizard({
+                                                    onFinish:onFinishCallback,
+                                                    transitionEffect: 'slide'
+                            });
 
-            function onFinishCallback() {
-                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-                alert('Finish Clicked');
-            }
+                            function onFinishCallback() {
+                                                        $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                                                        alert('Finish Clicked');
+                            }
+                          //hide and show upon clicking
+                            $("#TKscheduleN").click(function(){
+                                                                $("#TKDT").hide();
+                            });
+                            $("#TKscheduleY").click(function(){
+                                                                $("#TKDT").show();
+                            });
+                            $("#KscheduleN").click(function(){
+                                                                $("#KintroductoryD").hide();
+                                                                $("#KIDSDT").hide();
+                                                                $("#KrDTweekday").hide();
+                                                                $("#KrDT").hide();
+                                                                $("#KtbdDTweekday").hide();
+                                                                $("#KtbdDT").hide();
+                                                                $("#KtbdDTdate").hide();
+                            });
+                            $("#KscheduleY").click(function(){
+                                                                $("#KintroductoryD").show();
+                                                                $("#KIDSDT").show();
+                                                                $("#KrDTweekday").show();
+                                                                $("#KrDT").show();
+                                                                $("#KtbdDTweekday").show();
+                                                                $("#KtbdDT").show();
+                                                                $("#KtbdDTdate").show();
+                            });
         });
     </script>
 </body>
