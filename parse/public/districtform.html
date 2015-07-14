@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Custom styling plus plugins -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendors/wizard/jquery.smartWizard.js"></script>
+    <script type="text/javascript" src="bootstrap-editable/js/moment.min.js"></script>
+    <script src="vendors/bootstrap-datepicker.js"></script>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <!-- Smart Wizard -->
+                                    <p><br><br><br>Please input school district information below!<br>Thank you!</p>
+                                    <div id="wizard" class="form_wizard wizard_horizontal">
+                                        <ul class="wizard_steps">
+                                            <li>
+                                                <a href="#step-1">
+                                                    <span class="step_no">1</span>
+                                                    <span class="step_descr">School Dictrict Basic Info</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div id="step-1">
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <select class="form-control">
+                                                            <option>PUSD - Poway Unified School District</option>
+                                                            <option>SDUSD - San Diego Unified School District</option>
+                                                            <option>DMUSD - Del Mar Union School District</option>
+                                                            <option>SBSD - Solana Beach School District</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">District Calendar / 日历 <span class="required">*</span></label>
+                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                        <div class='input-group date ' id='noschooldate'>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                            <input type='text' class="form-control" name="startDate" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School #1 / 学校#1 <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="schoolname1" required="required" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Add new school / 新增</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="radio" id="addnewschoolY">
+                                                            <input type="radio" class="flat" value="Y" checked="" required /> 有 / Yes
+                                                        </div>
+                                                        <div class="radio" id="addnewschoolN">
+                                                            <input type="radio" class="flat" value="N" /> 无 / No
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End SmartWizard Content -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+            <!-- /page content -->
+        </div>
+
+    </div>
+
+<style>
+    /**-------**/
+    
+    .wizard_horizontal ul.wizard_steps {
+        display: table;
+        list-style: none;
+        position: relative;
+        width: 100%;
+        margin: 0 0 20px;
+    }
+
+.wizard_horizontal ul.wizard_steps li {
+    display: table-cell;
+    text-align: center;
+}
+
+.wizard_horizontal ul.wizard_steps li a,
+.wizard_horizontal ul.wizard_steps li:hover {
+    display: block;
+    position: relative;
+    -moz-opacity: 1;
+    filter: alpha(opacity: 100);
+    opacity: 1;
+    color: #666;
+}
+
+.wizard_horizontal ul.wizard_steps li a:before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: #ccc;
+    top: 20px;
+    width: 100%;
+    z-index: 4;
+    left: 0;
+}
+
+.wizard_horizontal ul.wizard_steps li a.disabled .step_no {
+    background: #ccc;
+}
+
+.wizard_horizontal ul.wizard_steps li a .step_no {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto 5px;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+
+.wizard_horizontal ul.wizard_steps li a.selected:before,
+.step_no {
+    background: #34495E;
+    color: #fff;
+}
+
+.wizard_horizontal ul.wizard_steps li a.done:before,
+.wizard_horizontal ul.wizard_steps li a.done .step_no {
+    background: #1ABB9C;
+    color: #fff;
+}
+
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+    left: 50%;
+}
+
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+    right: 50%;
+    width: 50%;
+    left: auto;
+}
+/**-------**/
+</style>
+
+    <!-- form wizard -->
+    <script type="text/javascript">
+            $(document).ready(function () {
+                              $("#noschooldate").datepicker({
+                                                                    startView: 1,
+                                                                    clearBtn: true,
+                                                                    multidate: true,
+                                                                    daysOfWeekDisabled: "0,6",
+                                                                    });
+            // Smart Wizard 	
+                          $('#wizard').smartWizard({
+                                                   onFinish:onFinishCallback,
+                                                   transitionEffect: 'slide'
+                          });
+
+            function onFinishCallback() {
+                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                alert('Finish Clicked');
+            }
+            $("#addnewschoolN").click(function(){
+                                                $("#").hide();
+                                      });
+            $("#addnewschoolY").click(function(){
+                                                $("#").show();
+                                      });
+              
+                  
+                              
+        });
+    </script>
+</body>
+
+</html>
