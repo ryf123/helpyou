@@ -17,6 +17,7 @@
     <script src="vendors/jquery.inputmask.js"></script>
     <script src="vendors/bootstrap-datepicker.js"></script>
     <script src="vendors/validator.js"></script>
+    <script type="text/javascript" src="vendors/parse.js"></script>
 </head>
 <body class="nav-md">
     <div class="container body">
@@ -30,7 +31,8 @@
                                 <div class="x_content">
                                     <!-- Smart Wizard -->
                                     <p><br><br><br>Please input school information below!<br>Thank you!</p>
-                                    <div id="wizard" class="form_wizard wizard_horizontal" >
+                                    <form>
+                                        <div id="wizard" class="form_wizard wizard_horizontal" >
                                         <ul class="wizard_steps">
                                             <li>
                                                 <a href="#step-1">
@@ -58,57 +60,57 @@
                                             </li>
                                         </ul>
                                         <div id="step-1">
-                                            <form class="form-horizontal form-label-left" data-toggle="validator">
+                                            <div class="form-horizontal form-label-left" data-toggle="validator">
                                                 <div class="form-group">
 <!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolname" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schoolname" name="schoolname" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schooladdress">Address / 地址 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schooladdress" name="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolcity">City / 城市 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schoolcity" name="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-3" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
+                                                        <input type="text" id="schoolzip" name="schoolzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" class="form-control" id="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
+                                                        <input type="text" class="form-control" id="phonenumber" name="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolprincipal">Principal / 校长 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schoolprincipal" name="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail" >Email / 邮箱 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="email" id="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@evereast.com">
+                                                        <input type="email" id="schoolemail" name="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@evereast.com">
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolwebsite">Website / 网址 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="schoolwebsite" name="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -123,18 +125,18 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                </form>
+                                                </div>
                                         </div>
                                         <div id="step-2">
-                                            <form class="form-horizontal form-label-left">
+                                            <div class="form-horizontal form-label-left">
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Does TK has different schedule <span class="required">*</span></span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <div class="radio" id="TKscheduleY">
-                                                            <input type="radio" class="flat" value="Y" checked="" required name="TKscheduleoption"/> 有 / Yes
+                                                            <input type="radio" class="flat" value="1" checked="" required name="TKscheduleoption"/> 有 / Yes
                                                         </div>
                                                         <div class="radio" id="TKscheduleN">
-                                                            <input type="radio" class="flat" value="N" name="TKscheduleoption"/> 无 / No
+                                                            <input type="radio" class="flat" value="0" name="TKscheduleoption"/> 无 / No
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,16 +144,16 @@
                                                 <div class="form-group" id="TKDT">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">TK Dismissal Time <span class="required">*</span></span></label>
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class='input-group date ' id='TKDismissalTime'>
+                                                        <div class='input-group date ' id='TKDismissalTime' >
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="startDate" />
+                                                            <input type='text' class="form-control" name="TKDismissalTime" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                         <div id="step-3">
-                                            <form class="form-horizontal form-label-left">
+                                            <div class="form-horizontal form-label-left">
                                                 <form class="form-horizontal form-label-left">
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Does K has different schedule <span class="required">*</span></label>
@@ -169,9 +171,9 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-daterange input-group' id='Kintroductorydays'>
-                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysstart'/>
+                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysstart' name='Kintroductorydaysstart'/>
                                                                 <span class="input-group-addon">to</span>
-                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysend'/>
+                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysend' name='Kintroductorydaysend'/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,7 +183,7 @@
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-group date ' id='KIDSDismissalTime'>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="startDate" />
+                                                                <input type='text' class="form-control" name="KIDSDismissalTime" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,7 +191,7 @@
                                                     <div class="form-group" id="KrDTweekday">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class="radio" id="KrDTWD">
+                                                            <div class="radio" id="KrDTWD" name="KrDTWD">
                                                                 <label><input type="checkbox" class="js-switch"> Monday</label>
                                                                 <label><input type="checkbox" class="js-switch"> Tuesday</label>
                                                                 <label><input type="checkbox" class="js-switch"> Wednesday</label>
@@ -203,7 +205,7 @@
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-group date ' id='KrDismissalTime'>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="startDate" />
+                                                                <input type='text' class="form-control" name="KrDismissalTime" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,12 +213,12 @@
                                                     <div class="form-group" id="KtbdDTweekday">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Weekday </label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class="radio" id="KtbdDTWD">
-                                                                <label><input type="radio" class="js-switch"> Monday</label>
-                                                                <label><input type="radio" class="js-switch"> Tuesday</label>
-                                                                <label><input type="radio" class="js-switch"> Wednesday</label>
-                                                                <label><input type="radio" class="js-switch"> Thursday</label>
-                                                                <label><input type="radio" class="js-switch"> Friday</label>
+                                                            <div class="radio" id="KtbdDTWD" name="KtbdDTWD">
+                                                                <label><input type="checkbox" class="js-switch" > Monday</label>
+                                                                <label><input type="checkbox" class="js-switch" > Tuesday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Wednesday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Thursday</label>
+                                                                <label><input type="checkbox" class="js-switch"> Friday</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -225,7 +227,7 @@
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-group date ' id='KtbdDismissalTime'>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="startDate" />
+                                                                <input type='text' class="form-control" name="KtbdDismissalTime" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,18 +237,18 @@
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-group date ' id='KtbdDismissalTimedate'>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="startDate" />
+                                                                <input type='text' class="form-control" name="KtbdDismissalTimedate" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                            </form>
+                                            </div>
                                         </div>
                                         <div id="step-4">
-                                            <form class="form-horizontal form-label-left">
+                                            <div class="form-horizontal form-label-left">
                                                 <div class="form-group" id="GrDTweekday">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class="checkbox" id="GrDTWD">
+                                                        <div class="checkbox" id="GrDTWD" name="GrDTWD">
                                                             <label><input type="checkbox" class="js-switch"> Monday</label>
                                                             <label><input type="checkbox" class="js-switch"> Tuesday</label>
                                                             <label><input type="checkbox" class="js-switch"> Wednesday</label>
@@ -261,7 +263,7 @@
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
                                                         <div class='input-group date ' id='GrDismissalTime'>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="startDate" />
+                                                            <input type='text' class="form-control" name="GrDismissalTime" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,12 +271,12 @@
                                                 <div class="form-group" id="GtbdDTweekday">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Weekday </label>
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class="radio" id="GtbdDTWD">
-                                                            <label><input type="radio" class="js-switch"> Monday</label>
-                                                            <label><input type="radio" class="js-switch"> Tuesday</label>
-                                                            <label><input type="radio" class="js-switch"> Wednesday</label>
-                                                            <label><input type="radio" class="js-switch"> Thursday</label>
-                                                            <label><input type="radio" class="js-switch"> Friday</label>
+                                                        <div class="radio" id="GtbdDTWD" name="GtbdDTWD">
+                                                            <label><input type="checkbox" class="js-switch"> Monday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Tuesday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Wednesday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Thursday</label>
+                                                            <label><input type="checkbox" class="js-switch"> Friday</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -284,7 +286,7 @@
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
                                                         <div class='input-group date ' id='GtbdDismissalTime'>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="startDate" />
+                                                            <input type='text' class="form-control" name="GtbdDismissalTime" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -294,15 +296,15 @@
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
                                                         <div class='input-group date ' id='GtbdDismissalTimedate'>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="startDate" />
+                                                            <input type='text' class="form-control" name="GtbdDismissalTimedate" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
-                                            </form>
+                                            </div>
                                         </div>
                                     <!-- End SmartWizard Content -->
-                                </div>
+                                </div></form>
                             </div>
                         </div>
 
@@ -396,6 +398,7 @@
     <!-- form wizard -->
     <script type="text/javascript">
         $(document).ready(function () {
+                          Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
                           //Datetimepicker
                           $("#TKDismissalTime").datetimepicker({
                                                                format: 'LT',
@@ -451,11 +454,29 @@
                             });
 
                             function onFinishCallback() {
-                                                        $('#wizard').smartWizard('showMessage', 'Finish Clicked');
-                                                        alert('Finish Clicked');
+                          var submitdata = {}
+                              var formarray = $("form").serializeArray();
+                              for(index in formarray){
+                                  var ele = formarray[index];
+                                  submitdata[ele["name"]] = ele["value"];
+                              }
+                              Parse.Cloud.run('saveobject', { objectname: 'SchoolDetail', objectvalue:submitdata,objectid:""}, {
+                              success: function() {
+                              console.log("Saved!");
+                              },
+                              error: function(error) {
+                              alert("Can't save, try again");
+                              }
+                              });
+                              console.log(submitdata);
                             }
                           // form horizontal
-                          $("#form-horizontal").validator();
+                          $(".form-horizontal").validator({
+                                                          KtbdDTWD: {
+                                                          enabled: false
+                                                          },
+                                                      
+                          });
                           //hide and show upon clicking
                             $("#TKscheduleN").click(function(){
                                                                 $("#TKDT").hide();
