@@ -4,13 +4,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
-    <script src="vendors/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="vendors/wizard/jquery.smartWizard.js"></script>
     <script type="text/javascript" src="bootstrap-editable/js/moment.min.js"></script>
     <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendors/inputmask.js"></script>
+    <script src="vendors/jquery.inputmask.js"></script>
 </head>
 <body class="nav-md">
     <div class="container body">
@@ -85,6 +88,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
                                                     <div class="col-md-9 col-sm-9 col-xs-9">
+                                                        <input type="text" class="form-control" id="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                             </div>
                                                 </div>
@@ -124,28 +128,10 @@
                                                 <br>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">School Dismissal Time / 放学</label>
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
-                                                        <select class="form-control">
-                                                            <option>10</option>
-                                                            <option>11</option>
-                                                            <option>12</option>
-                                                            <option>13</option>
-                                                            <option>14</option>
-                                                            <option>15</option>
-                                                            <option>16</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div id="time" class="btn-group" data-toggle="buttons">
-                                                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                                <input type="radio" name="time" value="AM"> &nbsp; AM &nbsp;
-                                                            </label>
-                                                            <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                                <input type="radio" name="time" value="PM" checked=""> PM
-                                                            </label>
-                                                        </div>
+                                                    <div class='input-group date' id='schooldismisstime'>
+                                                        <input type='text' class="form-control" name="startDate" />
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 </form>
@@ -257,27 +243,25 @@
 /**-------**/
 </style>
     <!-- input mask -->
-    <script src="vendors/jquery.inputmask.js"></script>
+    
     <!-- form wizard -->
     <script type="text/javascript">
-        $(document).ready(function () {
+            $(document).ready(function () {
+            $("#schooldismisstime").datetimepicker({
+            format: 'LT'
+            });
+            //input mask
+            $("#phonenumber").inputmask();
             // Smart Wizard 	
                           $('#wizard').smartWizard({
-                                                   onFinish:onFinishCallback
+                                                   onFinish:onFinishCallback,
+                                                   transitionEffect: 'slide'
                           });
 
             function onFinishCallback() {
                 $('#wizard').smartWizard('showMessage', 'Finish Clicked');
                 alert('Finish Clicked');
             }
-        });
-
-        $(document).ready(function () {
-            // Smart Wizard	
-            $('#wizard_verticle').smartWizard({
-                transitionEffect: 'slide'
-            });
-
         });
     </script>
 </body>
