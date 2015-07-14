@@ -5,12 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="vendors/wizard/jquery.smartWizard.js"></script>
+    <script type="text/javascript" src="bootstrap-editable/js/moment.min.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
 </head>
-
-
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
@@ -84,7 +85,6 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
                                                     <div class="col-md-9 col-sm-9 col-xs-9">
-                                                        <input type="text" class="form-control" data-inputmask="'mask' : '(999) 999-9999'">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                             </div>
                                                 </div>
@@ -258,7 +258,6 @@
 </style>
     <!-- input mask -->
     <script src="vendors/jquery.inputmask.js"></script>
-    <script src="vendors/js/bootstrap.min.js"></script>
     <!-- form wizard -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -281,14 +280,6 @@
 
         });
     </script>
-    <!-- input_mask -->
-    <script>
-        $(document).ready(function () {
-                          $(":input").inputmask();
-                          });
-        </script>
-    <!-- /input mask -->
-
 </body>
 
 </html>
