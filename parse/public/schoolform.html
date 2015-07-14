@@ -16,6 +16,7 @@
     <script src="vendors/inputmask.js"></script>
     <script src="vendors/jquery.inputmask.js"></script>
     <script src="vendors/bootstrap-datepicker.js"></script>
+    <script src="vendors/validator.js"></script>
 </head>
 <body class="nav-md">
     <div class="container body">
@@ -29,7 +30,7 @@
                                 <div class="x_content">
                                     <!-- Smart Wizard -->
                                     <p><br><br><br>Please input school information below!<br>Thank you!</p>
-                                    <div id="wizard" class="form_wizard wizard_horizontal">
+                                    <div id="wizard" class="form_wizard wizard_horizontal" >
                                         <ul class="wizard_steps">
                                             <li>
                                                 <a href="#step-1">
@@ -57,7 +58,7 @@
                                             </li>
                                         </ul>
                                         <div id="step-1">
-                                            <form class="form-horizontal form-label-left">
+                                            <form class="form-horizontal form-label-left" data-toggle="validator">
                                                 <div class="form-group">
 <!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
@@ -98,9 +99,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail">Email / 邮箱 <span class="required">*</span></label>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail" >Email / 邮箱 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="email" id="schoolemail" required="required" class="form-control col-md-7 col-xs-12">
+                                                        <input type="email" id="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@evereast.com">
+                                                        <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -452,6 +454,8 @@
                                                         $('#wizard').smartWizard('showMessage', 'Finish Clicked');
                                                         alert('Finish Clicked');
                             }
+                          // form horizontal
+                          $("#form-horizontal").validator();
                           //hide and show upon clicking
                             $("#TKscheduleN").click(function(){
                                                                 $("#TKDT").hide();
