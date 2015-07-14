@@ -167,9 +167,9 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class='input-daterange input-group' id='Kintroductorydays'>
-                                                                <input type="text" class="input-sm form-control" name="start" />
+                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysstart'/>
                                                                 <span class="input-group-addon">to</span>
-                                                                <input type="text" class="input-sm form-control" name="end" />
+                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysend'/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -427,11 +427,18 @@
                                                              daysOfWeekDisabled: "0,6"
                                                              });
                           //Date range picker
-                          $("#Kintroductorydays").datepicker({
+                          $("#Kintroductorydaysstart").datepicker({
+                                                             multidate: false,
                                                              startView: 1,
                                                              clearBtn: true,
                                                              daysOfWeekDisabled: "0,6"
                                                              });
+                          $("#Kintroductorydaysend").datepicker({
+                                                                  multidate: false,
+                                                                  startView: 1,
+                                                                  clearBtn: true,
+                                                                  daysOfWeekDisabled: "0,6"
+                                                                  });
                           //input mask
                             $("#phonenumber").inputmask();
                             $("#schoolzip").inputmask();
