@@ -248,8 +248,17 @@
         </div>
     </div>
 	<script>
+    // initialize constant
+    var d = new Date();
+    var currentyear = d.getFullYear();
+    var currentmonth = d.getMonth()+1;
+    var currentday = d.getDate();
+    var currentyearmonth = currentyear +""+currentmonth;
+    var registeryearmonth = "register"+currentyearmonth;
+    var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
+    var dayofweek = d.getDay();
 	$(function(){
-		// initialize constant
+		
 		Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
 		Parse.Cloud.run('getobject', {objectname: 'School'}, {
 		success: function(schools) {
@@ -265,40 +274,173 @@
 		});
 	});
 	function getStudent(schools){
-		var schoolsource = {}; // this will used to store students and school
+        var schools =  convertdatatokeyvalue(schools,"schoolname"); // school can be accessed by name
+		var schoolsource = {}; // this will used to store students and school, the structure is {school1:{time1:{student},time2:{student},time3:studnet},school2:{time1:{student}},schooln:{time1:{student},timen:{student}}}
+        // initialize schoolsource
+        Object.keys(schools).forEach(function (key) {
+            schoolsource[key] = {};
+        });
 		Parse.Cloud.run('getobject', {objectname: 'Student'}, {
 		success: function(students) {
 				students = JSON.parse(JSON.stringify(students));
-				for(j in students){
-					var myschool = students[j]["school"];
-					// if school is not in the array then creates it
-					if(schoolsource[myschool] == undefined){
-						schoolsource[myschool] = [[students][j]];
-					}
-					// else push the student to the array
-					else{
-						var schoolarray = schoolsource[myschool];
-						schoolarray.push(students[j]);
-						schoolsource[myschool] = schoolarray;
-					}
-				}
-				if(students.length > 0){
-					for(index in schools){
-						var name = schools[index]["schoolname"];
-						var studentarray = schoolsource[name];
-						var studentnumber =  studentarray.length;
-						var schooldismissaltime = schools[index]["schooldismissaltime"];
-						schoolinfo = "<li><div>"+schooldismissaltime+":"+ name +":"+studentnumber+"</div></li>";
-						$(".schools").append(schoolinfo);
-					}
-				}
-		  },
+                // step0 if today is saturday or sunday which is 0 or 6, if it is, then skip
+                if(dayofweek != 0 && dayofweek !=6){
+                    for(j in students){
+                        var currentstudent = students[j];
+                        var myschool = currentstudent["school"];
+                            var grade = currentstudent["grade"];
+                        
+                            // step1 if student is registered today, if not registered then continue
+                            if(studentisregistered(currentstudent) == false){
+                                continue;
+                            }
+                            // step2 if student grade is TK K or something else
+                        
+                            if(grade == "TK"){
+                                // step 2.1 if shcool has TKscheduleoption set to 1, then push the student to schoolsource[time]
+                                if(schools[myschool]["TKscheduleoption"] == 1){
+                                TKDismissalTime = schools[myschool]["TKDismissalTime"];
+                                if(TKDismissalTime != undefined){
+                        
+                                    TKDismissalTime = converttime(TKDismissalTime);
+                                    schoolsource = pushstudenttoschoolsource(schoolsource,TKDismissalTime,myschool,currentstudent);
+                                    continue;
+                                }
+                                }
+                            }
+                            if(grade == "K"){
+                                // step 2.2 if shcool has TKscheduleoption set to 1, then push the student to schoolsource[time]
+                                if(schools[myschool]["Kscheduleoption"] == 1){
+                                    // step 2.2.1 is today Kintroductorydays, whether today in in range of between start and end
+                                    var Kintroductorydaysend = schools[myschool]["Kintroductorydaysend"];
+                                    var Kintroductorydaysstart = schools[myschool]["Kintroductorydaysstart"];
+                                    if(Kintroductorydaysstart != undefined && Kintroductorydaysend != undefined){
+                                        var startDate = new Date(Kintroductorydaysstart);
+                                        var endDate = new Date(Kintroductorydaysend);
+                                        if(d >= startDate && d<=endDate){
+                                            KIDSDismissalTime = converttime(schools[myschool]["KIDSDismissalTime"]);
+                                            schoolsource = pushstudenttoschoolsource(schoolsource,KIDSDismissalTime,myschool,currentstudent);
+                                            continue;
+                                        }
+                                    }
+                                    // step 2.2.2 is today KtbdDismissalTimedate? actual date
+                                    var KtbdDismissalTimedate = schools[myschool]["KtbdDismissalTimedate"];
+                                    if(KtbdDismissalTimedate != undefined){
+                                        if(KtbdDismissalTimedate.indexOf(todaystriing)){
+                                            KtbdDismissalTime = converttime(schools[myschool]["KtbdDismissalTime"]);
+                                            schoolsource = pushstudenttoschoolsource(schoolsource,KtbdDismissalTime,myschool,currentstudent);
+                                            continue;
+                                    }
+                                    }
+                                    // step 2.2.3 is today KtbdDTWD? day of week
+                                    var KtbdDTWD = schools[myschool]["KtbdDTWD"];
+                                    if(KtbdDTWD != undefined){
+                                        if(dayofweek == KtbdDTWD){
+                                            var KtbdDismissalTime = converttime(schools[myschool]["KtbdDismissalTime"]);
+                                            schoolsource = pushstudenttoschoolsource(schoolsource,KtbdDismissalTime,myschool,currentstudent);
+                                            continue;
+                                        }
+                                    }
+                                    // step 2.2.4 grade is K; and Kscheduleoption is set; and it does not fall into above categories
+                                    var KrDismissalTime = converttime(schools[myschool]["KrDismissalTime"]);
+                                    if(KrDismissalTime != undefined){
+                                        KrDismissalTime = converttime(KrDismissalTime);
+                                        schoolsource = pushstudenttoschoolsource(schoolsource,KrDismissalTime,myschool,currentstudent);
+                                        continue;
+                                    }
+                                }
+                            }// end of grade==K
+                            // everything else, which is "grade is not TK scheduleoption set, or grade is not K schedule option not set or anything else"
+                            // step3 is today GtbdDismissalTimedate?
+                            var GtbdDismissalTimedate = schools[myschool]["GtbdDismissalTimedate"];
+                            if(GtbdDismissalTimedate.indexOf(todaystriing) != -1){
+                                var GtbdDismissalTime = converttime(schools[myschool]["GtbdDismissalTime"]);
+                                schoolsource = pushstudenttoschoolsource(schoolsource,GtbdDismissalTime,myschool,currentstudent);
+                                continue;
+                            }
+                            // step4 is today GtbdDTWD?
+                            var GtbdDTWD = schools[myschool]["GtbdDTWD"];
+                            if(dayofweek == GtbdDTWD){
+                                var GtbdDismissalTime = converttime(schools[myschool]["GtbdDismissalTime"]);
+                                schoolsource = pushstudenttoschoolsource(schoolsource,GtbdDismissalTime,myschool,currentstudent);
+                                continue;
+                            }
+                            else{
+                                var GrDismissalTime = converttime(schools[myschool]["GrDismissalTime"]);
+                                schoolsource = pushstudenttoschoolsource(schoolsource,GrDismissalTime,myschool,currentstudent);
+                                continue;
+                            }
+                        } //end of student loop
+                    } // end of dayofweek!=0/6
+                    
+                        Object.keys(schoolsource).forEach(function (schoolname) {
+                      var currentschool = schoolsource[schoolname];
+                      Object.keys(currentschool).forEach(function (schooldismissaltime) {
+                         var studentarray = currentschool[schooldismissaltime];
+                         var studentnumber = studentarray.length;
+                         schoolinfo = "<li><div>"+schooldismissaltime+":"+ schoolname +":"+studentnumber+"</div></li>";
+                         $(".schools").append(schoolinfo);
+                       });
+                      });
+                    
+                }, // end of success
 			error: function(error) {
 				console.log(error);
 				return [];
 		   }
 		});
 	}
+    
+    // this function converts data
+    // input [{name:school1,city:NY,time:11:00},{name:school2,city:LA,time:12:00}]
+    // output {school1:{name:school1,city:NY,time:11:00},school2:{name:school2,city:LA,time:12:00}}
+    // this the value can be accessed by data["school1"]["city"]
+    // the data must have newkey in it
+    function convertdatatokeyvalue(data,newkey){
+        var converted = {}
+        for(index in data){
+            var temp = data[index];
+            var name = temp[newkey];
+            if(name != undefined){
+                converted[name] = temp;
+            }
+        }
+        return converted;
+    }
+    
+    //whether the student is registered today
+    // return true if it's registered else return false
+    function studentisregistered(student){
+        if(student[registeryearmonth] != undefined){
+            if(student[registeryearmonth].indexOf(todaystriing) != -1){
+                return true;// if the register date contains today
+            }
+        }
+        return false;
+    }
+    
+    // function insert student to school source and return school source
+    // if the time: key is not created, then create it
+    function pushstudenttoschoolsource(schoolsource,schooltimestring,schoolname,currentstudent){
+        var currentstudentarray = schoolsource[schoolname][schooltimestring];
+        if(currentstudentarray ==  undefined){
+            schoolsource[schoolname][schooltimestring] = [currentstudent];
+        }
+        else{
+            currentstudentarray.push(currentstudent);
+            schoolsource[schoolname][schooltimestring] = currentstudentarray;
+        }
+        return schoolsource;
+    }
+    // convert time from 2:05 PM to time_2_05_PM
+    function converttime(time){
+        if(time == undefined){
+            return undefined;
+        }
+        converted = time.replace(/\s/g, ""); // replace whitespace
+        converted = converted.replace(/:/g, "_"); // replace whitespace
+        return "time_"+converted;
+    }
 	</script>
     </body>
     
