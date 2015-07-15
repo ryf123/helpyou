@@ -16,7 +16,7 @@
     </table>
     <script>
         // disable editable
-        
+        columnnamearray = ['studentid','age','firstname','lastname','grade','sex','contact','email','phonenumber','dob','edit','remove'];
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
         Parse.Cloud.run('getstudent', {}, {
@@ -28,63 +28,65 @@
                            data: stringify_data,
                            columns: [
                                      {
-                                     field: 'studentid',
-                                     title: '学号',
-                                     sortable:'true',
-                                     footerFormatter: totalNameFormatter
+                                         field: 'studentid',
+                                         title: '学号',
+                                         sortable:'true',
+                                         footerFormatter: totalNameFormatter
+                                     },
+                                     {
+                                         field: 'age',
+                                         title: '年龄',
+                                         sortable:'true'
                                      },
                                      {
                                          field: 'firstname',
                                          title: '名',
                                          sortable:'true',
-                                     }, {
+                                     },
+                                     {
                                          field: 'lastname',
                                          title: '姓',
                                          sortable:'true'
                                      },
                                      {
-                                     field: 'age',
-                                     title: '年龄',
-                                     sortable:'true'
+                                         field: 'grade',
+                                         title: '年级',
+                                         sortable:'true'
                                      },
                                      {
-                                     field: 'grade',
-                                     title: '年级',
-                                     sortable:'true'
+                                         field: 'sex',
+                                         title: '性别',
+                                         sortable:'true'
                                      },
                                      {
-                                     field: 'sex',
-                                     title: '性别',
-                                     sortable:'true'
+                                         field: 'contact',
+                                         title: '联系人',
+                                         sortable:'true'
                                      },
                                      {
-                                     field: 'contact',
-                                     title: '联系人',
-                                     sortable:'true'
+                                         field: 'email',
+                                         title: '邮箱',
+                                         sortable:'true'
                                      },
                                      {
-                                     field: 'email',
-                                     title: '邮箱',
-                                     sortable:'true'
-                                     },
-                                     {
-                                     field: 'phonenumber',
-                                     title: '联系电话',
-                                     sortable:'true'
+                                         field: 'phonenumber',
+                                         title: '联系电话',
+                                         sortable:'true'
                                      },
                                      {
                                          field: 'dob',
                                          sortable:'true',
                                          title: '生日'
-                                     },{
+                                     },
+                                     {
                                          field: 'edit',
                                          formatter: 'operateeditFormatter',
                                          events : 'operateEvents'
                                      },
                                      {
-                                     field: 'remove',
-                                     formatter: 'operateremoveFormatter',
-                                     events : 'operateEvents'
+                                         field: 'remove',
+                                         formatter: 'operateremoveFormatter',
+                                         events : 'operateEvents'
                                      },
                                      ]
                            });
@@ -93,8 +95,23 @@
                         alert("error");
                         }
         });
-    // draw the edit button
+        // draw the edit button
+        // if "UpdateCell" is called, then initBody will be called
+        // the initBody() function in bootstrap-table will call this to update icon
+        // if the current icon is
         function operateeditFormatter(value, row, index) {
+        // get the edit icon
+        var icon  = $("#table tr").eq(index+1).find("td a i").first()
+        //if current icon is ok then do not change
+        if(icon != undefined){
+            if(icon.attr("class") =="glyphicon glyphicon-ok"){
+                return [
+                        '<a class="edit" href="javascript:void(0)" title="edit">',
+                        '<i class="glyphicon glyphicon-ok"></i>',
+                        '</a>'
+                        ].join('');
+            }
+        }
         return [
                 '<a class="edit" href="javascript:void(0)" title="edit">',
                 '<i class="glyphicon glyphicon-edit"></i>',
@@ -118,26 +135,15 @@
             'click .edit': function (e, value, row, index) {
                 var button = "#table tr[data-index='"+index+"'] td .edit i";
                 var trindex = "#table tr[data-index='"+index+"'] td";
-                $(trindex).slice( 0, -2 ).editable('toggleDisabled'); // toggle disable
+                $(trindex).slice( 2, -2 ).editable('toggleDisabled'); // toggle disable
                 //if ok button is clicked
                 if($(button).attr("class") == "glyphicon glyphicon-ok"){
                     $(button).attr("class","glyphicon glyphicon-edit");
-                    //get the values of the row
-                    var values = $(trindex).slice( 0, -2 ).editable('submit',{
-                        ajaxOptions: {
-                        dataType: 'json' //assuming json response
-                        },
-                        success: function(data, config) {
-                        
-                        },
-                        error: function(errors) {
-                        }
-                    });
                     // run cloud code to save the object
                     var myobjectid = row["objectId"];
                     Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
                         success: function() {
-                                    console.log("Saved!");
+                                    alert("保存成功!");
                         },
                         error: function(error) {
                                     alert("Can't save, try again");
@@ -147,16 +153,31 @@
                 else{
                     // if it's the first time, then editable does not exist
                     // then enable the edit
-                    if($(trindex).slice( 0,1).hasClass("editable-disabled") == true){
-                        $(trindex).slice( 0, -2 ).editable('toggleDisabled');
+                    if($(trindex).slice( 2,-2).hasClass("editable-disabled") == true){
+                        $(trindex).slice( 2, -2 ).editable('toggleDisabled');
                     }
                     $(button).attr("class","glyphicon glyphicon-ok");
                 // do not selec the last two items which are edit and remove
-                $(trindex).slice( 0, -2 ).editable({
+                $(trindex).slice( 2, -2 ).editable({
                     title: 'enter name',
                     mode: 'inline'
                 });
                 console.log(value, row, index);
+                // on save event, if the value is saved then update row value
+                // save mean the the tick icon, or "enter" is pressed∂up
+                $(trindex).slice( 2, -2 ).on('save', function(e, params) {
+                     rowindex = $(this).parent()[0].rowIndex-1;
+                     colindex = this.cellIndex;
+                     fieldname = columnnamearray[colindex];
+                     $('#table').bootstrapTable("updateCell",{rowIndex: rowindex, fieldName: fieldname, fieldValue: params.newValue});
+                     //update cell will disable editable, re-enable it
+                     $('#table tr').each(function(){
+                         icon = $(this).find("td a i").first();
+                         if(icon.attr("class") =="glyphicon glyphicon-ok"){
+                             $(this).find("td").slice(2,-2).editable();
+                         }
+                     })
+                });
                 }
             },
             
