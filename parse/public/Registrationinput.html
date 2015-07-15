@@ -189,7 +189,7 @@
                     myobjectvalue[monthname2] = month2.join();
                     Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
                         success: function() {
-                                    console.log("Saved!");
+                                    alert("保存成功");
                         },
                         error: function(error) {
                                     alert("Can't save, try again");
