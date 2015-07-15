@@ -112,7 +112,8 @@
                                              registerdate = registerdate +","+monthdata2;
                                              }
                                              if(registerdate != ""){
-                                                 $(this).find(".registration")[0].innerHTML = registerdate;
+                                             $('#table').bootstrapTable("updateCell",{rowIndex: i-1, fieldName: "registrationdate", fieldValue: registerdate});
+                                             $(this).find(".registration")[0].innerHTML = registerdate;
                                              }
                             }
                             i++;
@@ -140,7 +141,9 @@
                                     // if there is not date yet, then registerdate is undefined
                                     if(registerarray[0] != "-"){
                                     for (var i = 0; i < registerarray.length; i++){
-                                        datearray.push(new Date(registerarray[i]))
+                                        if(registerarray[i] != ""){
+                                            datearray.push(new Date(registerarray[i]))
+                                        }
                                     }
                                     }
                                     if(datearray.length != 0){
