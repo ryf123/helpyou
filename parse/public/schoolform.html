@@ -103,7 +103,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail" >Email / 邮箱 <span class="required">*</span></label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="email" id="schoolemail" name="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@evereast.com">
+                                                        <input type="email" id="schoolemail" name="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@powayusd.com">
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                 <div class="form-group">
 <!--                                                    若在学区输入页面输入学校，则此选项应删除-->
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12" id='schooldistrict' name='schooldistrict'>
                                                         <select class="form-control">
                                                             <option>PUSD - Poway Unified School District</option>
                                                             <option>SDUSD - San Diego Unified School District</option>
@@ -159,10 +159,10 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Does K has different schedule <span class="required">*</span></label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                                             <div class="radio" id="KscheduleY">
-                                                                <input type="radio" class="flat" value="Y" checked="" required name="Kscheduleoption"/> 有 / Yes
+                                                                <input type="radio" class="flat" value="1" checked="" required name="Kscheduleoption"/> 有 / Yes
                                                             </div>
                                                             <div class="radio" id="KscheduleN">
-                                                                <input type="radio" class="flat" value="N" name="Kscheduleoption"/> 无 / No
+                                                                <input type="radio" class="flat" value="0" name="Kscheduleoption"/> 无 / No
                                                             </div>
                                                         </div>
                                                     </div>
@@ -170,7 +170,7 @@
                                                     <div class="form-group" id='KintroductoryD'>
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-daterange input-group' id='Kintroductorydays'>
+                                                            <div class='input-daterange input-group' id='Kintroductorydays' name='Kintroductorydays'>
                                                                 <input type="text" class="input-sm form-control" id='Kintroductorydaysstart' name='Kintroductorydaysstart'/>
                                                                 <span class="input-group-addon">to</span>
                                                                 <input type="text" class="input-sm form-control" id='Kintroductorydaysend' name='Kintroductorydaysend'/>
@@ -188,18 +188,7 @@
                                                         </div>
                                                     </div>
                                                     <br>
-                                                    <div class="form-group" id="KrDTweekday">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class="radio" id="KrDTWD" name="KrDTWD">
-                                                                <label><input type="checkbox" class="js-switch"> Monday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Tuesday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Wednesday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Thursday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Friday</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="form-group" id="KrDT">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <span class="required">*</span></label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -214,11 +203,11 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Weekday </label>
                                                         <div class='col-md-6 col-sm-6 col-xs-12'>
                                                             <div class="radio" id="KtbdDTWD" name="KtbdDTWD">
-                                                                <label><input type="checkbox" class="js-switch" > Monday</label>
-                                                                <label><input type="checkbox" class="js-switch" > Tuesday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Wednesday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Thursday</label>
-                                                                <label><input type="checkbox" class="js-switch"> Friday</label>
+                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="1"> Monday</label>
+                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="2"> Tuesday</label>
+                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="3"> Wednesday</label>
+                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="4"> Thursday</label>
+                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="5"> Friday</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -245,19 +234,7 @@
                                         </div>
                                         <div id="step-4">
                                             <div class="form-horizontal form-label-left">
-                                                <div class="form-group" id="GrDTweekday">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <br>Weekday <span class="required">*</span></label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class="checkbox" id="GrDTWD" name="GrDTWD">
-                                                            <label><input type="checkbox" class="js-switch"> Monday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Tuesday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Wednesday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Thursday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Friday</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
+                                                
                                                 <div class="form-group" id="GrDT">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <span class="required">*</span></label>
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -272,11 +249,11 @@
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Weekday </label>
                                                     <div class='col-md-6 col-sm-6 col-xs-12'>
                                                         <div class="radio" id="GtbdDTWD" name="GtbdDTWD">
-                                                            <label><input type="checkbox" class="js-switch"> Monday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Tuesday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Wednesday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Thursday</label>
-                                                            <label><input type="checkbox" class="js-switch"> Friday</label>
+                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="1"> Monday</label>
+                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="2"> Tuesday</label>
+                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="3"> Wednesday</label>
+                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="4"> Thursday</label>
+                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="5"> Friday</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -460,7 +437,7 @@
                                   var ele = formarray[index];
                                   submitdata[ele["name"]] = ele["value"];
                               }
-                              Parse.Cloud.run('saveobject', { objectname: 'SchoolDetail', objectvalue:submitdata,objectid:""}, {
+                              Parse.Cloud.run('saveobject', { objectname: 'School', objectvalue:submitdata,objectid:""}, {
                               success: function() {
                               console.log("Saved!");
                               },
