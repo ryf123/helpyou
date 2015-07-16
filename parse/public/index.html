@@ -84,7 +84,12 @@
                         </li>
                         <!-- / end of Sidebar Search-->
                         
-                        <!-- /1st - Info inputs-->
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
+                        </li>
+                        
+                        
+                        <!-- / Info inputs-->
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -117,7 +122,7 @@
                             <a href="Registrationinput.html"><i class="fa fa-pencil fa-fw"></i> Registration / 注册</a>
                         </li>
                         <li>
-                            <a href="studentpickuptable.html"><i class="fa fa-dashboard fa-fw"></i> Pickup Schedule / 接送安排</a>
+                            <a href="studentpickuptable.html"><i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
                         </li>
                         <li>
                             <a href="index.html"><i class="fa fa-bar-chart-o fa-fw"></i> Reports / 报告</a>
@@ -144,11 +149,24 @@
 				
 			</div>
         </div>
-        <!-- /End of heading   #page-wrapper  -->
+        <!-- /End of heading   #page-wrapper  -->   
     </div>
     <!-- /#wrapper -->
+    
+    
+    
+    
 
-
+    <!-- footer content -->
+    <footer>
+        <div class="">
+            <p class="pull-right">©2015 Evereast All Rights Reserved |
+            <span class="lead"> <i class="fa fa-paw"></i> Evereast</span>
+            </p>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -157,10 +175,16 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="metisMenu/metisMenu.min.js"></script>
+    <script src="metisMenu/metisMenu.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="vendors/sb-admin-2.js"></script>
 
 </body>
-
+<script>
+    $(function(){
+      $("#side-menu").metisMenu({
+      toggle: false
+      });
+    });
+</script>
 </html>
