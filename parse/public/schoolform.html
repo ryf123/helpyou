@@ -3,10 +3,19 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+                            
+    <title>HYAC-School Info Input</title>
+    
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet">
-        <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
+    
     <!-- Custom styling plus plugins -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -18,281 +27,666 @@
     <script src="vendors/bootstrap-datepicker.js"></script>
     <script src="vendors/validator.js"></script>
     <script type="text/javascript" src="vendors/parse.js"></script>
+    
+    <!-- MetisMenu CSS -->
+    <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="vendors/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="vendors/select2.min.css" rel="stylesheet">
+        
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+    
+    table.table > tbody > tr > td {
+        height: 30px;
+        vertical-align: middle;
+    }
+    /* address.js css style for address*/
+    .editable-address {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .editable-address span {
+        width: 70px;
+        display: inline-block;
+    }
+    </style>
 </head>
+
 <body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_content">
-                                    <!-- Smart Wizard -->
-                                    <p><br><br><br>Please input school information below!<br>Thank you!</p>
-                                    <form>
-                                        <div id="wizard" class="form_wizard wizard_horizontal" >
-                                        <ul class="wizard_steps">
-                                            <li>
-                                                <a href="#step-1">
-                                                    <span class="step_no">1</span>
-                                                    <span class="step_descr">School Basic Info</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#step-2">
-                                                    <span class="step_no">2</span>
-                                                    <span class="step_descr">School Dismissal Time (TK)</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#step-3">
-                                                    <span class="step_no">3</span>
-                                                    <span class="step_descr">School Dismissal Time (K)</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#step-4">
-                                                    <span class="step_no">4</span>
-                                                    <span class="step_descr">School Dismissal Time (G1-5)</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div id="step-1">
-                                            <div class="form-horizontal form-label-left" data-toggle="validator">
-                                                <div class="form-group">
-<!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolname" name="schoolname" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schooladdress">Address / 地址 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schooladdress" name="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolcity">City / 城市 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolcity" name="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-3" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolzip" name="schoolzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
-                                                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" class="form-control" id="phonenumber" name="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
-                                                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolprincipal">Principal / 校长 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolprincipal" name="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail" >Email / 邮箱 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="email" id="schoolemail" name="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@powayusd.com">
-                                                        <div class="help-block with-errors"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolwebsite">Website / 网址 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="schoolwebsite" name="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-<!--                                                    若在学区输入页面输入学校，则此选项应删除-->
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12" id='schooldistrict' name='schooldistrict'>
-                                                        <select class="form-control">
-                                                            <option value="PUSD">PUSD - Poway Unified School District</option>
-                                                            <option value="SDUSD">SDUSD - San Diego Unified School District</option>
-                                                            <option value="DMUSD">DMUSD - Del Mar Union School District</option>
-                                                            <option value="SBSD">SBSD - Solana Beach School District</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                        </div>
-                                        <div id="step-2">
-                                            <div class="form-horizontal form-label-left">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Does TK has different schedule <span class="required">*</span></span></label>
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div class="radio" id="TKscheduleY">
-                                                            <input type="radio" class="flat" value="1" checked="" required name="TKscheduleoption"/> 有 / Yes
-                                                        </div>
-                                                        <div class="radio" id="TKscheduleN">
-                                                            <input type="radio" class="flat" value="0" name="TKscheduleoption"/> 无 / No
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="form-group" id="TKDT">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">TK Dismissal Time <span class="required">*</span></span></label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class='input-group date ' id='TKDismissalTime' >
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="TKDismissalTime" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="step-3">
-                                            <div class="form-horizontal form-label-left">
-                                                <form class="form-horizontal form-label-left">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Does K has different schedule <span class="required">*</span></label>
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="radio" id="KscheduleY">
-                                                                <input type="radio" class="flat" value="1" checked="" required name="Kscheduleoption"/> 有 / Yes
-                                                            </div>
-                                                            <div class="radio" id="KscheduleN">
-                                                                <input type="radio" class="flat" value="0" name="Kscheduleoption"/> 无 / No
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-group" id='KintroductoryD'>
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-daterange input-group' id='Kintroductorydays' name='Kintroductorydays'>
-                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysstart' name='Kintroductorydaysstart'/>
-                                                                <span class="input-group-addon">to</span>
-                                                                <input type="text" class="input-sm form-control" id='Kintroductorydaysend' name='Kintroductorydaysend'/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-group" id="KIDSDT">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">KIDS Dismissal Time <span class="required">*</label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-group date ' id='KIDSDismissalTime'>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="KIDSDismissalTime" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    
-                                                    <div class="form-group" id="KrDT">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <span class="required">*</span></label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-group date ' id='KrDismissalTime'>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="KrDismissalTime" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-group" id="KtbdDTweekday">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Weekday </label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class="radio" id="KtbdDTWD" name="KtbdDTWD">
-                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="1"> Monday</label>
-                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="2"> Tuesday</label>
-                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="3"> Wednesday</label>
-                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="4"> Thursday</label>
-                                                                <label><input type="radio" class="js-switch" name="KtbdDTWD" value="5"> Friday</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group" id="KtbdDT">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time </label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-group date ' id='KtbdDismissalTime'>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="KtbdDismissalTime" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-group" id='KtbdDTdate'>
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Date </label>
-                                                        <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                            <div class='input-group date ' id='KtbdDismissalTimedate'>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                <input type='text' class="form-control" name="KtbdDismissalTimedate" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div id="step-4">
-                                            <div class="form-horizontal form-label-left">
-                                                
-                                                <div class="form-group" id="GrDT">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <span class="required">*</span></label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class='input-group date ' id='GrDismissalTime'>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="GrDismissalTime" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="form-group" id="GtbdDTweekday">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Weekday </label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class="radio" id="GtbdDTWD" name="GtbdDTWD">
-                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="1"> Monday</label>
-                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="2"> Tuesday</label>
-                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="3"> Wednesday</label>
-                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="4"> Thursday</label>
-                                                            <label><input type="radio" class="js-switch" name="GtbdDTWD" value="5"> Friday</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="form-group" id="GtbdDT">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time </label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class='input-group date ' id='GtbdDismissalTime'>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="GtbdDismissalTime" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="form-group" id='GtbdDTdate'>
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Date </span></label>
-                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                                        <div class='input-group date ' id='GtbdDismissalTimedate'>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                            <input type='text' class="form-control" name="GtbdDismissalTimedate" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    <!-- End SmartWizard Content -->
-                                </div></form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
+    <div id="wrapper">
+        
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">HelpYouAchieve</a>
             </div>
-            <!-- /page content -->
-        </div>
+            <!-- /.navbar-header -->
+            
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                    <strong>Task 1</strong>
+                                    <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                    <strong>Task 2</strong>
+                                    <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                    <strong>Task 3</strong>
+                                    <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                    <strong>Task 4</strong>
+                                    <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="studenttable.html"><i class="fa fa-dashboard fa-fw"></i> 所有学生</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="flot.html">Flot Charts</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">Morris.js Charts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="container body">
+                    <div class="main_container">
+                        <!-- page content -->
+                        <div class="right_col" role="main">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <!-- Smart Wizard -->
+                                                <p><br><br><br>Please input school information below!<br>Thank you!</p>
+                                                <form>
+                                                    <div id="wizard" class="form_wizard wizard_horizontal" >
+                                                    <ul class="wizard_steps">
+                                                        <li>
+                                                            <a href="#step-1">
+                                                                <span class="step_no">1</span>
+                                                                <span class="step_descr">School Basic Info</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#step-2">
+                                                                <span class="step_no">2</span>
+                                                                <span class="step_descr">School Dismissal Time (TK)</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#step-3">
+                                                                <span class="step_no">3</span>
+                                                                <span class="step_descr">School Dismissal Time (K)</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#step-4">
+                                                                <span class="step_no">4</span>
+                                                                <span class="step_descr">School Dismissal Time (G1-5)</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div id="step-1">
+                                                        <div class="form-horizontal form-label-left" data-toggle="validator">
+                                                            <div class="form-group">
+            <!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schoolname" name="schoolname" required="required" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schooladdress">Address / 地址 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schooladdress" name="schooladdress" required="required" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolcity">City / 城市 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schoolcity" name="schoolcity" required="required" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-3" for="schoolzip">Zipcode / 邮编 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schoolzip" name="schoolzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
+                                                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
+                                                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolprincipal">Principal / 校长 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schoolprincipal" name="schoolprincipal" required="required" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolemail" >Email / 邮箱 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="email" id="schoolemail" name="schoolemail" required="required" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@powayusd.com">
+                                                                    <div class="help-block with-errors"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="schoolwebsite">Website / 网址 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input type="text" id="schoolwebsite" name="schoolwebsite" required="required" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+            <!--                                                    若在学区输入页面输入学校，则此选项应删除-->
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12" id='schooldistrict' name='schooldistrict'>
+                                                                    <select class="form-control">
+                                                                        <option value="PUSD">PUSD - Poway Unified School District</option>
+                                                                        <option value="SDUSD">SDUSD - San Diego Unified School District</option>
+                                                                        <option value="DMUSD">DMUSD - Del Mar Union School District</option>
+                                                                        <option value="SBSD">SBSD - Solana Beach School District</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                    </div>
+                                                    <div id="step-2">
+                                                        <div class="form-horizontal form-label-left">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Does TK has different schedule <span class="required">*</span></span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <div class="radio" id="TKscheduleY">
+                                                                        <input type="radio" class="flat" value="1" checked="" required name="TKscheduleoption"/> 有 / Yes
+                                                                    </div>
+                                                                    <div class="radio" id="TKscheduleN">
+                                                                        <input type="radio" class="flat" value="0" name="TKscheduleoption"/> 无 / No
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="form-group" id="TKDT">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">TK Dismissal Time <span class="required">*</span></span></label>
+                                                                <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                    <div class='input-group date ' id='TKDismissalTime' >
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                        <input type='text' class="form-control" name="TKDismissalTime" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="step-3">
+                                                        <div class="form-horizontal form-label-left">
+                                                            <form class="form-horizontal form-label-left">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Does K has different schedule <span class="required">*</span></label>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="radio" id="KscheduleY">
+                                                                            <input type="radio" class="flat" value="1" checked="" required name="Kscheduleoption"/> 有 / Yes
+                                                                        </div>
+                                                                        <div class="radio" id="KscheduleN">
+                                                                            <input type="radio" class="flat" value="0" name="Kscheduleoption"/> 无 / No
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-group" id='KintroductoryD'>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Grade K Introductory Days (KIDS) <span class="required">*</span></label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class='input-daterange input-group' id='Kintroductorydays' name='Kintroductorydays'>
+                                                                            <input type="text" class="input-sm form-control" id='Kintroductorydaysstart' name='Kintroductorydaysstart'/>
+                                                                            <span class="input-group-addon">to</span>
+                                                                            <input type="text" class="input-sm form-control" id='Kintroductorydaysend' name='Kintroductorydaysend'/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-group" id="KIDSDT">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">KIDS Dismissal Time <span class="required">*</label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class='input-group date ' id='KIDSDismissalTime'>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                            <input type='text' class="form-control" name="KIDSDismissalTime" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                
+                                                                <div class="form-group" id="KrDT">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">K Regular Dismissal Time <span class="required">*</span></label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class='input-group date ' id='KrDismissalTime'>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                            <input type='text' class="form-control" name="KrDismissalTime" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-group" id="KtbdDTweekday">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Weekday </label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class="radio" id="KtbdDTWD" name="KtbdDTWD">
+                                                                            <label><input type="radio" class="js-switch" name="KtbdDTWD" value="1"> Monday</label>
+                                                                            <label><input type="radio" class="js-switch" name="KtbdDTWD" value="2"> Tuesday</label>
+                                                                            <label><input type="radio" class="js-switch" name="KtbdDTWD" value="3"> Wednesday</label>
+                                                                            <label><input type="radio" class="js-switch" name="KtbdDTWD" value="4"> Thursday</label>
+                                                                            <label><input type="radio" class="js-switch" name="KtbdDTWD" value="5"> Friday</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" id="KtbdDT">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time </label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class='input-group date ' id='KtbdDismissalTime'>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                            <input type='text' class="form-control" name="KtbdDismissalTime" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="form-group" id='KtbdDTdate'>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">K TimeBankingDay Dismissal Time <br>Date </label>
+                                                                    <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                        <div class='input-group date ' id='KtbdDismissalTimedate'>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                            <input type='text' class="form-control" name="KtbdDismissalTimedate" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="step-4">
+                                                        <div class="form-horizontal form-label-left">
+                                                            
+                                                            <div class="form-group" id="GrDT">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 Regular Dismissal Time <span class="required">*</span></label>
+                                                                <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                    <div class='input-group date ' id='GrDismissalTime'>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                        <input type='text' class="form-control" name="GrDismissalTime" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="form-group" id="GtbdDTweekday">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Weekday </label>
+                                                                <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                    <div class="radio" id="GtbdDTWD" name="GtbdDTWD">
+                                                                        <label><input type="radio" class="js-switch" name="GtbdDTWD" value="1"> Monday</label>
+                                                                        <label><input type="radio" class="js-switch" name="GtbdDTWD" value="2"> Tuesday</label>
+                                                                        <label><input type="radio" class="js-switch" name="GtbdDTWD" value="3"> Wednesday</label>
+                                                                        <label><input type="radio" class="js-switch" name="GtbdDTWD" value="4"> Thursday</label>
+                                                                        <label><input type="radio" class="js-switch" name="GtbdDTWD" value="5"> Friday</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="form-group" id="GtbdDT">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time </label>
+                                                                <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                    <div class='input-group date ' id='GtbdDismissalTime'>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                        <input type='text' class="form-control" name="GtbdDismissalTime" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="form-group" id='GtbdDTdate'>
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">G 1-5 TimeBankingDay Dismissal Time <br>Date </span></label>
+                                                                <div class='col-md-6 col-sm-6 col-xs-12'>
+                                                                    <div class='input-group date ' id='GtbdDismissalTimedate'>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                                        <input type='text' class="form-control" name="GtbdDismissalTimedate" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <!-- End SmartWizard Content -->
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
 
-    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- /page content -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+<!--  /end of div class=row          -->
+</div>
+        
+<!-- Metis Menu Plugin JavaScript -->
+<script src="metisMenu/metisMenu.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="vendors/sb-admin-2.js"></script>
+<!-- momentjs -->
+<script src="bootstrap-editable/js/moment.min.js"></script>
+<script src="vendors/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="vendors/parse.js"></script>
+<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+<script src="vendors/select2.min.js"></script>
+<script src="bootstrap-editable/js/address.js"></script>
 
 <style>
     /**-------**/
