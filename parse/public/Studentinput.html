@@ -1,44 +1,397 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <!-- momentjs -->
-        <script src="bootstrap-editable/js/moment.min.js"></script>
-        <script src="vendors/jquery.dataTables.min.js"></script>
-        <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
-        <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
-        <link href="vendors/select2.min.css" rel="stylesheet">
-        <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
-        <script src="vendors/select2.min.js"></script>
-        <script src="bootstrap-editable/js/address.js"></script>
-        <script type="text/javascript" src="vendors/parse.js"></script>
-        <style type="text/css">
-            body {
-                padding-top: 50px;
-                padding-bottom: 30px;
-            }
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HelpYouAchieve</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="vendors/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+	<link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendors/select2.min.css" rel="stylesheet">
         
-        table.table > tbody > tr > td {
-            height: 30px;
-            vertical-align: middle;
-        }
-        /* address.js css style for address*/
-        .editable-address {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .editable-address span {
-            width: 70px;
-            display: inline-block;
-        }
-        </style>
-    </head>
-    
-    <body>
-        <div id="msg" class="alert"></div>
+	<style type="text/css">
+		body {
+			padding-top: 50px;
+			padding-bottom: 30px;
+		}
+	
+	table.table > tbody > tr > td {
+		height: 30px;
+		vertical-align: middle;
+	}
+	/* address.js css style for address*/
+	.editable-address {
+		display: block;
+		margin-bottom: 5px;
+	}
+	
+	.editable-address span {
+		width: 70px;
+		display: inline-block;
+	}
+	</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">HelpYouAchieve</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="studenttable.html"><i class="fa fa-dashboard fa-fw"></i> 所有学生</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="flot.html">Flot Charts</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">Morris.js Charts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+			<div class="row">
+				       <div id="msg" class="alert"></div>
         <table id="user" class="table table-bordered table-striped" style="clear: both">
             <tbody>
                 <tr>
@@ -116,237 +469,244 @@
                     <td>Contact Method: Text (Default) or Email</td>
                     <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="1"></a></td>
                 </tr>
-                <tr>
-                    <td align="right">Select2 (dropdown mode)</td>
-                    <td></td>
-                    <td><a href="#" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country"></a></td>
-                </tr>
             </tbody>
         </table>
         <div>
             <button id="save-btn" class="btn btn-primary">保存新学生 / Save</button>
             <button id="reset-btn" class="btn pull-right">重置 / Reset</button>
         </div>
-        <script>
-            $(function(){
-              //initialize Parse
-              Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-              //defaults
-              //$.fn.editable.defaults.url = '/post';
-              var listschools = undefined;
-              Parse.Cloud.run('getobject', {objectname: 'School'}, {
-                success: function(schools) {
-                              var schoolsource = [];
-                              schools = JSON.parse(JSON.stringify(schools));
-                              for(index in schools){
-                              var name = schools[index]["schoolname"];
-                              schoolsource.push({"value":name,"text":name});
-                              }
-                              $('#school').editable({
-                                                    source: schoolsource
-                              });
-              },
-                error: function(error) {
-                              console.log(error);
-               }
-               });
-              //editables
-              $('#lastname').editable({
-                  name: 'lastname',
-                                      url : '',
-                  validate: function(value) {
-                  if($.trim(value) == ''){ return 'This field is required';
-                  }
-                  },
-                                      success: function(response, newValue) {
-                                      console.log(newValue);
-                                      }
-              });
-              
-              $('#firstname').editable({
-                                       url : '',
-                   validate: function(value) {
-                        if($.trim(value) == ''){ return 'This field is required';
-                        }
-                   }
-               });
-              
-              $('#sex').editable({
-                 prepend: "not selected",
-                 source: [
-                          {value: "Male", text: 'Male'},
-                          {value: "Female", text: 'Female'}
-                          ],
-                 display: function(value, sourceData) {
-                 var colors = {"": "gray", 1: "green", 2: "blue"},
-                 elem = $.grep(sourceData, function(o){return o.value == value;});
-                 
-                 if(elem.length) {
-                 $(this).text(elem[0].text);
-                 } else {
-                 $(this).empty();
-                 }
-             }
-             });
-              $('#grade').editable({
-                 prepend: "not selected",
-                 source: [
-                          {value: "TK", text: 'TK'},
-                          {value: "K", text: 'K'},
-                          {value: "1", text: 'Grade 1'},
-                          {value: "2", text: 'Grade 2'},
-                          {value: "3", text: 'Grade 3'},
-                          {value: "4", text: 'Grade 4'},
-                          {value: "5", text: 'Grade 5'},
-                          {value: "6", text: 'Grade 6'}
-                          ],
-                 display: function(value, sourceData) {
-                 var colors = {"": "gray", 1: "green", 2: "blue"},
-                 elem = $.grep(sourceData, function(o){return o.value == value;});
-                 
-                 if(elem.length) {
-                 $(this).text(elem[0].text);
-                 } else {
-                 $(this).empty();
-                 }
-                 }
-              });
-              $('#status').editable();
-              $('#vacation').editable({
-                                      datepicker: {
-                                      todayBtn: 'linked'
-                                      }
-                                      });
-              
-              $('#dob').editable();
-              $('#roomnumber').editable();
-              $('#contact').editable();
-              $('#phonenumber').editable();
-              $('#altphonenumber').editable();
-              $('#email').editable();
-              $('#altemail').editable();
-              $('#firstdayatschool').editable();
-              $('#contactmethod').editable({
-                     source: [
-                              {value: 1, text: 'Text 短信'},
-                              {value: 2, text: 'Email 电子邮箱'}
-                              ],
-                     display: function(value, sourceData) {
-                     elem = $.grep(sourceData, function(o){return o.value == value;});
-                     
-                     if(elem.length) {
-                     $(this).text(elem[0].text);
-                     } else {
-                     $(this).empty();
-                     }
-             }
-             });
 
-              
-              
-              var countries = [];
-              $.each({"BD": "Bangladesh", "BE": "Belgium", "BF": "Burkina Faso", "BG": "Bulgaria", "BA": "Bosnia and Herzegovina", "BB": "Barbados", "WF": "Wallis and Futuna", "BL": "Saint Bartelemey", "BM": "Bermuda", "BN": "Brunei Darussalam", "BO": "Bolivia", "BH": "Bahrain", "BI": "Burundi", "BJ": "Benin", "BT": "Bhutan", "JM": "Jamaica", "BV": "Bouvet Island", "BW": "Botswana", "WS": "Samoa", "BR": "Brazil", "BS": "Bahamas", "JE": "Jersey", "BY": "Belarus", "O1": "Other Country", "LV": "Latvia", "RW": "Rwanda", "RS": "Serbia", "TL": "Timor-Leste", "RE": "Reunion", "LU": "Luxembourg", "TJ": "Tajikistan", "RO": "Romania", "PG": "Papua New Guinea", "GW": "Guinea-Bissau", "GU": "Guam", "GT": "Guatemala", "GS": "South Georgia and the South Sandwich Islands", "GR": "Greece", "GQ": "Equatorial Guinea", "GP": "Guadeloupe", "JP": "Japan", "GY": "Guyana", "GG": "Guernsey", "GF": "French Guiana", "GE": "Georgia", "GD": "Grenada", "GB": "United Kingdom", "GA": "Gabon", "SV": "El Salvador", "GN": "Guinea", "GM": "Gambia", "GL": "Greenland", "GI": "Gibraltar", "GH": "Ghana", "OM": "Oman", "TN": "Tunisia", "JO": "Jordan", "HR": "Croatia", "HT": "Haiti", "HU": "Hungary", "HK": "Hong Kong", "HN": "Honduras", "HM": "Heard Island and McDonald Islands", "VE": "Venezuela", "PR": "Puerto Rico", "PS": "Palestinian Territory", "PW": "Palau", "PT": "Portugal", "SJ": "Svalbard and Jan Mayen", "PY": "Paraguay", "IQ": "Iraq", "PA": "Panama", "PF": "French Polynesia", "BZ": "Belize", "PE": "Peru", "PK": "Pakistan", "PH": "Philippines", "PN": "Pitcairn", "TM": "Turkmenistan", "PL": "Poland", "PM": "Saint Pierre and Miquelon", "ZM": "Zambia", "EH": "Western Sahara", "RU": "Russian Federation", "EE": "Estonia", "EG": "Egypt", "TK": "Tokelau", "ZA": "South Africa", "EC": "Ecuador", "IT": "Italy", "VN": "Vietnam", "SB": "Solomon Islands", "EU": "Europe", "ET": "Ethiopia", "SO": "Somalia", "ZW": "Zimbabwe", "SA": "Saudi Arabia", "ES": "Spain", "ER": "Eritrea", "ME": "Montenegro", "MD": "Moldova, Republic of", "MG": "Madagascar", "MF": "Saint Martin", "MA": "Morocco", "MC": "Monaco", "UZ": "Uzbekistan", "MM": "Myanmar", "ML": "Mali", "MO": "Macao", "MN": "Mongolia", "MH": "Marshall Islands", "MK": "Macedonia", "MU": "Mauritius", "MT": "Malta", "MW": "Malawi", "MV": "Maldives", "MQ": "Martinique", "MP": "Northern Mariana Islands", "MS": "Montserrat", "MR": "Mauritania", "IM": "Isle of Man", "UG": "Uganda", "TZ": "Tanzania, United Republic of", "MY": "Malaysia", "MX": "Mexico", "IL": "Israel", "FR": "France", "IO": "British Indian Ocean Territory", "FX": "France, Metropolitan", "SH": "Saint Helena", "FI": "Finland", "FJ": "Fiji", "FK": "Falkland Islands (Malvinas)", "FM": "Micronesia, Federated States of", "FO": "Faroe Islands", "NI": "Nicaragua", "NL": "Netherlands", "NO": "Norway", "NA": "Namibia", "VU": "Vanuatu", "NC": "New Caledonia", "NE": "Niger", "NF": "Norfolk Island", "NG": "Nigeria", "NZ": "New Zealand", "NP": "Nepal", "NR": "Nauru", "NU": "Niue", "CK": "Cook Islands", "CI": "Cote d'Ivoire", "CH": "Switzerland", "CO": "Colombia", "CN": "China", "CM": "Cameroon", "CL": "Chile", "CC": "Cocos (Keeling) Islands", "CA": "Canada", "CG": "Congo", "CF": "Central African Republic", "CD": "Congo, The Democratic Republic of the", "CZ": "Czech Republic", "CY": "Cyprus", "CX": "Christmas Island", "CR": "Costa Rica", "CV": "Cape Verde", "CU": "Cuba", "SZ": "Swaziland", "SY": "Syrian Arab Republic", "KG": "Kyrgyzstan", "KE": "Kenya", "SR": "Suriname", "KI": "Kiribati", "KH": "Cambodia", "KN": "Saint Kitts and Nevis", "KM": "Comoros", "ST": "Sao Tome and Principe", "SK": "Slovakia", "KR": "Korea, Republic of", "SI": "Slovenia", "KP": "Korea, Democratic People's Republic of", "KW": "Kuwait", "SN": "Senegal", "SM": "San Marino", "SL": "Sierra Leone", "SC": "Seychelles", "KZ": "Kazakhstan", "KY": "Cayman Islands", "SG": "Singapore", "SE": "Sweden", "SD": "Sudan", "DO": "Dominican Republic", "DM": "Dominica", "DJ": "Djibouti", "DK": "Denmark", "VG": "Virgin Islands, British", "DE": "Germany", "YE": "Yemen", "DZ": "Algeria", "US": "United States", "UY": "Uruguay", "YT": "Mayotte", "UM": "United States Minor Outlying Islands", "LB": "Lebanon", "LC": "Saint Lucia", "LA": "Lao People's Democratic Republic", "TV": "Tuvalu", "TW": "Taiwan", "TT": "Trinidad and Tobago", "TR": "Turkey", "LK": "Sri Lanka", "LI": "Liechtenstein", "A1": "Anonymous Proxy", "TO": "Tonga", "LT": "Lithuania", "A2": "Satellite Provider", "LR": "Liberia", "LS": "Lesotho", "TH": "Thailand", "TF": "French Southern Territories", "TG": "Togo", "TD": "Chad", "TC": "Turks and Caicos Islands", "LY": "Libyan Arab Jamahiriya", "VA": "Holy See (Vatican City State)", "VC": "Saint Vincent and the Grenadines", "AE": "United Arab Emirates", "AD": "Andorra", "AG": "Antigua and Barbuda", "AF": "Afghanistan", "AI": "Anguilla", "VI": "Virgin Islands, U.S.", "IS": "Iceland", "IR": "Iran, Islamic Republic of", "AM": "Armenia", "AL": "Albania", "AO": "Angola", "AN": "Netherlands Antilles", "AQ": "Antarctica", "AP": "Asia/Pacific Region", "AS": "American Samoa", "AR": "Argentina", "AU": "Australia", "AT": "Austria", "AW": "Aruba", "IN": "India", "AX": "Aland Islands", "AZ": "Azerbaijan", "IE": "Ireland", "ID": "Indonesia", "UA": "Ukraine", "QA": "Qatar", "MZ": "Mozambique"}, function(k, v) {
-                     countries.push({id: k, text: v});
-                     }); 
-              $('#country').editable({
-                                     source: countries,
-              });
-              
-              
-              
-              $('#address').editable({
-                     value: {
-                     city: "San Diego",
-                     address: "",
-                     zipcode: "92129"
-                     },
-                     validate: function(value) {
-                     if(value.city == '') return 'city is required!'; 
-                     },
-                     display: function(value) {
-                     if(!value) {
-                     $(this).empty();
-                     return; 
-                     }
-                     var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ', ' + $('<div>').text(value.zipcode).html();
-                     $(this).html(html);
-                     }
-                });
-              
-              
-              
-              $('#user .editable').on('hidden', function(e, reason){
-                  if(reason === 'save' || reason === 'nochange') {
-                  var $next = $(this).closest('tr').next().find('.editable');
-                  if($('#autoopen').is(':checked')) {
-                  setTimeout(function() {
-                             $next.editable('show');
-                             }, 300); 
-                  } else {
-                  $next.focus();
-                  } 
-                  }
-              });
-              
-              });
-              // save button validation
-              $('#save-btn').click(function() {
-                    var values = $('.myeditable').editable('submit',{
-                         ajaxOptions: {
-                         dataType: 'json' //assuming json response
-                         },
-                         success: function(data, config) {
-                         console.log(data);
-                         if(data && data.id) {  //record created, response like {"id": 2}
-                         //set pk
-                         $(this).editable('option', 'pk', data.id);
-                         //remove unsaved class
-                         $(this).removeClass('editable-unsaved');
-                         //show messages
-                         var msg = 'New user created! Now editables submit individually.';
-                         $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
-                         $('#save-btn').hide();
-                         $(this).off('save.newuser');
-                         } else if(data && data.errors){ 
-                         //server-side validation error, response like {"errors": {"username": "username already exist"} }
-                         config.error.call(this, data.errors);
-                         }               
-                         },
-                         error: function(errors) {
-                         var msg = '';
-                         if(errors && errors.responseText) { //ajax error, errors = xhr object
-                         msg = errors.responseText;
-                         } else { //validation error (client-side or server-side)
-                         $.each(errors, function(k, v) { msg += k+": "+v+"<br>"; });
-                         } 
-                         $('#msg').removeClass('alert-success').addClass('alert-error').html(msg).show();
-                         }
-                         });
-                         var Student = Parse.Object.extend("Student");
-                         var student = new Student();
-                                   for(key in values){
-                                   if (values.hasOwnProperty(key)){
-                                   student.set(key,values[key]);
-                                   }
-                                   }
-                                   student.save(null, {
-                                   success: function(gameScore) {
-                                      // Execute any logic that should take place after the object is saved.
-                                      alert('New object created with objectId: ' + student.id);
-                                      },
-                                      error: function(gameScore, error) {
-                                      // Execute any logic that should take place if the save fails.
-                                      // error is a Parse.Error with an error code and message.
-                                      alert('Failed to create new object, with error code: ' + error.message);
-                                      }
-                                    });
-            });
-            // reset button
-            $('#reset-btn').click(function() {
-              $('.myeditable').editable('setValue', null)  //clear values
-              .editable('option', 'pk', null)          //clear pk
-              .removeClass('editable-unsaved');        //remove bold css
-              });
+		</div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="vendors/sb-admin-2.js"></script>
+	<!-- momentjs -->
+	<script src="bootstrap-editable/js/moment.min.js"></script>
+	<script src="vendors/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="vendors/parse.js"></script>
+	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+	<script src="vendors/select2.min.js"></script>
+	<script src="bootstrap-editable/js/address.js"></script>
+</body>
+<script>
+		$(function(){
+		  //initialize Parse
+		  Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+		  //defaults
+		  //$.fn.editable.defaults.url = '/post';
+		  var listschools = undefined;
+		  Parse.Cloud.run('getobject', {objectname: 'School'}, {
+			success: function(schools) {
+						  var schoolsource = [];
+						  schools = JSON.parse(JSON.stringify(schools));
+						  for(index in schools){
+						  var name = schools[index]["schoolname"];
+						  schoolsource.push({"value":name,"text":name});
+						  }
+						  $('#school').editable({
+												source: schoolsource
+						  });
+		  },
+			error: function(error) {
+						  console.log(error);
+		   }
+		   });
+		  //editables
+		  $('#lastname').editable({
+			  name: 'lastname',
+								  url : '',
+			  validate: function(value) {
+			  if($.trim(value) == ''){ return 'This field is required';
+			  }
+			  },
+								  success: function(response, newValue) {
+								  console.log(newValue);
+								  }
+		  });
+		  
+		  $('#firstname').editable({
+								   url : '',
+			   validate: function(value) {
+					if($.trim(value) == ''){ return 'This field is required';
+					}
+			   }
+		   });
+		  
+		  $('#sex').editable({
+			 prepend: "not selected",
+			 source: [
+					  {value: "Male", text: 'Male'},
+					  {value: "Female", text: 'Female'}
+					  ],
+			 display: function(value, sourceData) {
+			 var colors = {"": "gray", 1: "green", 2: "blue"},
+			 elem = $.grep(sourceData, function(o){return o.value == value;});
+			 
+			 if(elem.length) {
+			 $(this).text(elem[0].text);
+			 } else {
+			 $(this).empty();
+			 }
+		 }
+		 });
+		  $('#grade').editable({
+			 prepend: "not selected",
+			 source: [
+					  {value: "TK", text: 'TK'},
+					  {value: "K", text: 'K'},
+					  {value: "1", text: 'Grade 1'},
+					  {value: "2", text: 'Grade 2'},
+					  {value: "3", text: 'Grade 3'},
+					  {value: "4", text: 'Grade 4'},
+					  {value: "5", text: 'Grade 5'},
+					  {value: "6", text: 'Grade 6'}
+					  ],
+			 display: function(value, sourceData) {
+			 var colors = {"": "gray", 1: "green", 2: "blue"},
+			 elem = $.grep(sourceData, function(o){return o.value == value;});
+			 
+			 if(elem.length) {
+			 $(this).text(elem[0].text);
+			 } else {
+			 $(this).empty();
+			 }
+			 }
+		  });
+		  $('#status').editable();
+		  $('#vacation').editable({
+								  datepicker: {
+								  todayBtn: 'linked'
+								  }
+								  });
+		  
+		  $('#dob').editable();
+		  $('#roomnumber').editable();
+		  $('#contact').editable();
+		  $('#phonenumber').editable();
+		  $('#altphonenumber').editable();
+		  $('#email').editable();
+		  $('#altemail').editable();
+		  $('#firstdayatschool').editable();
+		  $('#contactmethod').editable({
+				 source: [
+						  {value: 1, text: 'Text 短信'},
+						  {value: 2, text: 'Email 电子邮箱'}
+						  ],
+				 display: function(value, sourceData) {
+				 elem = $.grep(sourceData, function(o){return o.value == value;});
+				 
+				 if(elem.length) {
+				 $(this).text(elem[0].text);
+				 } else {
+				 $(this).empty();
+				 }
+		 }
+		 });              
+		  $('#address').editable({
+				 value: {
+				 city: "San Diego",
+				 address: "",
+				 zipcode: "92129"
+				 },
+				 validate: function(value) {
+				 if(value.city == '') return 'city is required!'; 
+				 },
+				 display: function(value) {
+				 if(!value) {
+				 $(this).empty();
+				 return; 
+				 }
+				 var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ', ' + $('<div>').text(value.zipcode).html();
+				 $(this).html(html);
+				 }
+			});
+		  
+		  
+		  
+		  $('#user .editable').on('hidden', function(e, reason){
+			  if(reason === 'save' || reason === 'nochange') {
+			  var $next = $(this).closest('tr').next().find('.editable');
+			  if($('#autoopen').is(':checked')) {
+			  setTimeout(function() {
+						 $next.editable('show');
+						 }, 300); 
+			  } else {
+			  $next.focus();
+			  } 
+			  }
+		  });
+		  
+		  });
+		  // save button validation
+		  $('#save-btn').click(function() {
+				var values = $('.myeditable').editable('submit',{
+					 ajaxOptions: {
+					 dataType: 'json' //assuming json response
+					 },
+					 success: function(data, config) {
+					 console.log(data);
+					 if(data && data.id) {  //record created, response like {"id": 2}
+					 //set pk
+					 $(this).editable('option', 'pk', data.id);
+					 //remove unsaved class
+					 $(this).removeClass('editable-unsaved');
+					 //show messages
+					 var msg = 'New user created! Now editables submit individually.';
+					 $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+					 $('#save-btn').hide();
+					 $(this).off('save.newuser');
+					 } else if(data && data.errors){ 
+					 //server-side validation error, response like {"errors": {"username": "username already exist"} }
+					 config.error.call(this, data.errors);
+					 }               
+					 },
+					 error: function(errors) {
+					 var msg = '';
+					 if(errors && errors.responseText) { //ajax error, errors = xhr object
+					 msg = errors.responseText;
+					 } else { //validation error (client-side or server-side)
+					 $.each(errors, function(k, v) { msg += k+": "+v+"<br>"; });
+					 } 
+					 $('#msg').removeClass('alert-success').addClass('alert-error').html(msg).show();
+					 }
+					 });
+					 var Student = Parse.Object.extend("Student");
+					 var student = new Student();
+							   for(key in values){
+							   if (values.hasOwnProperty(key)){
+							   student.set(key,values[key]);
+							   }
+							   }
+							   student.save(null, {
+							   success: function(gameScore) {
+								  // Execute any logic that should take place after the object is saved.
+								  alert('New object created with objectId: ' + student.id);
+								  },
+								  error: function(gameScore, error) {
+								  // Execute any logic that should take place if the save fails.
+								  // error is a Parse.Error with an error code and message.
+								  alert('Failed to create new object, with error code: ' + error.message);
+								  }
+								});
+		});
+		// reset button
+		$('#reset-btn').click(function() {
+		  $('.myeditable').editable('setValue', null)  //clear values
+		  .editable('option', 'pk', null)          //clear pk
+		  .removeClass('editable-unsaved');        //remove bold css
+		  });
         </script>
-    </body>
 </html>
