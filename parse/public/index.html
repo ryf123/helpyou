@@ -59,7 +59,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -178,12 +178,18 @@
     <script src="metisMenu/metisMenu.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="vendors/sb-admin-2.js"></script>
+    <script src="vendors/parse.js"></script>
 
 </body>
 <script>
-    $(function(){
+    Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+    $( document ).ready(function() {
       $("#side-menu").metisMenu({
       toggle: false
+      });
+      $('#signoutbutton').click(function() {
+        Parse.User.logOut();
+        $(location).attr('href','login.html');
       });
     });
 </script>
