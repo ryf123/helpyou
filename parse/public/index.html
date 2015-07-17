@@ -178,7 +178,7 @@
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge" id="studentcount">26</div>
                                     <div class="strong">Students / 学生</div>
                                 </div>
                             </div>
@@ -329,6 +329,14 @@
 <script>
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     $( document ).ready(function() {
+        Parse.Cloud.run('countobject', {objectname: 'Student'}, {
+            success: function(count) {
+                console.log(count);
+                $("#studentcount")[0].innerText = count;
+            },
+        error: function(error) {
+            console.log(error);
+        }});
       $("#side-menu").metisMenu({
       toggle: false
       });
