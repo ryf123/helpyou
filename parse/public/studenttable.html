@@ -393,7 +393,7 @@
         columnnamearray = ['studentid','age','firstname','lastname','grade','sex','contact','email','phonenumber','dob','edit','remove'];
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-        Parse.Cloud.run('getstudent', {}, {
+        Parse.Cloud.run('getobject', {objectname: 'Student'}, {
                         success: function(schooldata) {
                         var stringify_data = JSON.stringify(schooldata);
                         stringify_data = JSON.parse(stringify_data);
@@ -464,6 +464,22 @@
                                      },
                                      ]
                            });
+                        //update cell with current age
+                        var data = $('#table').bootstrapTable('getData');
+                        for(index in data){
+                            // calculate the age difference
+                            var rowdata = data[index];
+                            var dob = rowdata['dob'];
+                                if(dob != undefined){
+                                var d = new Date(dob);
+                                var diff = Date.now() - d.getTime();
+                                var ageDate = new Date(diff);
+                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                                fieldname = 'age';
+                                $('#table').bootstrapTable("updateCell",{rowIndex: index, fieldName: fieldname, fieldValue: age});
+                            }
+                            
+                        }
                         },
                         error: function(error) {
                         alert("error");
