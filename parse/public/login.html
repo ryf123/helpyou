@@ -141,6 +141,10 @@
 	<script>
 	$( document ).ready(function() {
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+        // redirect to index page, if user alreay logged in
+        if(Parse.User.current() != undefined){
+            $(location).attr('href','index.html');
+        }
 		$("#signupform").validator();
         $("#btn-signup").click(function(){
             var email = $("#email").val();
@@ -168,6 +172,7 @@
             Parse.User.logIn(loginusername,loginpassword,{
                 success:function(newuser){
                     console.log("login success!");
+                    $(location).attr('href','index.html');
                 },
                 error:function(newuser,error){
                     console.log(error);
