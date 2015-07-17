@@ -467,7 +467,7 @@
                 <tr>
                     <td align="right">联系方式：短信(默认)或者电子邮箱</td>
                     <td>Contact Method: Text (Default) or Email</td>
-                    <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="1"></a></td>
+                    <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="email"></a></td>
                 </tr>
             </tbody>
         </table>
@@ -602,8 +602,8 @@
 		  $('#firstdayatschool').editable();
 		  $('#contactmethod').editable({
 				 source: [
-						  {value: 1, text: 'Text 短信'},
-						  {value: 2, text: 'Email 电子邮箱'}
+						  {value: "email", text: 'Text 短信'},
+						  {value: "text", text: 'Email 电子邮箱'}
 						  ],
 				 display: function(value, sourceData) {
 				 elem = $.grep(sourceData, function(o){return o.value == value;});
