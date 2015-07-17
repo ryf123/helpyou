@@ -50,11 +50,8 @@
 
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
-
                                     <div class="col-sm-12 controls">
                                       <a id="btn-login" href="#" class="btn btn-success">Login  </a>
-                                      <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-
                                     </div>
                                 </div>
 
@@ -91,7 +88,7 @@
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control" name="email" placeholder="evereast@evereast.com" data-error="邮箱格式错误">
+                                        <input type="email" class="form-control" name="email" placeholder="evereast@evereast.com" id="email" data-error="邮箱格式错误">
 										<span class="help-block with-errors"></span>
                                     </div>
                                 </div>
@@ -99,13 +96,13 @@
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
+                                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
+                                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -140,9 +137,43 @@
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="vendors/validator.js"></script>
+    <script type="text/javascript" src="vendors/parse.js"></script>
 	<script>
 	$( document ).ready(function() {
+        Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
 		$("#signupform").validator();
+        $("#btn-signup").click(function(){
+            var email = $("#email").val();
+            var password = $("#passwd").val();
+            var lastname = $("#lastname").val();
+            var firstname = $("#firstname").val();
+            var user = new Parse.User();
+            user.set("email",email);
+            user.set("password",password);
+            user.set("username",email);
+            user.set("lastname",lastname);
+            user.set("firstname",firstname);
+            user.signUp(null,{
+                success:function(newuser){
+                    console.log(newuser);
+                },
+                error:function(newuser,error){
+                    console.log(error);
+                }
+            });
+        });
+        $("#btn-login").click(function(){
+            var loginusername = $("#login-username").val();
+            var loginpassword = $("#login-password").val();
+            Parse.User.logIn(loginusername,loginpassword,{
+                success:function(newuser){
+                    console.log("login success!");
+                },
+                error:function(newuser,error){
+                    console.log(error);
+                }
+            });
+        });
     })
 	</script>
 </html>
