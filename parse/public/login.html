@@ -159,9 +159,16 @@
             user.set("firstname",firstname);
             user.signUp(null,{
                 success:function(newuser){
-                    console.log(newuser);
+                    $("#signupalert").hide();
+                    $('#loginbox').show(); 
+                    $('#signupbox').hide();
                 },
                 error:function(newuser,error){
+                    if(error["code"] == 203){
+                        $("#signupalert").show();
+                        $("#signupalert p")[0].innerHTML = "email alreay taken";
+                        console.log("email alreay taken");
+                    }
                     console.log(error);
                 }
             });
