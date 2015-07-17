@@ -620,7 +620,13 @@
                       Object.keys(currentschool).forEach(function (schooldismissaltime) {
                          var studentarray = currentschool[schooldismissaltime];
                          var studentnumber = studentarray.length;
-                         schoolinfo = "<li><div>"+schooldismissaltime+":"+ schoolname +":"+studentnumber+"</div></li>";
+                         // change time style to 10:30 PM style
+                         schooldismissaltime = schooldismissaltime.replace("time_", "");
+                         schooldismissaltime = schooldismissaltime.replace("_", ":");
+                         schooldismissaltime = schooldismissaltime.replace("PM", " PM");
+                         schooldismissaltime = schooldismissaltime.replace("AM", " AM");
+
+                         schoolinfo = "<li><div>"+"<i class='fa fa-clock-o'></i>"+schooldismissaltime+"——"+ schoolname +"——"+studentnumber+"</div></li>";
                          $(".schools").append(schoolinfo);
                        });
                       });
