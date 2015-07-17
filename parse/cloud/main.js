@@ -117,44 +117,6 @@ Parse.Cloud.define("sinch", function(request, response) {
                    sinchSms.sendMessage("+18588882432", "Hello world!");
 });
 
-Parse.Cloud.define("getstudent", function(request, response) {
-var schools = Parse.Object.extend("Student");
-var query = new Parse.Query(schools);
-query.find({
-          success: function(schools) {
-           for (var i = 0; i < schools.length; i++) {
-           var school = schools[i];
-           var dob  = school.get("dob");
-           console.log(dob);
-           // calculate the age difference
-           var d = new Date(dob);
-           var diff = Date.now() - d.getTime();
-           var ageDate = new Date(diff);
-           var age = Math.abs(ageDate.getUTCFullYear() - 1970);
-           school.set("age",age);
-           console.log(age);
-           // save school object
-           school.save(null, {
-              success: function(school) {
-              // Execute any logic that should take place after the object is saved.
-                  console.log("age saved");
-              },
-              error: function(school, error) {
-                  console.log(error);
-              }
-           });
-           }
-            console.log("success");
-            response.success(schools);
-          },
-          error: function(object, error) {
-            console.log(error);
-            console.log("fail");
-            response.fail("fail");
-          }
-          });
-});
-
 Parse.Cloud.define("getobject", function(request, response) {
                    var objectname = request.params.objectname;
                    var Myobject = Parse.Object.extend(objectname);
@@ -193,22 +155,37 @@ Parse.Cloud.beforeSave("Student", function(request, response) {
                                  query.lessThanOrEqualTo("createdAt", currentDate);
                                  query.descending("createdAt");
                                  query.first({
-                                             success: function(result) {
-                                             // if there is no record yet, the result will be undefine, set the studentid to 1 for the first item
-                                             if (result === undefined) {
-                                             console.log("result if undefined");
-                                             request.object.set("studentid",1);
-                                             }
-                                             else{
-                                             console.log(result.get("studentid"));
-                                             request.object.set("studentid", (result.get("studentid") + 1));
-                                             }
-                                             response.success();
-                                             },
-                                             error: function() {
-                                             response.error("error");
-                                             }
+                                   success: function(result) {
+                                   // if there is no record yet, the result will be undefine, set the studentid to 1 for the first item
+                                   if (result === undefined) {
+                                   console.log("result if undefined");
+                                   request.object.set("studentid",1);
+                                   }
+                                   else{
+                                   console.log(result.get("studentid"));
+                                   request.object.set("studentid", (result.get("studentid") + 1));
+                                   }
+                                   response.success();
+                                   },
+                                   error: function() {
+                                   response.error("error");
+
+                                   }
                                  });
                          }
         
+});
+// count object this function counts the total number of object of a class
+Parse.Cloud.define("countobject", function(request, response) {
+  var objectname = request.params.objectname;
+  var Myobject = Parse.Object.extend(objectname);
+  var query = new Parse.Query(Myobject);
+  query.count({
+    success: function(count) {
+      response.success(count);
+    },
+    error: function(error){
+      response.error("error");
+    }
+  })
 });

@@ -403,7 +403,7 @@
 	var monthname2 = "register"+year+""+nextmonth;
 	// load initial data from database
 	Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-	Parse.Cloud.run('getstudent', {}, {
+	Parse.Cloud.run('getobject', {objectname: 'Student'}, {
 					success: function(schooldata) {
 					var stringify_data = JSON.stringify(schooldata);
 					stringify_data = JSON.parse(stringify_data);
