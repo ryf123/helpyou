@@ -496,7 +496,7 @@
 					 });
 					 var currentdate = new Date();
 					 var currentday= currentdate.getDate()-1;
-					 $('#table .registration').datepicker({
+					 $("#table td[class='registration']").datepicker({
 														  todayHighlight: true,
 														  todayBtn: true,
 														  clearBtn: true,
@@ -505,12 +505,12 @@
 														  startDate: "-"+currentday+"d",
 														  endDate: "+2m "+"-"+currentday+"d"+" -1d",
 					});
-						$('#table .registration').datepicker()
+						$("#table td[class='registration']").datepicker()
 							.on('changeDate', function(e){
 								this.innerHTML = $(this).datepicker('getFormattedDate');
 						});
 						// show the preselected date
-						$('#table .registration').datepicker()
+						$("#table td[class='registration']").datepicker()
 							.on('show', function(e){
 								var registerarray = this.innerHTML.split(",");
 								var datearray = [];
