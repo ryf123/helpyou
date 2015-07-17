@@ -124,9 +124,6 @@
                         <li>
                             <a href="studentpickuptable.html"><i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
                         </li>
-                        <li>
-                            <a href="index.html"><i class="fa fa-bar-chart-o fa-fw"></i> Reports / 报告</a>
-                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -136,6 +133,7 @@
         <!--Heading-->
         <div id="page-wrapper">
             <div class="row">
+                <br>
                 <div class="col-lg-1">
                     <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="85" height="85">
                         </div>
@@ -146,8 +144,99 @@
             </div>
             <!-- /.row -->
 			<div class="row">
-				
-			</div>
+                <br>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div class="strong">Students / 学生</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer" id="dashboardstudents">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-pencil fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div class="strong">Registration / 注册</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer" id="dashboardregistration">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-th-list fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div class="strong">Pickup / 接送</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer" id="dashboardpickup">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div class="strong">Tuition / 学费</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+
         </div>
         <!-- /End of heading   #page-wrapper  -->   
     </div>
@@ -160,11 +249,10 @@
     <!-- footer content -->
     <footer>
         <div class="">
-            <p class="pull-right">©2015 Evereast All Rights Reserved |
+            <p class="pull-right">Copyright ©2015 Evereast All Rights Reserved |
             <span class="lead"> <i class="fa fa-paw"></i> Evereast</span>
             </p>
         </div>
-        <div class="clearfix"></div>
     </footer>
     <!-- /footer content -->
 
@@ -185,6 +273,16 @@
       $("#side-menu").metisMenu({
       toggle: false
       });
+      $("#dashboardstudents").click(function(){
+        $(location).attr('href','studenttable.html');
+      });
+      $("#dashboardregistration").click(function(){
+        $(location).attr('href','Registrationinput.html');
+      });
+      $("#dashboardpickup").click(function(){
+        $(location).attr('href','studentpickuptable.html');
+      });
     });
+
 </script>
 </html>
