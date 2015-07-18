@@ -178,7 +178,7 @@
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge" id="studentcount">26</div>
+                                    <div class="huge" id="studentcount"></div>
                                     <div class="strong">Students / 学生</div>
                                 </div>
                             </div>
@@ -200,7 +200,7 @@
                                     <i class="fa fa-pencil fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge" id="monthlyregisterstudent"></div>
                                     <div class="strong">Registration / 注册</div>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@
                                     <i class="fa fa-th-list fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge" id='totalpickstudents'>124</div>
+                                    <div class="huge" id='totalpickstudents'></div>
                                     <div class="strong">Pickup / 接送</div>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge" id="totaltuition">0</div>
                                     <div class="strong">Tuition / 学费</div>
                                 </div>
                             </div>
@@ -348,6 +348,16 @@
         Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystriing},{
         success: function(Students){
             $("#totalpickstudents")[0].innerText = String(Students.length);
+        },
+        error: function(error){
+            console.log(error);
+        }
+        });
+        // find the students who are registered this month, as long as it has registeryearmonth, and it contains currentmonth string
+        // then the student is registered this month
+        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:String(currentmonth)},{
+        success: function(Students){
+            $("#monthlyregisterstudent")[0].innerText = String(Students.length);
         },
         error: function(error){
             console.log(error);
