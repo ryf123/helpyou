@@ -337,12 +337,15 @@
                                             <div class="row-fluid" >
                                                 <div class="block-content collapse in span12">
                                                     <div class ="row span12">
-                                                        <div id="connected" class="row-fluid span12">
+                                                        <div id="connected" class="row-fluid span12" style="width: 1052px">
                                                                 <!--draggable school list -->
-                                                                <div class="span5">
-                                                                    <ol class="simple_with_animation vertical sortable schools" drag="false"></ol>
+                                                                <div class="col-lg-6">
+                                                                    <ul>
+                                                                        <ol class="simple_with_animation vertical sortable schools" drag="false"></ol>
+                                                                    </ul>
                                                                 </div>
-                                                                <div class="span5">
+                                                                <div class="col-lg-6">
+                                                                    <ul>
                                                                     <ol class="simple_with_animation vertical sortable teachers">
                                                                         <li>
                                                                             <div>Tang</div>
@@ -369,6 +372,7 @@
                                                                             <ol></ol>
                                                                         </li>
                                                                     </ol>
+                                                                    </ul>
                                                                 </div>
                                                                 <!-- End of span5 -->
                                                         </div>
@@ -442,7 +446,7 @@
      <![endif]-->
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="assets/scripts.js"></script>
-    <script type="text/javascript" src="vendors/jquery.mjs.nestedSortable.js"></script>
+    
     <script src="vendors/application.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="metisMenu/metisMenu.min.js"></script>
@@ -482,6 +486,16 @@
     }
     body {
       color: #337ab7;
+    }
+    ol.vertical li {
+        background: #d9edf7;
+        color: #337ab7;
+    }
+    .teachers div {
+        background-color: transparent;
+    }
+    .schools div {
+        background-color: transparent;
     }
 </style>
     
