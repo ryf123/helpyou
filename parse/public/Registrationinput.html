@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -13,16 +13,39 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
+    <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="vendors/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
 	<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
+    <!-- add 2 new -->
+    <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="vendors/select2.min.css" rel="stylesheet">
+    <style type="text/css">
+    body {
+            padding-top: 50px;
+            padding-bottom: 30px;
+    }
+    
+    table.table > tbody > tr > td {
+        height: 30px;
+        vertical-align: middle;
+    }
+    /* address.js css style for address*/
+    .editable-address {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .editable-address span {
+        width: 70px;
+        display: inline-block;
+    }
+    </style>
 </head>
 
 <body class="nav-md" style="padding-top: 0px">
@@ -158,23 +181,32 @@
         </nav>
         <!--End of Navigation-->
 
-        <!-- <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;"> -->
-
+        <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
+            <div class="row">
+                <br>
+                <div class="col-lg-1" style="padding-right: 0px; width:">
+                    <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="55" height="55">
+                        </div>
+                <div class="col-lg-11">
+                    <h3 class="text-primary" style="margin-top: 10px">HYACSIS - Registration Info Input</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
             <!-- /.End of 1st row -System Name -->
-            <!-- <hr> -->
-            <!-- <div class="row"> -->
-                <!-- <div class="col-lg-12"> -->
-                    <!-- <div class="panel panel-info"> -->
-                        <!-- <div class="panel-heading" style="padding-left: 30px;">Registration Information Input / 请输入学生注册信息</div> -->
-                        <!-- <div class="panel-body"> -->
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="padding-left: 30px;">Registration Information Input / 请输入学生注册信息</div>
+                        <div class="panel-body">
                             <table id="table" data-show-footer="true" data-detail-view="true"/>
-                        <!-- </div> -->
-                    <!-- </div> -->
+                        </div>
+                    </div>
                     <!-- End of Panel -->
-                <!-- </div> -->
-            <!-- </div> -->
+                </div>
+            </div>
             <!-- End of 2nd row -->
-        <!-- </div> -->
+        </div>
         <!-- End of Page Wrapper -->
     </div>
     <!-- End of wrapper -->
@@ -203,6 +235,9 @@
 	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
 	<script src="bootstrap-editable/js/moment.min.js"></script>
 	<script src="vendors/bootstrap-datepicker.js"></script>
+    <script src="vendors/jquery.dataTables.min.js"></script>
+    <script src="vendors/select2.min.js"></script>
+    <script src="bootstrap-editable/js/address.js"></script>
 
 </body>
 <style>
@@ -242,6 +277,7 @@ body {
   color: #337ab7;
 }
 </style>
+
 	<script>
     // constants
 	var d = new Date();
@@ -447,7 +483,7 @@ body {
 	};
 	// this is used to display "Total:"+ number
 	function totalNameFormatter(data) {
-		return "Total : "+data.length;
+		return "Total: "+data.length;
 	}
 </script>
 </html>
