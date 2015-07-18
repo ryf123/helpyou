@@ -578,7 +578,9 @@
     left: auto;
 }
 /**-------**/
-
+.wizard_horizontal .actionBar a {
+    float:right;
+}
 .navbar-default {
     background-color: #d9edf7;
     border-color: #bce8f1;
@@ -723,6 +725,8 @@ body {
                                                                 $("#KtbdDT").show();
                                                                 $("#KtbdDTdate").show();
                             });
+            // change "Finish" to "Save"
+            $(".actionBar .btn-default")[0].innerHTML = "Save";
         });
     </script>
 </body>
