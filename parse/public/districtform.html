@@ -23,7 +23,7 @@
     <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
     <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
     <link href="vendors/select2.min.css" rel="stylesheet">
-    
+    <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
     
     <style type="text/css">
         body {
@@ -139,7 +139,7 @@
                         </li>
                         <!-- /End of 1st - Info inputs-->
                         <li>
-                            <a href="index.html" style="
+                            <a href="districtform.html" style="
                                 padding-left: 10px;
                                 padding-right: 10px;
                                 ">
@@ -246,7 +246,7 @@
                 </div> 
             </div>
             <!-- End of 2nd row - Info Inputs -->
-            <hr>
+            <hr>            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-info">
@@ -269,8 +269,8 @@
                                 </span>
                             </div>
                             <hr>
-                            <div class="col-lg-12">
-                                Insert table here.<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A<br>A
+                            <div >
+                                <table id="table"></table>
                             </div>
                         </div>
                         <!-- End of panel-body -->
@@ -305,6 +305,7 @@
     <!-- momentjs -->
     <script src="vendors/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="vendors/parse.js"></script>
+    <script src="vendors/bootstrap-table.min.js"></script>
     <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
     <script src="vendors/select2.min.js"></script>
     <script src="bootstrap-editable/js/address.js"></script>
@@ -349,9 +350,36 @@ body {
 
     <script type="text/javascript">
             $(document).ready(function () {
-                enabledatepicker();
+                //initialize Parse
                 Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-                var currentdistrict = $(this).val();
+                // initialize table, 
+                // first load data from DB
+                Parse.Cloud.run('getobject', {objectname: 'SchoolDistrict'}, {
+                    success: function(districtdata){
+                        var stringify_data = JSON.stringify(districtdata);
+                        stringify_data = JSON.parse(stringify_data);
+                        $('#table').bootstrapTable({
+                            data: stringify_data,
+                            columns: [
+                                {
+                                    field: 'districtname',
+                                    title: "学区"
+                                },
+                                {
+                                    field: 'districtnodate',
+                                    title: "日历"
+                                }
+                            ]
+                        });
+                    },
+                    error: function(error){
+                        cosole.log(error);
+                    }
+                });
+                // enable date picker
+                enabledatepicker();
+                
+                var currentdistrict = $("#schooldistrict").val();
                 setcurrentdistrict(currentdistrict);
                 $('#districtsave').click(function() {
                     var form = $("#districtform");
