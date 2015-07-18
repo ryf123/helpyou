@@ -200,16 +200,36 @@ Parse.Cloud.define("findobjectcontains",function(request,response){
   if(objectname == undefined || keyname == undefined || stringval == undefined){
     response.error("incomplete input");  
   }
+  else{
+    var Myobject = Parse.Object.extend(objectname);
+    var query = new Parse.Query(Myobject);
+    query.contains(keyname,stringval);
+    query.find({
+      success: function(students){
+        response.success(students);
+      },
+      error: function(error){
+        response.error(error);
+      }
+    });
+  }
+});
+
+// 
+// this function get all the record with key equal to some value
+Parse.Cloud.define("getobjectwithkeyequal", function(request, response) {
+  var objectname = request.params.objectname;
   var Myobject = Parse.Object.extend(objectname);
   var query = new Parse.Query(Myobject);
-  query.contains(keyname,stringval);
+  var keyname = request.params.keyname;
+  var stringval = request.params.stringval;
+  query.equalTo(keyname,stringval);
   query.find({
-    success: function(students){
-      response.success(students);
+    success: function(objects) {
+      response.success(objects);
     },
     error: function(error){
-      response.error(error);
+      response.error("error");
     }
-  });
-
+  })
 });

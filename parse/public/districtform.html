@@ -351,7 +351,8 @@ body {
             $(document).ready(function () {
                 enabledatepicker();
                 Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-
+                var currentdistrict = $(this).val();
+                setcurrentdistrict(currentdistrict);
                 $('#districtsave').click(function() {
                     var form = $("#districtform");
                     data = form.serializeArray();
@@ -359,10 +360,10 @@ body {
                     var objectid = $("#objectid")[0].innerHTML;
                     Parse.Cloud.run('saveobject', { objectname: 'SchoolDistrict', 'objectid':objectid,objectvalue:myobjectvalue}, {
                     success: function() {
-                                alert("保存成功");
+                        alert("保存成功");
                     },
                     error: function(error) {
-                                alert("Can't save, try again");
+                        alert("Can't save, try again");
                     }
                 });
                 });
@@ -370,28 +371,7 @@ body {
                 // change datepicker on selection change 
                 $('#schooldistrict').on('change', function() {
                     var currentdistrict = $(this).val();
-                    var noschooldate = $("#noschooldate").val();
-                    Parse.Cloud.run('getobject',{objectname:"SchoolDistrict"},{
-                        success(district){
-                            district = JSON.parse(JSON.stringify(district))[0];
-                            if(district["districtnodate"] != undefined){
-                                $("#objectid")[0].innerHTML = district["objectId"]; 
-                                var datearray = [];
-                                var nodatearray = district["districtnodate"].split(",");
-                                for (var i = 0; i < nodatearray.length; i++){
-                                    if(nodatearray[i] != ""){
-                                        datearray.push(new Date(nodatearray[i]))
-                                    }
-                                }
-                                if(datearray.length > 0){
-                                    $("#noschooldate").datepicker('setDate',datearray);
-                                }
-                            }
-                        },
-                        error(error){
-                            console.log(error);
-                        }
-                    });
+                    setcurrentdistrict(currentdistrict);
                 });
             });
             function enabledatepicker(){
@@ -401,6 +381,36 @@ body {
                     multidate: true,
                     daysOfWeekDisabled: "0,6",
                 });
+            }
+            function setcurrentdistrict(currentdistrict){
+                    var noschooldate = $("#noschooldate").val();
+                    Parse.Cloud.run('getobjectwithkeyequal',{objectname:"SchoolDistrict",keyname:"districtname",stringval:currentdistrict},{
+                        success(district){
+                            if(district.length != 0){
+                                district = JSON.parse(JSON.stringify(district))[0];
+                                if(district["districtnodate"] != undefined){
+                                    $("#objectid")[0].innerHTML = district["objectId"]; 
+                                    var datearray = [];
+                                    var nodatearray = district["districtnodate"].split(",");
+                                    for (var i = 0; i < nodatearray.length; i++){
+                                        if(nodatearray[i] != ""){
+                                            datearray.push(new Date(nodatearray[i]))
+                                    }
+                                }
+                                if(datearray.length > 0){
+                                    $("#noschooldate").datepicker('setDate',datearray);
+                                }
+                                }
+                            }
+                            else{
+                               $("#objectid")[0].innerHTML = ""; 
+                               $("#noschooldate").datepicker('setDate',null); 
+                            }
+                        },
+                        error(error){
+                            console.log(error);
+                        }
+                    });
             }
     </script>
 </body>
