@@ -26,10 +26,10 @@
     <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
     
     <style type="text/css">
-        body {
+    body {
             padding-top: 50px;
             padding-bottom: 30px;
-        }
+    }
     
     table.table > tbody > tr > td {
         height: 30px;
@@ -256,8 +256,8 @@
                                 <button type="button" class="btn btn-outline btn-primary" id="districtrefresh">Refresh / 刷新</button>
                                 </span>                                
                             </div>
-                            <div>
-                                <table id="table"></table>
+                            <div >
+                                <table id="table" style="word-wrap:break-word;table-layout: fixed;"></table>
                             </div>
                         </div>
                     </div>
@@ -351,11 +351,14 @@
                             columns: [
                                 {
                                     field: 'districtname',
-                                    title: "学区"
+                                    title: "学区",
+                                    width: "40%"
+
                                 },
                                 {
                                     field: 'districtnodate',
-                                    title: "日历"
+                                    title: "日历2",
+                                    width: "60%"
                                 }
                             ]
                         });
@@ -430,5 +433,7 @@
             }
     </script>
 </body>
+    <style>
 
+    </style>
 </html>
