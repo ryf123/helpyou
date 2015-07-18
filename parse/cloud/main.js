@@ -202,12 +202,14 @@ Parse.Cloud.define("findobjectcontains",function(request,response){
   }
   var Myobject = Parse.Object.extend(objectname);
   var query = new Parse.Query(Myobject);
-  query.contains(keyname,stringval,{
+  query.contains(keyname,stringval);
+  query.find({
     success: function(students){
       response.success(students);
     },
     error: function(error){
       response.error(error);
     }
-  })
+  });
+
 });

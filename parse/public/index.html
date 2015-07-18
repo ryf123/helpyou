@@ -345,9 +345,9 @@
         var currentyearmonth = currentyear +""+currentmonth;
         var registeryearmonth = "register"+currentyearmonth;
         var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
-        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyval:registeryearmonth,stringval:todaystriing},{
+        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystriing},{
         success: function(Students){
-            $("#totalpickstudents")[0].innerText = Students.length;
+            $("#totalpickstudents")[0].innerText = String(Students.length);
         },
         error: function(error){
             console.log(error);
