@@ -189,3 +189,25 @@ Parse.Cloud.define("countobject", function(request, response) {
     }
   })
 });
+
+
+// find key that contains some values
+// this function takes three params objectname, keyname and stringval that will be matched
+Parse.Cloud.define("findobjectcontains",function(request,response){
+  var objectname = request.params.objectname;
+  var keyname = request.params.keyname;
+  var stringval = request.params.stringval;
+  if(objectname == undefined || keyname == undefined || stringval == undefined){
+    response.error("incomplete input");  
+  }
+  var Myobject = Parse.Object.extend(objectname);
+  var query = new Parse.Query(Myobject);
+  query.contains(keyname,stringval,{
+    success: function(students){
+      response.success(students);
+    },
+    error: function(error){
+      response.error(error);
+    }
+  })
+});

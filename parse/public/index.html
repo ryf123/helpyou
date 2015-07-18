@@ -222,7 +222,7 @@
                                     <i class="fa fa-th-list fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge" id='totalpickstudents'>124</div>
                                     <div class="strong">Pickup / 接送</div>
                                 </div>
                             </div>
@@ -331,12 +331,28 @@
     $( document ).ready(function() {
         Parse.Cloud.run('countobject', {objectname: 'Student'}, {
             success: function(count) {
-                console.log(count);
                 $("#studentcount")[0].innerText = count;
             },
-        error: function(error) {
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        // get date information
+        var d = new Date();
+        var currentyear = d.getFullYear();
+        var currentmonth = d.getMonth()+1;
+        var currentday = d.getDate();
+        var currentyearmonth = currentyear +""+currentmonth;
+        var registeryearmonth = "register"+currentyearmonth;
+        var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
+        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyval:registeryearmonth,stringval:todaystriing},{
+        success: function(Students){
+            $("#totalpickstudents")[0].innerText = Students.length;
+        },
+        error: function(error){
             console.log(error);
-        }});
+        }
+        });
       $("#side-menu").metisMenu({
       toggle: false
       });
@@ -358,40 +374,40 @@
 
 </script>
 <style>
-.navbar-default {
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-}
-.sidebar ul li a.active {
-  background-color: #d9edf7;
-}
-.nav>li>a:focus, .nav>li>a:hover{
-  text-decoration: none;
-  background-color: #fff;
-}
-.sidebar ul li a.active {
-  background-color: #fff;
-}
-.navbar-default .navbar-brand {
-  color: #337ab7;
-}
-.panel-footer {
-  background-color: #fff;
-  border-top: 1px solid #fff;
-}
-body {
-    background-color: #d9edf7;
-}
-.form-control {
-  border: 1px solid #bce8f1;
-}
-.btn-default {
-  color: #337ab7;
-  background-color: #fff;
-  border-color: #bce8f1;
-}
-body {
-  color: #337ab7;
-}
+    .navbar-default {
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+    }
+    .sidebar ul li a.active {
+      background-color: #d9edf7;
+    }
+    .nav>li>a:focus, .nav>li>a:hover{
+      text-decoration: none;
+      background-color: #fff;
+    }
+    .sidebar ul li a.active {
+      background-color: #fff;
+    }
+    .navbar-default .navbar-brand {
+      color: #337ab7;
+    }
+    .panel-footer {
+      background-color: #fff;
+      border-top: 1px solid #fff;
+    }
+    body {
+        background-color: #d9edf7;
+    }
+    .form-control {
+      border: 1px solid #bce8f1;
+    }
+    .btn-default {
+      color: #337ab7;
+      background-color: #fff;
+      border-color: #bce8f1;
+    }
+    body {
+      color: #337ab7;
+    }
 </style>
 </html>
