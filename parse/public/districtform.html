@@ -200,16 +200,17 @@
                         <div class="panel-heading" style="padding-left: 30px;">District Information Input / 请输入学区信息                          
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal form-label-left">
+                            <form class="form-horizontal form-label-left" id="districtform">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select class="form-control" id='schooldistrict' name='schooldistrict'>
-                                            <option>PUSD - Poway Unified School District</option>
-                                            <option>SDUSD - San Diego Unified School District</option>
-                                            <option>DMUSD - Del Mar Union School District</option>
-                                            <option>SBSD - Solana Beach School District</option>
+                                            <option value="PUSD">PUSD - Poway Unified School District</option>
+                                            <option value="SDUSD">SDUSD - San Diego Unified School District</option>
+                                            <option value="DMUSD">DMUSD - Del Mar Union School District</option>
+                                            <option value="SBSD">SBSD - Solana Beach School District</option>
                                         </select>
+                                        <span id="objectid" style="display:none;"/>
                                     </div>
                                 </div>
                                 <br>
@@ -348,13 +349,59 @@ body {
 
     <script type="text/javascript">
             $(document).ready(function () {
-                              $("#noschooldate").datepicker({
-                                                                    startView: 1,
-                                                                    clearBtn: true,
-                                                                    multidate: true,
-                                                                    daysOfWeekDisabled: "0,6",
-                                                                    });
-        });
+                enabledatepicker();
+                Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+
+                $('#districtsave').click(function() {
+                    var form = $("#districtform");
+                    data = form.serializeArray();
+                    myobjectvalue = {"districtname":data[0]["value"],"districtnodate":data[1]["value"]};
+                    var objectid = $("#objectid")[0].innerHTML;
+                    Parse.Cloud.run('saveobject', { objectname: 'SchoolDistrict', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                    success: function() {
+                                alert("保存成功");
+                    },
+                    error: function(error) {
+                                alert("Can't save, try again");
+                    }
+                });
+                });
+
+                // change datepicker on selection change 
+                $('#schooldistrict').on('change', function() {
+                    var currentdistrict = $(this).val();
+                    var noschooldate = $("#noschooldate").val();
+                    Parse.Cloud.run('getobject',{objectname:"SchoolDistrict"},{
+                        success(district){
+                            district = JSON.parse(JSON.stringify(district))[0];
+                            if(district["districtnodate"] != undefined){
+                                $("#objectid")[0].innerHTML = district["objectId"]; 
+                                var datearray = [];
+                                var nodatearray = district["districtnodate"].split(",");
+                                for (var i = 0; i < nodatearray.length; i++){
+                                    if(nodatearray[i] != ""){
+                                        datearray.push(new Date(nodatearray[i]))
+                                    }
+                                }
+                                if(datearray.length > 0){
+                                    $("#noschooldate").datepicker('setDate',datearray);
+                                }
+                            }
+                        },
+                        error(error){
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+            function enabledatepicker(){
+                $("#noschooldate").datepicker({
+                    startView: 1,
+                    clearBtn: true,
+                    multidate: true,
+                    daysOfWeekDisabled: "0,6",
+                });
+            }
     </script>
 </body>
 
