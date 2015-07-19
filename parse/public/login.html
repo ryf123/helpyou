@@ -182,7 +182,10 @@
                     $(location).attr('href','index.html');
                 },
                 error:function(newuser,error){
-                    console.log(error);
+                    if(error["code"] == 101){
+                        $("#login-alert").show();
+                        $("#login-alert")[0].innerHTML = "invalid user name or password";
+                    }
                 }
             });
         });
