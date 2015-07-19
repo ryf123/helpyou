@@ -329,6 +329,9 @@
 <script>
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     $( document ).ready(function() {
+        if(Parse.User.current() == undefined){
+            $(location).attr('href','login.html');
+        }   
         Parse.Cloud.run('countobject', {objectname: 'Student'}, {
             success: function(count) {
                 $("#studentcount")[0].innerText = count;
