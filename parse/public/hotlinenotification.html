@@ -277,36 +277,62 @@
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     $( document ).ready(function() {
         Parse.Cloud.run('getobject', {objectname: 'Smsmessage'}, {
-                    success: function(districtdata){
-                        var stringify_data = JSON.stringify(districtdata);
+                    success: function(msgs){
+                        var stringify_data = JSON.stringify(msgs);
                         stringify_data = JSON.parse(stringify_data);
                         $('#table').bootstrapTable({
+                            search : 'true',
                             data: stringify_data,
                             columns: [
                                 {
-                                    class: "checkbox",
                                     field: 'state',
                                     title: "check",
-                                    checkbox: true,
-                                    width: "2%"
+                                    checkbox: "true"
                                 },
                                 {
+                                    class: "msgread",
+                                    field: "read",
+                                    witdh: "3%",
+                                },
+                                {
+                                    class: "localtime",
                                     field: 'createdAt',
                                     title: "时间",
-                                    width: "15%"
+                                    width: "10%"
 
                                 },
                                 {
                                     field: 'mfrom',
                                     title: "电话",
-                                    width: "13%"
+                                    width: "10%"
                                 },
                                 {
                                     field: 'mbody',
                                     title: "信息",
-                                    width: "70%"
+                                    width: "75%"
                                 }
                             ]
+                        });
+                        // update UTC time to local time
+                        $('tbody .localtime').each(function(){
+                            utcdate = $(this)[0].innerText;
+                            d = new Date(utcdate).toString();
+                            d = d.split("GMT")[0];
+                            $(this)[0].innerText = d;
+                        });
+                        // if msgread equals false then set icon to 
+                        // <i class="fa fa-envelope-o"></i> unread
+                        // <i class="fa fa-check"></i> read
+                        $('tbody .msgread').each(function(){
+                            status = $(this)[0].innerText;
+                            if(status == "true"){
+                                $(this)[0].innerText = "";
+                                $(this).append("<i class='fa fa-check'></i>");
+                            }
+                            else if(status == "false"){
+                                $(this)[0].innerText = "";
+                                $(this).append("<i class='fa fa-envelope-o'></i>");
+                            }
                         });
                     },
                     error: function(error){
@@ -320,7 +346,7 @@
         
         
        
-        Parse.Cloud.run('getobject',{objectname: 'Smsmessage'},{
+        Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
         success: function(msgs){
             msgs = JSON.parse(JSON.stringify(msgs));
             for(index in msgs){
@@ -366,7 +392,25 @@
         Parse.User.logOut();
         $(location).attr('href','login.html');
       }); 
-      $('[data-toggle="tooltip"]').tooltip();  
+      $('#messageread').click(function() {
+        rows = $('#table').bootstrapTable("getAllSelections");
+        for(index in rows){
+            objectid = rows[index]["objectId"];
+            myobjectvalue = {
+                read: "true"
+            };
+            Parse.Cloud.run('saveobject', { objectname: 'Smsmessage', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                success: function() {
+                },
+                error: function(error) {
+                    console.log("success");
+                }
+            });  
+        }
+        location.reload();
+      });
+      $('[data-toggle="tooltip"]').tooltip();
+        
     });
 
 </script>
@@ -406,8 +450,6 @@
     body {
       color: #337ab7;
     }
-    .checkbox.style {
-  width: 5%;
-}
+
 </style>
 </html>
