@@ -47,43 +47,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                                    <span class="pull-right text-muted">
-                                                        <em>Yesterday</em>
-                                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                                    <span class="pull-right text-muted">
-                                                        <em>Yesterday</em>
-                                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                                    <span class="pull-right text-muted">
-                                                        <em>Yesterday</em>
-                                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
+                    <ul class="dropdown-menu dropdown-messages" id="messages">
+                        
                         <li>
                             <a class="text-center" href="#">
                                 <strong>Read All Messages</strong>
@@ -412,6 +377,34 @@
         Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:String(currentmonth)},{
         success: function(Students){
             $("#monthlyregisterstudent")[0].innerText = String(Students.length);
+        },
+        error: function(error){
+            console.log(error);
+        }
+        });
+        Parse.Cloud.run('getobject',{objectname: 'Smsmessage'},{
+        success: function(msgs){
+            msgs = JSON.parse(JSON.stringify(msgs));
+            for(index in msgs){
+                var msg = msgs[index];
+                console.log(msg);
+                mbody = msg["mbody"];
+                mfrom = msg["mfrom"];
+                msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                // msg format
+                // <li>
+                //             <a href="#">
+                //                 <div>
+                //                     <strong>John Smith</strong>
+                //                                     <span class="pull-right text-muted">
+                //                                         <em>Yesterday</em>
+                //                                     </span>
+                //                 </div>
+                //                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                //             </a>
+                // </li>
+                $("#messages").append(msginfo);        
+            }
         },
         error: function(error){
             console.log(error);
