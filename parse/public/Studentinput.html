@@ -272,8 +272,8 @@
                                             <td><a href="#" id="firstdayatschool" class="myeditable" data-type="combodate" data-value="2015-02-23" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY"></a></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">联系方式：短信(默认)或者电子邮箱</td>
-                                            <td>Contact Method: Text (Default) or Email</td>
+                                            <td align="right">联系方式：短信(默认)<br>/ 电子邮箱 / 不收取</td>
+                                            <td>Contact Method: Text (Default) or Email<br> or not selected</td>
                                             <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="email"></a></td>
                                         </tr>
                                     </tbody>
@@ -351,6 +351,7 @@
 		   }
 		   });
 		  //editables
+          $.fn.editable.defaults.mode = 'inline';
 		  $('#lastname').editable({
 			  name: 'lastname',
 								  url : '',
@@ -429,7 +430,8 @@
 		  $('#contactmethod').editable({
 				 source: [
 						  {value: "email", text: 'Text 短信'},
-						  {value: "text", text: 'Email 电子邮箱'}
+						  {value: "text", text: 'Email 电子邮箱'},
+                          {value: "nocontact", text: 'Not Selected 不收取'}
 						  ],
 				 display: function(value, sourceData) {
 				 elem = $.grep(sourceData, function(o){return o.value == value;});
