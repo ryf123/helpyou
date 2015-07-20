@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-                            
-    <title>HYACSIS-District</title>
-    
-    <!-- Bootstrap core CSS -->
+
+    <title>HYACSIS-Index</title>
+
+    <!-- Bootstrap Core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="vendors/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
-    <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="vendors/select2.min.css" rel="stylesheet">
     <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
-    
+
     <style type="text/css">
     body {
             padding-top: 50px;
@@ -46,10 +42,13 @@
         display: inline-block;
     }
     </style>
+
 </head>
+
 <body class="nav-md" style="padding-top: 0px">
+
     <div id="wrapper">
-        
+
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -205,7 +204,6 @@
             <!-- /.navbar-static-side -->
         </nav>
         <!--End of Heading-->
-
         <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
             <div class="row">
                 <br>
@@ -213,7 +211,7 @@
                     <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="55" height="55">
                         </div>
                 <div class="col-lg-11">
-                    <h3 class="text-primary" style="margin-top: 10px">HYACSIS - District Info Input</h3>
+                    <h3 class="text-primary" style="margin-top: 10px">HYACSIS - Attendance Hotline Notification <i class="fa fa-phone-square fa-fw"></i> (862) 899 - 8899</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -222,45 +220,16 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-info">
-                        <div class="panel-heading" style="padding-left: 30px;">District Information Input / 请输入学区信息                          
+                        <div class="panel-heading" style="padding-left: 30px;">Attendance Hotline Notification / 出勤热线通知                          
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal form-label-left" id="districtform">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select class="form-control" id='schooldistrict' name='schooldistrict'>
-                                            <option value="PUSD">PUSD - Poway Unified School District</option>
-                                            <option value="SDUSD">SDUSD - San Diego Unified School District</option>
-                                            <option value="DMUSD">DMUSD - Del Mar Union School District</option>
-                                            <option value="SBSD">SBSD - Solana Beach School District</option>
-                                        </select>
-                                        <span id="objectid" style="display:none;"/>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">District Calendar / 日历 <span class="required">*</span></label>
-                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                        <div class='input-group date ' id='noschooldate' name='noschooldate'>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            <input type='text' class="form-control" name="startDate" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                    <div class='col-md-6 col-sm-6 col-xs-12'>
-                                        <p class="text-info">请根据学区日历选择当前学年节假日并录入。<br>Please choose the No-School Dates from the above school district‘s Calendar for the current school year.</p>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- End of form -->
+                            <table id="table" style="word-wrap:break-word;table-layout: fixed;" data-click-to-select="true"></table>
+                           
                             <hr>
                             <div class="col-lg-4"></div>
                             <div class="col-lg-4">
                                 <span class="pull-left">
-                                <button type="button" class="btn btn-outline btn-success" id="districtsave">Save / 保存</button>
+                                <button type="button" class="btn btn-outline btn-success" id="messageread">Read / 已读</button>
                                 </span>                                
                             </div>
                             <!-- Button -->
@@ -268,33 +237,17 @@
                     </div>
                 </div> 
             </div>
-            <!-- End of 2nd row - Info Inputs -->
-            <hr style="margin-top: 0px;">            
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading" style="padding-left: 30px;">School District Table / 学区信息列表
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-lg-4" style="padding-left: 0px; padding-bottom: 15px;">
-                                <span class="pull-left">
-                                <button type="button" class="btn btn-outline btn-primary" id="districtrefresh">Refresh / 刷新</button>
-                                </span>                                
-                            </div>
-                            <div >
-                                <table id="table" style="word-wrap:break-word;table-layout: fixed;"></table>
-                            </div>
-                        </div>
-                    </div>
-                        <!-- End of panel-body -->
-                </div>
-            </div>
-            <!-- End of 3rd row - Lists -->
+            <!-- End of 2nd row -  -->
+
+
         </div>
-        <!-- /#page-wrapper -->
-        
+        <!-- /End of heading   #page-wrapper  -->   
     </div>
     <!-- /#wrapper -->
+    
+    
+    
+    
 
     <!-- footer content -->
     <footer>
@@ -304,25 +257,119 @@
             </p>
         </div>
     </footer>
-    <!-- /footer content -->    
-    <!-- Custom styling plus plugins -->
+    <!-- /footer content -->
+
+    <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="vendors/wizard/jquery.smartWizard.js"></script>
-    <script type="text/javascript" src="bootstrap-editable/js/moment.min.js"></script>
-    <script src="vendors/bootstrap-datepicker.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="metisMenu/metisMenu.min.js"></script>
+    <script src="metisMenu/metisMenu.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="vendors/sb-admin-2.js"></script>
-    <!-- momentjs -->
-    <script src="vendors/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="vendors/parse.js"></script>
+    <script src="vendors/parse.js"></script>
     <script src="vendors/bootstrap-table.min.js"></script>
-    <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
-    <script src="vendors/select2.min.js"></script>
-    <script src="bootstrap-editable/js/address.js"></script>
 
+</body>
+<script>
+    Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+    $( document ).ready(function() {
+        Parse.Cloud.run('getobject', {objectname: 'Smsmessage'}, {
+                    success: function(districtdata){
+                        var stringify_data = JSON.stringify(districtdata);
+                        stringify_data = JSON.parse(stringify_data);
+                        $('#table').bootstrapTable({
+                            data: stringify_data,
+                            columns: [
+                                {
+                                    class: "checkbox",
+                                    field: 'state',
+                                    title: "check",
+                                    checkbox: true,
+                                    width: "2%"
+                                },
+                                {
+                                    field: 'createdAt',
+                                    title: "时间",
+                                    width: "15%"
+
+                                },
+                                {
+                                    field: 'mfrom',
+                                    title: "电话",
+                                    width: "13%"
+                                },
+                                {
+                                    field: 'mbody',
+                                    title: "信息",
+                                    width: "70%"
+                                }
+                            ]
+                        });
+                    },
+                    error: function(error){
+                        cosole.log(error);
+                    }
+        });
+
+        if(Parse.User.current() == undefined){
+            $(location).attr('href','login.html');
+        }   
+        
+        
+       
+        Parse.Cloud.run('getobject',{objectname: 'Smsmessage'},{
+        success: function(msgs){
+            msgs = JSON.parse(JSON.stringify(msgs));
+            for(index in msgs){
+                var msg = msgs[index];
+                console.log(msg);
+                mbody = msg["mbody"];
+                mfrom = msg["mfrom"];
+                msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                // msg format
+                // <li>
+                //             <a href="#">
+                //                 <div>
+                //                     <strong>John Smith</strong>
+                //                                     <span class="pull-right text-muted">
+                //                                         <em>Yesterday</em>
+                //                                     </span>
+                //                 </div>
+                //                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                //             </a>
+                // </li>
+                $("#messages").append(msginfo);        
+            }
+            //change badge number
+            $(".badge")[0].innerText = msgs.length;
+        },
+        error: function(error){
+            console.log(error);
+        }
+        });
+      $("#side-menu").metisMenu({
+      toggle: false
+      });
+      $("#dashboardstudents").click(function(){
+        $(location).attr('href','studenttable.html');
+      });
+      $("#dashboardregistration").click(function(){
+        $(location).attr('href','Registrationinput.html');
+      });
+      $("#dashboardpickup").click(function(){
+        $(location).attr('href','studentpickuptable.html')
+        });
+      $('#signoutbutton').click(function() {
+        Parse.User.logOut();
+        $(location).attr('href','login.html');
+      }); 
+      $('[data-toggle="tooltip"]').tooltip();  
+    });
+
+</script>
 <style>
     .navbar-default {
         background-color: #d9edf7;
@@ -359,106 +406,8 @@
     body {
       color: #337ab7;
     }
+    .checkbox.style {
+  width: 5%;
+}
 </style>
-
-    <script type="text/javascript">
-            $(document).ready(function () {
-                //initialize Parse
-                Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-                // initialize table, 
-                // first load data from DB
-                Parse.Cloud.run('getobject', {objectname: 'SchoolDistrict'}, {
-                    success: function(districtdata){
-                        var stringify_data = JSON.stringify(districtdata);
-                        stringify_data = JSON.parse(stringify_data);
-                        $('#table').bootstrapTable({
-                            data: stringify_data,
-                            columns: [
-                                {
-                                    field: 'districtname',
-                                    title: "学区",
-                                    width: "40%"
-
-                                },
-                                {
-                                    field: 'districtnodate',
-                                    title: "日历2",
-                                    width: "60%"
-                                }
-                            ]
-                        });
-                    },
-                    error: function(error){
-                        cosole.log(error);
-                    }
-                });
-                // enable date picker
-                enabledatepicker();
-                
-                var currentdistrict = $("#schooldistrict").val();
-                setcurrentdistrict(currentdistrict);
-                $('#districtsave').click(function() {
-                    var form = $("#districtform");
-                    data = form.serializeArray();
-                    myobjectvalue = {"districtname":data[0]["value"],"districtnodate":data[1]["value"]};
-                    var objectid = $("#objectid")[0].innerHTML;
-                    Parse.Cloud.run('saveobject', { objectname: 'SchoolDistrict', 'objectid':objectid,objectvalue:myobjectvalue}, {
-                    success: function() {
-                        alert("保存成功");
-                    },
-                    error: function(error) {
-                        alert("Can't save, try again");
-                    }
-                });
-                });
-
-                // change datepicker on selection change 
-                $('#schooldistrict').on('change', function() {
-                    var currentdistrict = $(this).val();
-                    setcurrentdistrict(currentdistrict);
-                });
-            });
-            function enabledatepicker(){
-                $("#noschooldate").datepicker({
-                    startView: 1,
-                    clearBtn: true,
-                    multidate: true,
-                    daysOfWeekDisabled: "0,6",
-                });
-            }
-            function setcurrentdistrict(currentdistrict){
-                    var noschooldate = $("#noschooldate").val();
-                    Parse.Cloud.run('getobjectwithkeyequal',{objectname:"SchoolDistrict",keyname:"districtname",stringval:currentdistrict},{
-                        success(district){
-                            if(district.length != 0){
-                                district = JSON.parse(JSON.stringify(district))[0];
-                                if(district["districtnodate"] != undefined){
-                                    $("#objectid")[0].innerHTML = district["objectId"]; 
-                                    var datearray = [];
-                                    var nodatearray = district["districtnodate"].split(",");
-                                    for (var i = 0; i < nodatearray.length; i++){
-                                        if(nodatearray[i] != ""){
-                                            datearray.push(new Date(nodatearray[i]))
-                                    }
-                                }
-                                if(datearray.length > 0){
-                                    $("#noschooldate").datepicker('setDate',datearray);
-                                }
-                                }
-                            }
-                            else{
-                               $("#objectid")[0].innerHTML = ""; 
-                               $("#noschooldate").datepicker('setDate',null); 
-                            }
-                        },
-                        error(error){
-                            console.log(error);
-                        }
-                    });
-            }
-    </script>
-</body>
-    <style>
-
-    </style>
 </html>

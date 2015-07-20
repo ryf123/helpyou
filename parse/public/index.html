@@ -45,13 +45,14 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-envelope fa-fw"></i><span class="badge"></span>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages" id="messages">
                         
                         <li>
-                            <a class="text-center" href="#">
+                            <a class="text-center" href="hotlinenotification.html">
                                 <strong>Read All Messages</strong>
+
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -94,6 +95,14 @@
                                 padding-right: 10px;
                                 ">
                                 <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
+                        </li>
+
+                        <li>
+                            <a href="hotlinenotification.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a>
                         </li>
                         
                         
@@ -405,6 +414,8 @@
                 // </li>
                 $("#messages").append(msginfo);        
             }
+            //change badge number
+            $(".badge")[0].innerText = msgs.length;
         },
         error: function(error){
             console.log(error);
