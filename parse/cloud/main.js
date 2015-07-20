@@ -1,4 +1,54 @@
+// Include Cloud Code module dependencies
+var express = require('express'),
+    twilio = require('twilio');
+ 
+// Create an Express web app (more info: http://expressjs.com/)
+var app = express();
+app.use(express.bodyParser());  // Populate req.body 
+// Create a route that will respond to am HTTP GET request with some
+// simple TwiML instructions
+app.post('/processinbound', function(request, response) {
+    var twiml = new twilio.TwimlResponse();
+    var messagebody = request.body.Body;
+    var messageid = request.body.MessageSid;
+    var messagefrom = request.body.From;
+    var messageto = request.body.To;
+    console.log("Received a new text: " + messagebody);
+    objectvalue = {
+      mid : messageid,
+      mbody: messagebody,
+      mfrom: messagefrom,
+      mto: messageto 
+    }
+    var Smsmessage = Parse.Object.extend("Smsmessage");
+    var smsmessage = new Smsmessage();
+    for(key in objectvalue){
+      if (objectvalue.hasOwnProperty(key)){
+        smsmessage.set(key,objectvalue[key]);
+      }
+    }
+    smsmessage.save(null, {
+    success: function(gameScore) {
+    // Execute any logic that should take place after the object is saved.
+      response.type('text/xml');
+      response.send(twiml.toString());
+    },
+    error: function(gameScore, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and message.
+      response.error(error);
+    }
+    });
 
+    //response.send(String(request.body.From));
+    // Create a TwiML response generator object
+    // add some instructions
+    //twiml.say('Hello there! Isn\'t Jill I love you baby? from:Yifei', {
+    //    voice:'man'
+    //});
+});
+// Start the Express app
+app.listen();
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
 Parse.Cloud.define("hello", function(request, response) {
