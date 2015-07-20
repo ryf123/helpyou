@@ -18,7 +18,8 @@ app.post('/processinbound', function(request, response) {
       mid : messageid,
       mbody: messagebody,
       mfrom: messagefrom,
-      mto: messageto 
+      mto: messageto,
+      read: "false" 
     }
     var Smsmessage = Parse.Object.extend("Smsmessage");
     var smsmessage = new Smsmessage();
@@ -46,6 +47,10 @@ app.post('/processinbound', function(request, response) {
     //twiml.say('Hello there! Isn\'t Jill I love you baby? from:Yifei', {
     //    voice:'man'
     //});
+});
+app.post('/processemail', function(request, response) {
+  var text = request.body.text;
+  console.log(text);
 });
 // Start the Express app
 app.listen();
