@@ -275,13 +275,13 @@ body {
         var currentday = d.getDate();
         var currentyearmonth = currentyear +""+currentmonth;
         var registeryearmonth = "register"+currentyearmonth;
-        var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
+        var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
 
         // disable editable
         columnnamearray = ['studentid','firstname','lastname','grade','sex','contact','email','phonenumber','edit','remove'];
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystriing}, {
+        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystring}, {
                         success: function(schooldata) {
                         var stringify_data = JSON.stringify(schooldata);
                         stringify_data = JSON.parse(stringify_data);
@@ -370,7 +370,7 @@ body {
             for(index in rows){
                 objectid = rows[index]["objectId"];
                 myobjectvalue = {
-                    signindate: todaystriing
+                    signindate: todaystring
                 };
                 Parse.Cloud.run('objectadduniquevalue', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
                     success: function() {
@@ -380,7 +380,7 @@ body {
                     }
                 });  
             }
-            location.reload();
+            //location.reload();
       });
 
     </script>

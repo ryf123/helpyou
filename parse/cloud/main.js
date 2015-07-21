@@ -316,8 +316,8 @@ Parse.Cloud.define("getobjectwithkeyequal", function(request, response) {
     error: function(error){
       response.error("error");
     }
-  })
-
+  });
+});
 // add unique value to an array of exiting object
 // for example
 // gameScore.addUnique("skills", "flying");
