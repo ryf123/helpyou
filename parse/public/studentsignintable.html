@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HYACSIS-Students</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="vendors/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="vendors/bootstrap-table.min.css" rel="stylesheet">
+	<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+    <style type="text/css">
+    body {
+            padding-top: 50px;
+            padding-bottom: 30px;
+    }
+    
+    table.table > tbody > tr > td {
+        height: 30px;
+        vertical-align: middle;
+    }
+    /* address.js css style for address*/
+    .editable-address {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .editable-address span {
+        width: 70px;
+        display: inline-block;
+    }
+    </style>
+</head>
+
+<body class="nav-md" style="padding-top: 0px">
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; height: 51px;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="25" height="25">
+                        </div>
+                        <div class="col-lg-11">
+                            HelpYouAchieve Student Information System
+                        </div>
+                    </div>
+                    </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation" style="
+                width: 220px;
+                margin-top: 51px;
+                ">
+                <div class="sidebar-nav navbar-collapse" style="
+                width: 220px;
+                ">
+                    <ul class="nav" id="side-menu">
+                        
+                        
+                        <li>
+                            <a href="index.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
+                        </li>
+                        
+                        
+                        <!-- / Info inputs-->
+                        <li>
+                            <a href="#" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="districtform.html" style="
+                                padding-left: 32px;
+                                ">District Inputs / 学区信息</a>
+                                </li>
+                                <li>
+                                    <a href="schoolform.html" style="
+                                padding-left: 32px;
+                                ">School Inputs / 学校信息</a>
+                                </li>
+                                <li>
+                                    <a href="Studentinput.html" style="
+                                padding-left: 32px;
+                                ">Student Inputs / 学生信息</a>
+                                </li>
+                                <li>
+                                    <a href="Registrationinput.html" style="
+                                padding-left: 32px;
+                                padding-right: 0px;
+                                ">Registration Inputs / 注册信息</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!-- /End of 1st - Info inputs-->
+                        <li>
+                            <a href="districtform.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-home fa-fw"></i> District / 学区</a>
+                        </li>
+                        <li>
+                            <a href="schooltable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a>
+                        </li>
+                        <li>
+                            <a href="studenttable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-users fa-fw"></i> Student / 学生</a>
+                        </li>
+                        <li>
+                            <a href="Registrationinput.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a>
+                        </li>
+                        <li>
+                            <a href="studentpickuptable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!--End of Navigation-->
+
+        <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
+            <div class="row">
+                <br>
+                <div class="col-lg-1" style="padding-right: 0px; width:">
+                    <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="55" height="55">
+                        </div>
+                <div class="col-lg-11">
+                    <h3 class="text-primary" style="margin-top: 10px">HYACSIS - Student Information</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.End of 1st row -System Name -->
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="padding-left: 30px;">Student Information / 学校信息</div>
+                        <div class="panel-body">
+                            <table id="table" data-show-footer="true" style="word-wrap:break-word;table-layout: fixed;" data-click-to-select="true"></table>
+                        </div>
+                    </div>
+                    <!-- End of Panel -->
+                </div>
+            </div>
+            <!-- End of 2nd row -->
+        </div>
+        <!-- End of Page Wrapper -->
+    </div>
+    <!-- End of Wrapper -->
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="vendors/sb-admin-2.js"></script>
+	<script src="vendors/bootstrap-table.min.js"></script>
+	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+	<script type="text/javascript" src="vendors/parse.js"></script>
+</body>
+<style>
+.navbar-default {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.sidebar ul li a.active {
+  background-color: #d9edf7;
+}
+.nav>li>a:focus, .nav>li>a:hover{
+  text-decoration: none;
+  background-color: #fff;
+}
+.sidebar ul li a.active {
+  background-color: #fff;
+}
+.navbar-default .navbar-brand {
+  color: #337ab7;
+}
+.panel-footer {
+  background-color: #fff;
+  border-top: 1px solid #fff;
+}
+body {
+    background-color: #d9edf7;
+}
+.form-control {
+  border: 1px solid #bce8f1;
+}
+.btn-default {
+  color: #337ab7;
+  background-color: #fff;
+  border-color: #bce8f1;
+}
+body {
+  color: #337ab7;
+}
+</style>
+
+<script>
+        // get date information
+        var d = new Date();
+        var currentyear = d.getFullYear();
+        var currentmonth = d.getMonth()+1;
+        var currentday = d.getDate();
+        var currentyearmonth = currentyear +""+currentmonth;
+        var registeryearmonth = "register"+currentyearmonth;
+        var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
+
+        // disable editable
+        columnnamearray = ['studentid','firstname','lastname','grade','sex','contact','email','phonenumber','edit','remove'];
+        // load initial data from database
+        Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystriing}, {
+                        success: function(schooldata) {
+                        var stringify_data = JSON.stringify(schooldata);
+                        stringify_data = JSON.parse(stringify_data);
+                        $('#table').bootstrapTable({
+                           search : 'true',
+                           data: stringify_data,
+                           columns: [
+                                     {
+                                         field: 'state',
+                                         title: "check",
+                                         checkbox: "true"
+                                     },
+                                     {
+                                         field: 'studentid',
+                                         title: '学号',
+                                         sortable:'true',
+                                         footerFormatter: totalNameFormatter
+                                     },                                                                          
+
+                                     {
+                                         field: 'firstname',
+                                         title: '名',
+                                         sortable:'true',
+                                     },
+                                     {
+                                         field: 'lastname',
+                                         title: '姓',
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'school',
+                                         title: '学校',
+                                         width: "%15",
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'grade',
+                                         title: '年级',
+                                         width: "%4",
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'roomnumber',
+                                         title: '教室',
+                                         width: "%5",
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'contactmethod',
+                                         title: '联系方式',
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'contact',
+                                         title: '联系人',
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'phonenumber',
+                                         title: '联系电话',
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'altphonenumber',
+                                         title: '联系电话（备用）',
+                                         sortable:'true'
+                                     },
+                                     {
+                                         field: 'sex',
+                                         title: '性别',
+                                         sortable:'true'
+                                     },
+                                     ]
+                           });
+                        //update cell with current age
+                        var data = $('#table').bootstrapTable('getData');
+                        for(index in data){
+                            // calculate the age difference
+                            var rowdata = data[index];
+                            var dob = rowdata['dob'];
+                                if(dob != undefined){
+                                var d = new Date(dob);
+                                var diff = Date.now() - d.getTime();
+                                var ageDate = new Date(diff);
+                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                                fieldname = 'age';
+                                $('#table').bootstrapTable("updateCell",{rowIndex: index, fieldName: fieldname, fieldValue: age});
+                            }
+                            
+                        }
+                        },
+                        error: function(error) {
+                        alert("error");
+                        }
+        });
+        // draw the edit button
+        // if "UpdateCell" is called, then initBody will be called
+        // the initBody() function in bootstrap-table will call this to update icon
+        // if the current icon is
+        function operateeditFormatter(value, row, index) {
+        // get the edit icon
+        var icon  = $("#table tr").eq(index+1).find("td a i").first()
+        //if current icon is ok then do not change
+        if(icon != undefined){
+            if(icon.attr("class") =="glyphicon glyphicon-ok"){
+                return [
+                        '<a class="edit" href="javascript:void(0)" title="edit">',
+                        '<i class="glyphicon glyphicon-ok"></i>',
+                        '</a>'
+                        ].join('');
+            }
+        }
+        return [
+                '<a class="edit" href="javascript:void(0)" title="edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>'
+                ].join('');
+        }
+        // draw the delete button
+        function operateremoveFormatter(value, row, index) {
+            return [
+                    '<a class="remove ml10" href="javascript:void(0)" title="remove">',
+                    '<i class="glyphicon glyphicon-remove"></i>',
+                    '</a>'
+                    ].join('');
+        }
+        // edit button event
+        window.operateEvents = {
+            
+            
+            // Edit/save button Event
+            
+            'click .edit': function (e, value, row, index) {
+                var button = "#table tr[data-index='"+index+"'] td .edit i";
+                var trindex = "#table tr[data-index='"+index+"'] td";
+                $(trindex).slice( 2, -2 ).editable('toggleDisabled'); // toggle disable
+                //if ok button is clicked
+                if($(button).attr("class") == "glyphicon glyphicon-ok"){
+                    $(button).attr("class","glyphicon glyphicon-edit");
+                    // run cloud code to save the object
+                    var myobjectid = row["objectId"];
+                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
+                        success: function() {
+                                    alert("保存成功!");
+                        },
+                        error: function(error) {
+                                    alert("Can't save, try again");
+                        }
+                    });
+                }
+                else{
+                    // if it's the first time, then editable does not exist
+                    // then enable the edit
+                    if($(trindex).slice( 2,-2).hasClass("editable-disabled") == true){
+                        $(trindex).slice( 2, -2 ).editable('toggleDisabled');
+                    }
+                    $(button).attr("class","glyphicon glyphicon-ok");
+                // do not selec the last two items which are edit and remove
+                $(trindex).slice( 2, -2 ).editable({
+                    title: 'enter name',
+                    mode: 'inline'
+                });
+                console.log(value, row, index);
+                // on save event, if the value is saved then update row value
+                // save mean the the tick icon, or "enter" is pressed∂up
+                $(trindex).slice( 2, -2 ).on('save', function(e, params) {
+                     rowindex = $(this).parent()[0].rowIndex-1;
+                     colindex = this.cellIndex;
+                     fieldname = columnnamearray[colindex];
+                     $('#table').bootstrapTable("updateCell",{rowIndex: rowindex, fieldName: fieldname, fieldValue: params.newValue});
+                     //update cell will disable editable, re-enable it
+                     $('#table tr').each(function(){
+                         icon = $(this).find("td a i").first();
+                         if(icon.attr("class") =="glyphicon glyphicon-ok"){
+                             $(this).find("td").slice(2,-2).editable();
+                         }
+                     })
+                });
+                }
+            },
+            
+            
+            //Remove button Event
+            
+            'click .remove': function (e, value, row, index) {
+                if (confirm("确定要删除吗？") == true) {
+                    var myobjectid = row["objectId"];
+                    var studentid = row["studentid"];
+                    Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
+                                    success: function() {
+                                    $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
+                                    console.log("Delete!");
+                                    },
+                                    error: function(error) {
+                                    alert("Delete failed");
+                        }
+                    });
+                }
+            }
+        };
+        // this is used to display "Total:"+ number
+        function totalNameFormatter(data) {
+            return "Total: "+data.length;
+        }
+    </script>
+</html>
