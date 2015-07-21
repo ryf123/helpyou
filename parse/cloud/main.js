@@ -49,8 +49,38 @@ app.post('/processinbound', function(request, response) {
     //});
 });
 app.post('/processemail', function(request, response) {
-  var text = request.body.text;
-  console.log(text);
+  var sender = request.body.sender;
+  var subject = request.body.subject;
+  var plainbody = request.body["body-plain"];
+  console.log(request.body)
+  console.log(sender + ":"+subject+plainbody);
+  objectvalue = {
+      mbody: plainbody,
+      mfrom: sender,
+      read: "false",
+      type: "email" 
+  }
+  var Smsmessage = Parse.Object.extend("Smsmessage");
+    var smsmessage = new Smsmessage();
+    for(key in objectvalue){
+      if (objectvalue.hasOwnProperty(key)){
+        smsmessage.set(key,objectvalue[key]);
+      }
+    }
+    smsmessage.save(null, {
+    success: function(gameScore) {
+    // Execute any logic that should take place after the object is saved.
+      response.type('text/xml');
+      response.send(twiml.toString());
+    },
+    error: function(gameScore, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and message.
+      response.error(error);
+    }
+  });
+  response.type('text/xml');
+  response.send("<response></response>");
 });
 // Start the Express app
 app.listen();
