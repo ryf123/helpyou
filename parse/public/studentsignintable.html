@@ -320,7 +320,7 @@ body {
                                      {
                                          field: 'grade',
                                          title: '年级',
-                                         width: "%4",
+                                         width: "%5",
                                          sortable:'true'
                                      },
                                      {
@@ -356,135 +356,32 @@ body {
                                      },
                                      ]
                            });
-                        //update cell with current age
-                        var data = $('#table').bootstrapTable('getData');
-                        for(index in data){
-                            // calculate the age difference
-                            var rowdata = data[index];
-                            var dob = rowdata['dob'];
-                                if(dob != undefined){
-                                var d = new Date(dob);
-                                var diff = Date.now() - d.getTime();
-                                var ageDate = new Date(diff);
-                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
-                                fieldname = 'age';
-                                $('#table').bootstrapTable("updateCell",{rowIndex: index, fieldName: fieldname, fieldValue: age});
-                            }
-                            
-                        }
                         },
                         error: function(error) {
                         alert("error");
                         }
         });
-        // draw the edit button
-        // if "UpdateCell" is called, then initBody will be called
-        // the initBody() function in bootstrap-table will call this to update icon
-        // if the current icon is
-        function operateeditFormatter(value, row, index) {
-        // get the edit icon
-        var icon  = $("#table tr").eq(index+1).find("td a i").first()
-        //if current icon is ok then do not change
-        if(icon != undefined){
-            if(icon.attr("class") =="glyphicon glyphicon-ok"){
-                return [
-                        '<a class="edit" href="javascript:void(0)" title="edit">',
-                        '<i class="glyphicon glyphicon-ok"></i>',
-                        '</a>'
-                        ].join('');
-            }
-        }
-        return [
-                '<a class="edit" href="javascript:void(0)" title="edit">',
-                '<i class="glyphicon glyphicon-edit"></i>',
-                '</a>'
-                ].join('');
-        }
-        // draw the delete button
-        function operateremoveFormatter(value, row, index) {
-            return [
-                    '<a class="remove ml10" href="javascript:void(0)" title="remove">',
-                    '<i class="glyphicon glyphicon-remove"></i>',
-                    '</a>'
-                    ].join('');
-        }
-        // edit button event
-        window.operateEvents = {
-            
-            
-            // Edit/save button Event
-            
-            'click .edit': function (e, value, row, index) {
-                var button = "#table tr[data-index='"+index+"'] td .edit i";
-                var trindex = "#table tr[data-index='"+index+"'] td";
-                $(trindex).slice( 2, -2 ).editable('toggleDisabled'); // toggle disable
-                //if ok button is clicked
-                if($(button).attr("class") == "glyphicon glyphicon-ok"){
-                    $(button).attr("class","glyphicon glyphicon-edit");
-                    // run cloud code to save the object
-                    var myobjectid = row["objectId"];
-                    Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
-                        success: function() {
-                                    alert("保存成功!");
-                        },
-                        error: function(error) {
-                                    alert("Can't save, try again");
-                        }
-                    });
-                }
-                else{
-                    // if it's the first time, then editable does not exist
-                    // then enable the edit
-                    if($(trindex).slice( 2,-2).hasClass("editable-disabled") == true){
-                        $(trindex).slice( 2, -2 ).editable('toggleDisabled');
-                    }
-                    $(button).attr("class","glyphicon glyphicon-ok");
-                // do not selec the last two items which are edit and remove
-                $(trindex).slice( 2, -2 ).editable({
-                    title: 'enter name',
-                    mode: 'inline'
-                });
-                console.log(value, row, index);
-                // on save event, if the value is saved then update row value
-                // save mean the the tick icon, or "enter" is pressed∂up
-                $(trindex).slice( 2, -2 ).on('save', function(e, params) {
-                     rowindex = $(this).parent()[0].rowIndex-1;
-                     colindex = this.cellIndex;
-                     fieldname = columnnamearray[colindex];
-                     $('#table').bootstrapTable("updateCell",{rowIndex: rowindex, fieldName: fieldname, fieldValue: params.newValue});
-                     //update cell will disable editable, re-enable it
-                     $('#table tr').each(function(){
-                         icon = $(this).find("td a i").first();
-                         if(icon.attr("class") =="glyphicon glyphicon-ok"){
-                             $(this).find("td").slice(2,-2).editable();
-                         }
-                     })
-                });
-                }
-            },
-            
-            
-            //Remove button Event
-            
-            'click .remove': function (e, value, row, index) {
-                if (confirm("确定要删除吗？") == true) {
-                    var myobjectid = row["objectId"];
-                    var studentid = row["studentid"];
-                    Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
-                                    success: function() {
-                                    $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
-                                    console.log("Delete!");
-                                    },
-                                    error: function(error) {
-                                    alert("Delete failed");
-                        }
-                    });
-                }
-            }
-        };
         // this is used to display "Total:"+ number
         function totalNameFormatter(data) {
             return "Total: "+data.length;
         }
+        $('#studentsignin').click(function() {
+            rows = $('#table').bootstrapTable("getAllSelections");
+            for(index in rows){
+                objectid = rows[index]["objectId"];
+                myobjectvalue = {
+                    signindate: todaystriing
+                };
+                Parse.Cloud.run('objectadduniquevalue', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                    success: function() {
+                    },
+                    error: function(error) {
+                        console.log("success");
+                    }
+                });  
+            }
+            location.reload();
+      });
+
     </script>
 </html>

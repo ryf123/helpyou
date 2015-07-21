@@ -317,4 +317,43 @@ Parse.Cloud.define("getobjectwithkeyequal", function(request, response) {
       response.error("error");
     }
   })
+
+// add unique value to an array of exiting object
+// for example
+// gameScore.addUnique("skills", "flying");
+// gameScore.addUnique("skills", "kungfu");
+
+Parse.Cloud.define("objectadduniquevalue", function(request, response) {
+    var objectname = request.params.objectname;
+    var values = request.params.objectvalue;
+    var objectid = request.params.objectid;
+    var Myobject = Parse.Object.extend(objectname);
+    var query = new Parse.Query(Myobject);
+    query.get(objectid, {
+      success: function(myinstance) {
+      for(key in values){
+       if (values.hasOwnProperty(key)){
+          myinstance.addUnique(key,values[key]);
+       }
+      }
+      myinstance.save(null, {
+         success: function(myinstance) {
+         // Execute any logic that should take place after the object is saved.
+         console.log(objectname + " obj saved successfully");
+         response.success();
+         },
+         error: function(gameScore, error) {
+         // Execute any logic that should take place if the save fails.
+         // error is a Parse.Error with an error code and message.
+             console.log("Failed to save: " + objectname);
+             response.error();
+         }
+      });
+      },
+      error: function(object, error) {
+      // The object was not retrieved successfully.
+      // error is a Parse.Error with an error code and message.
+             response.error(error);
+      }
+    });
 });
