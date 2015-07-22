@@ -431,8 +431,8 @@ body {
             
             'click .edit': function (e, value, row, index) {
                 var button = "#table tr[data-index='"+index+"'] td .edit i";
-                var trindex = "#table tr[data-index='"+index+"'] td";
-                $(trindex).slice( 2, -2 ).editable('toggleDisabled'); // toggle disable
+                var trindex = "#table tr[data-index='"+index+"'] td"; // all tds in the row
+                $(trindex).slice( 1, -2 ).editable('toggleDisabled'); // toggle disable
                 //if ok button is clicked
                 if($(button).attr("class") == "glyphicon glyphicon-ok"){
                     $(button).attr("class","glyphicon glyphicon-edit");
@@ -451,30 +451,18 @@ body {
                 else{
                     // if it's the first time, then editable does not exist
                     // then enable the edit
-                    if($(trindex).slice( 2,-2).hasClass("editable-disabled") == true){
-                        $(trindex).slice( 2, -2 ).editable('toggleDisabled');
+                    if($(trindex).slice( 1, -2).hasClass("editable-disabled") == true){
+                        $(trindex).slice( 1, -2 ).editable('toggleDisabled');
                     }
                     $(button).attr("class","glyphicon glyphicon-ok");
                 // do not selec the last two items which are edit and remove
-                $(trindex).slice( 2, -2 ).editable({
+                $(trindex).slice( 1, -2 ).editable({
                     title: 'enter name',
                     mode: 'inline'
                 });
                 console.log(value, row, index);
                 // on save event, if the value is saved then update row value
                 // save mean the the tick icon, or "enter" is pressed∂up
-                $(trindex).slice( 2, -2 ).on('save', function(e, params) {
-                     rowindex = $(this).parent()[0].rowIndex-1;
-                     colindex = this.cellIndex;
-                     fieldname = columnnamearray[colindex];
-                     $('#table').bootstrapTable("updateCell",{rowIndex: rowindex, fieldName: fieldname, fieldValue: params.newValue});
-                     //update cell will disable editable, re-enable it
-                     $('#table tr').each(function(){
-                         icon = $(this).find("td a i").first();
-                         if(icon.attr("class") =="glyphicon glyphicon-ok"){
-                             $(this).find("td").slice(2,-2).editable();
-                         }
-                     })
                 });
                 }
             },
