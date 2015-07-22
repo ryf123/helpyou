@@ -20,7 +20,7 @@
     <link href="vendors/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
     <link href="vendors/bootstrap-table.min.css" rel="stylesheet">
     <!-- add 2 new -->
     <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
@@ -230,11 +230,11 @@
     <script src="metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="vendors/sb-admin-2.js"></script>
-	<script src="vendors/bootstrap-table.min.js"></script>
-	<script type="text/javascript" src="vendors/parse.js"></script>
-	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
-	<script src="bootstrap-editable/js/moment.min.js"></script>
-	<script src="vendors/bootstrap-datepicker.js"></script>
+    <script src="vendors/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="vendors/parse.js"></script>
+    <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+    <script src="bootstrap-editable/js/moment.min.js"></script>
+    <script src="vendors/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
     <script src="vendors/jquery.dataTables.min.js"></script>
     <script src="vendors/select2.min.js"></script>
@@ -279,64 +279,64 @@ body {
 }
 </style>
 
-	<script>
+    <script>
     // constants
-	var d = new Date();
-	var month = d.getMonth()+1;
-	var year = d.getFullYear();
-	var nextmonth = month+1;
-	var monthname1 = "register"+year+""+month;
-	var monthname2 = "register"+year+""+nextmonth;
-	// load initial data from database
-	Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-	Parse.Cloud.run('getobject', {objectname: 'Student'}, {
-					success: function(schooldata) {
-					var stringify_data = JSON.stringify(schooldata);
-					stringify_data = JSON.parse(stringify_data);
-					$('#table').bootstrapTable({
-					   search : 'true',
-					   data: stringify_data,
-					   columns: [
-								 {
-								 class: 'studentid',
-								 width: '5%',
-								 field: 'studentid',
-								 title: '学号',
-								 sortable:'true',
-								 footerFormatter: totalNameFormatter
-								 },
-								 {
-								 width: '7%',
-								 field: 'school',
-								 title: '学校',
-								 sortable:'true'
-								 },
-								 {
-								 width: '5%',
-								 field: 'firstname',
-								 title: '名',
-								 sortable:'true',
-								 },
-								 {
-								 width: '5%',
-								 field: 'lastname',
-								 title: '姓',
-								 sortable:'true'
-								 },
-								 {
-								 width: '5%',
-								 field: 'grade',
-								 title: '年级',
-								 sortable:'true'
-								 },
-								 {
-								 width: '30%',
-								 field: 'registrationdate',
-								 title: '注册日期',
-								 sortable:'true',
-								 class: 'registration'
-								 
-								 },
+    var d = new Date();
+    var month = d.getMonth()+1;
+    var year = d.getFullYear();
+    var nextmonth = month+1;
+    var monthname1 = "register"+year+""+month;
+    var monthname2 = "register"+year+""+nextmonth;
+    // load initial data from database
+    Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+    Parse.Cloud.run('getobject', {objectname: 'Student'}, {
+                    success: function(schooldata) {
+                    var stringify_data = JSON.stringify(schooldata);
+                    stringify_data = JSON.parse(stringify_data);
+                    $('#table').bootstrapTable({
+                       search : 'true',
+                       data: stringify_data,
+                       columns: [
+                                 {
+                                 class: 'studentid',
+                                 width: '5%',
+                                 field: 'studentid',
+                                 title: '学号',
+                                 sortable:'true',
+                                 footerFormatter: totalNameFormatter
+                                 },
+                                 {
+                                 width: '7%',
+                                 field: 'school',
+                                 title: '学校',
+                                 sortable:'true'
+                                 },
+                                 {
+                                 width: '5%',
+                                 field: 'firstname',
+                                 title: '名',
+                                 sortable:'true',
+                                 },
+                                 {
+                                 width: '5%',
+                                 field: 'lastname',
+                                 title: '姓',
+                                 sortable:'true'
+                                 },
+                                 {
+                                 width: '5%',
+                                 field: 'grade',
+                                 title: '年级',
+                                 sortable:'true'
+                                 },
+                                 {
+                                 width: '30%',
+                                 field: 'registrationdate',
+                                 title: '注册日期',
+                                 sortable:'true',
+                                 class: 'registration'
+                                 
+                                 },
                                 {
                                  width: '30%',
                                  field: 'tempdate',
@@ -345,60 +345,60 @@ body {
                                  class: 'tempdate'
                                  
                                  },
-								 {
-								 width: '7%',
-								 field: 'contact',
-								 title: '联系人',
-								 sortable:'true'
-								 },
-								 {
-								 width: '10%',
-								 field: 'phonenumber',
-								 title: '联系电话',
-								 sortable:'true'
-								 },
-								 {
-								 width: '10%',
-								 field: 'operate',
-								 title: '保存',
-								 formatter:"operatesaveFormatter",
-								 events:"operateEvents"
-								 },
-								 ]
-					   });
-					 var tabledata = $('#table').bootstrapTable("getData");
-					 // loop through tr elements
-					 var i= 0;
-					 $('#table tr').each(function(){
-						// the first row is table head, skip it
-						if(i != 0){
-										 var registerdate = "";
-										 var monthdata1 = $('#table').bootstrapTable("getData")[i-1][monthname1];
-										 var monthdata2 = $('#table').bootstrapTable("getData")[i-1][monthname2];
-										 if(monthdata1 != undefined){
-											 registerdate+=monthdata1;
-										 }
-										 if(monthdata2 != undefined){
-										 registerdate = registerdate +","+monthdata2;
-										 }
-										 if(registerdate != ""){
-										 $('#table').bootstrapTable("updateCell",{rowIndex: i-1, fieldName: "registrationdate", fieldValue: registerdate});
-										 $(this).find(".registration")[0].innerHTML = registerdate;
-										 }
-						}
-						i++;
-					 });
-					 var currentdate = new Date();
-					 var currentday= currentdate.getDate()-1;
-					 $("#table td[class='registration']").datepicker({
-														  todayHighlight: true,
-														  todayBtn: true,
-														  clearBtn: true,
-														  multidate: true,
-														  daysOfWeekDisabled: "0,6",
-														  startDate: "-"+currentday+"d",
-														  endDate: "+2m "+"-"+currentday+"d"+" -1d",
-					});
+                                 {
+                                 width: '7%',
+                                 field: 'contact',
+                                 title: '联系人',
+                                 sortable:'true'
+                                 },
+                                 {
+                                 width: '10%',
+                                 field: 'phonenumber',
+                                 title: '联系电话',
+                                 sortable:'true'
+                                 },
+                                 {
+                                 width: '10%',
+                                 field: 'operate',
+                                 title: '保存',
+                                 formatter:"operatesaveFormatter",
+                                 events:"operateEvents"
+                                 },
+                                 ]
+                       });
+                     var tabledata = $('#table').bootstrapTable("getData");
+                     // loop through tr elements
+                     var i= 0;
+                     $('#table tr').each(function(){
+                        // the first row is table head, skip it
+                        if(i != 0){
+                                         var registerdate = "";
+                                         var monthdata1 = $('#table').bootstrapTable("getData")[i-1][monthname1];
+                                         var monthdata2 = $('#table').bootstrapTable("getData")[i-1][monthname2];
+                                         if(monthdata1 != undefined){
+                                             registerdate+=monthdata1;
+                                         }
+                                         if(monthdata2 != undefined){
+                                         registerdate = registerdate +","+monthdata2;
+                                         }
+                                         if(registerdate != ""){
+                                         $('#table').bootstrapTable("updateCell",{rowIndex: i-1, fieldName: "registrationdate", fieldValue: registerdate});
+                                         $(this).find(".registration")[0].innerHTML = registerdate;
+                                         }
+                        }
+                        i++;
+                     });
+                     var currentdate = new Date();
+                     var currentday= currentdate.getDate()-1;
+                     $("#table td[class='registration']").datepicker({
+                                                          todayHighlight: true,
+                                                          todayBtn: true,
+                                                          clearBtn: true,
+                                                          multidate: true,
+                                                          daysOfWeekDisabled: "0,6",
+                                                          startDate: "-"+currentday+"d",
+                                                          endDate: "+2m "+"-"+currentday+"d"+" -1d",
+                    });
                     $("#table td[class='tempdate']").datepicker({
                         todayHighlight: true,
                         todayBtn: true,
@@ -408,105 +408,105 @@ body {
                         startDate: "-"+currentday+"d",
                         endDate: "+2m "+"-"+currentday+"d"+" -1d",
                     });
-						$("#table td[class='registration']").datepicker()
-							.on('changeDate', function(e){
-								this.innerHTML = $(this).datepicker('getFormattedDate');
-						});
+                        $("#table td[class='registration']").datepicker()
+                            .on('changeDate', function(e){
+                                this.innerHTML = $(this).datepicker('getFormattedDate');
+                        });
                         $("#table td[class='tempdate']").datepicker()
                             .on('changeDate', function(e){
                                 this.innerHTML = $(this).datepicker('getFormattedDate');
                         });
-						// show the preselected date
-						$("#table td[class='registration']").datepicker()
-							.on('show', function(e){
-								var registerarray = this.innerHTML.split(",");
-								var datearray = [];
-								// if there is not date yet, then registerdate is undefined
-								if(registerarray[0] != "-"){
-								for (var i = 0; i < registerarray.length; i++){
-									if(registerarray[i] != ""){
-										datearray.push(new Date(registerarray[i]))
-									}
-								}
-								}
-								if(datearray.length != 0){
-									$(this).datepicker('setDate',datearray);
-								}
-						});
-					
-				},
-					error: function(error) {
-					alert("error");
-					}
-	});
+                        // show the preselected date
+                        $("#table td[class='registration']").datepicker()
+                            .on('show', function(e){
+                                var registerarray = this.innerHTML.split(",");
+                                var datearray = [];
+                                // if there is not date yet, then registerdate is undefined
+                                if(registerarray[0] != "-"){
+                                for (var i = 0; i < registerarray.length; i++){
+                                    if(registerarray[i] != ""){
+                                        datearray.push(new Date(registerarray[i]))
+                                    }
+                                }
+                                }
+                                if(datearray.length != 0){
+                                    $(this).datepicker('setDate',datearray);
+                                }
+                        });
+                    
+                },
+                    error: function(error) {
+                    alert("error");
+                    }
+    });
 // draw the edit button
-	function operatesaveFormatter(value, row, index) {
-	return [
-			'<a class="save" href="javascript:void(0)" title="save">',
-			'<i class="glyphicon glyphicon-ok"></i>',
-			'</a>'
-			].join('');
-	}
-	// edit button event
-	window.operateEvents = {
-		
-		
-		// Edit/save button Event
-		'click .save': function (e, value, row, index) {
-				var month1 = [];
-				var month2 = [];
-				var objectid = row["objectId"];
-				var studentid = row["studentid"];
-				var registerdate = $(this).parent().parent().find(".registration").html();
-				registerdatearray = registerdate.split(",");
-				for (var i = 0; i < registerdatearray.length; i++){
-					var date = registerdatearray[i];
-					var re = new RegExp(month+"\/[0-9]+\/"+year);
-					var match = date.match(re);
-					if(match != undefined){
-						month1.push(date);
-					}
-					else{
-						month2.push(date);
-					}
-				}
+    function operatesaveFormatter(value, row, index) {
+    return [
+            '<a class="save" href="javascript:void(0)" title="save">',
+            '<i class="glyphicon glyphicon-ok"></i>',
+            '</a>'
+            ].join('');
+    }
+    // edit button event
+    window.operateEvents = {
+        
+        
+        // Edit/save button Event
+        'click .save': function (e, value, row, index) {
+                var month1 = [];
+                var month2 = [];
+                var objectid = row["objectId"];
+                var studentid = row["studentid"];
+                var registerdate = $(this).parent().parent().find(".registration").html();
+                registerdatearray = registerdate.split(",");
+                for (var i = 0; i < registerdatearray.length; i++){
+                    var date = registerdatearray[i];
+                    var re = new RegExp(month+"\/[0-9]+\/"+year);
+                    var match = date.match(re);
+                    if(match != undefined){
+                        month1.push(date);
+                    }
+                    else{
+                        month2.push(date);
+                    }
+                }
                 var tempdate = $(this).parent().parent().find(".tempdate").html();
-				var myobjectvalue = {'studentid':studentid,'tempdate':tempdate};
-				myobjectvalue[monthname1] = month1.join();
-				myobjectvalue[monthname2] = month2.join();
-				Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
-					success: function() {
-								alert("保存成功");
-					},
-					error: function(error) {
-								alert("Can't save, try again");
-					}
-				});
-			
-		},
-		
-		
-		//Remove button Event
-		
-		'click .remove': function (e, value, row, index) {
-			if (confirm("确定要删除吗？") == true) {
-				var myobjectid = row["objectId"];
-				var studentid = row["studentid"];
-				Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
-								success: function() {
-								$('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
-								console.log("Delete!");
-								},
-								error: function(error) {
-								alert("Delete failed");
-					}
-				});
-			}
-		}
-	};
-	// this is used to display "Total:"+ number
-	function totalNameFormatter(data) {
-		return "Total: "+data.length;
-	}
+                var myobjectvalue = {'studentid':studentid,'tempdate':tempdate};
+                myobjectvalue[monthname1] = month1.join();
+                myobjectvalue[monthname2] = month2.join();
+                Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                    success: function() {
+                                alert("保存成功");
+                    },
+                    error: function(error) {
+                                alert("Can't save, try again");
+                    }
+                });
+            
+        },
+        
+        
+        //Remove button Event
+        
+        'click .remove': function (e, value, row, index) {
+            if (confirm("确定要删除吗？") == true) {
+                var myobjectid = row["objectId"];
+                var studentid = row["studentid"];
+                Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
+                                success: function() {
+                                $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
+                                console.log("Delete!");
+                                },
+                                error: function(error) {
+                                alert("Delete failed");
+                    }
+                });
+            }
+        }
+    };
+    // this is used to display "Total:"+ number
+    function totalNameFormatter(data) {
+        return "Total: "+data.length;
+    }
 </script>
 </html>
