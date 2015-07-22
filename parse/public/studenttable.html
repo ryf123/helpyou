@@ -262,7 +262,7 @@ body {
 
 <script>
         // disable editable
-        columnnamearray = ['studentid','age','firstname','lastname','grade','sex','contact','email','phonenumber','dob','edit','remove'];
+        columnnamearray = ['studentid','firstname','lastname','school','grade','roomnumber','contactmethod','contact','phonenumber','altphonenumber','email','altemail','address','sex','age','dob','firstdayatschool','edit','remove'];
         // load initial data from database
         Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
         Parse.Cloud.run('getobject', {objectname: 'Student'}, {
@@ -439,7 +439,8 @@ body {
                     // run cloud code to save the object
                     var myobjectid = row["objectId"];
                     Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
-                        success: function() {
+                        success: function(data) {
+                                    console.log(data);
                                     alert("保存成功!");
                         },
                         error: function(error) {
