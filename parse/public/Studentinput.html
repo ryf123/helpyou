@@ -276,6 +276,11 @@
                                             <td>Contact Method: Text (Default) or Email<br> or not selected</td>
                                             <td><a href="#" id="contactmethod" class="myeditable" data-type="select" data-value="email"></a></td>
                                         </tr>
+                                        <tr>
+                                            <td align="right">临时地点</td>
+                                            <td>Temporary Location</td>
+                                            <td><a href="#" id="temploc" class="myeditable" data-type="text"></a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -324,6 +329,7 @@
 	<script src="vendors/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="vendors/parse.js"></script>
 	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
 	<script src="vendors/select2.min.js"></script>
 	<script src="bootstrap-editable/js/address.js"></script>
 </body>
@@ -412,13 +418,7 @@
 			 }
 			 }
 		  });
-		  $('#status').editable();
-		  $('#vacation').editable({
-								  datepicker: {
-								  todayBtn: 'linked'
-								  }
-								  });
-		  
+		  $('#status').editable();		  
 		  $('#dob').editable();
 		  $('#roomnumber').editable();
 		  $('#contact').editable();
@@ -427,6 +427,7 @@
 		  $('#email').editable();
 		  $('#altemail').editable();
 		  $('#firstdayatschool').editable();
+          $('#temploc').editable();
 		  $('#contactmethod').editable({
 				 source: [
 						  {value: "email", text: 'Text 短信'},

@@ -235,6 +235,7 @@
 	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
 	<script src="bootstrap-editable/js/moment.min.js"></script>
 	<script src="vendors/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
     <script src="vendors/jquery.dataTables.min.js"></script>
     <script src="vendors/select2.min.js"></script>
     <script src="bootstrap-editable/js/address.js"></script>
@@ -336,6 +337,14 @@ body {
 								 class: 'registration'
 								 
 								 },
+                                {
+                                 width: '30%',
+                                 field: 'tempdate',
+                                 title: '特殊日期',
+                                 sortable:'true',
+                                 class: 'tempdate'
+                                 
+                                 },
 								 {
 								 width: '7%',
 								 field: 'contact',
@@ -390,10 +399,23 @@ body {
 														  startDate: "-"+currentday+"d",
 														  endDate: "+2m "+"-"+currentday+"d"+" -1d",
 					});
+                    $("#table td[class='tempdate']").datepicker({
+                        todayHighlight: true,
+                        todayBtn: true,
+                        clearBtn: true,
+                        multidate: true,
+                        daysOfWeekDisabled: "0,6",
+                        startDate: "-"+currentday+"d",
+                        endDate: "+2m "+"-"+currentday+"d"+" -1d",
+                    });
 						$("#table td[class='registration']").datepicker()
 							.on('changeDate', function(e){
 								this.innerHTML = $(this).datepicker('getFormattedDate');
 						});
+                        $("#table td[class='tempdate']").datepicker()
+                            .on('changeDate', function(e){
+                                this.innerHTML = $(this).datepicker('getFormattedDate');
+                        });
 						// show the preselected date
 						$("#table td[class='registration']").datepicker()
 							.on('show', function(e){
@@ -448,7 +470,8 @@ body {
 						month2.push(date);
 					}
 				}
-				var myobjectvalue = {'studentid':studentid};
+                var tempdate = $(this).parent().parent().find(".tempdate").html();
+				var myobjectvalue = {'studentid':studentid,'tempdate':tempdate};
 				myobjectvalue[monthname1] = month1.join();
 				myobjectvalue[monthname2] = month2.join();
 				Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
