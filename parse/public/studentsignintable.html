@@ -295,12 +295,16 @@ body {
                                          checkbox: "true"
                                      },
                                      {
+                                         class : 'signinstatus',
+                                         field: 'signindate',                                         
+                                         title: '签到'
+                                     },                                      
+                                     {
                                          field: 'studentid',
                                          title: '学号',
                                          sortable:'true',
                                          footerFormatter: totalNameFormatter
                                      },                                                                          
-
                                      {
                                          field: 'firstname',
                                          title: '名',
@@ -356,11 +360,43 @@ body {
                                      },
                                      ]
                            });
+                           $('#table').bootstrapTable().on('post-body.bs.table', function (e, name, args) {
+                                converttoicon();
+                           });
+                           converttoicon();
                         },
                         error: function(error) {
                         alert("error");
                         }
         });
+        
+
+        // ocnvert sign in status to corresponding icon
+        function converttoicon(){
+            tabledata = $('#table').bootstrapTable("getData");
+            var i = 0;
+            $('#table tbody tr').each(function(){
+                rowdata = tabledata[i];
+                $(this).find(".signinstatus")[0].innerHTML = "";
+                if("signindate" in rowdata){
+                    signinstatus = rowdata["signindate"];
+                    
+                    if(signinstatus.indexOf(todaystring) > -1){
+                        // change the field value, make it sortable
+                        //$('#table').bootstrapTable("updateCell",{rowIndex: i, fieldName: "signindate", fieldValue: "true"});
+                        $(this).find(".signinstatus").append("<i class='fa fa-check-square-o'></i>");
+
+                    }
+                    else{
+                        $(this).find(".signinstatus").append("<i class='fa fa-minus-square-o'></i>");
+                    }
+                }
+                else{
+                    $(this).find(".signinstatus").append("<i class='fa fa-minus-square-o'></i>");
+                }
+                i++;
+            });
+        }
         // this is used to display "Total:"+ number
         function totalNameFormatter(data) {
             return "Total: "+data.length;
@@ -368,6 +404,8 @@ body {
         $('#studentsignin').click(function() {
             rows = $('#table').bootstrapTable("getAllSelections");
             for(index in rows){
+                $('#table tbody tr .signinstatus i').remove();
+                $('#table tbody tr .signinstatus').append("<i class='fa fa-check-square-o'></i>");
                 objectid = rows[index]["objectId"];
                 myobjectvalue = {
                     signindate: todaystring
