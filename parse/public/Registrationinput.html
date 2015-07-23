@@ -329,13 +329,37 @@ body {
 								 sortable:'true'
 								 },
 								 {
-								 width: '30%',
+								 width: '20%',
 								 field: 'registrationdate',
 								 title: '注册日期',
 								 sortable:'true',
 								 class: 'registration'
 								 
 								 },
+                                 {
+                                 width: '10%',
+                                 field: 'specialtime',
+                                 title: '特殊时间',
+                                 sortable:'true',
+                                 class: 'specialtime'
+                                 
+                                 },
+                                 {
+                                 width: '10%',
+                                 field: 'specialaddress',
+                                 title: '特殊地点',
+                                 sortable:'true',
+                                 class: 'specialaddress'
+                                 
+                                 },
+                                 {
+                                 width: '10%',
+                                 field: 'specialdate',
+                                 title: '特殊日期',
+                                 sortable:'true',
+                                 class: 'specialdate'
+                                 
+                                 },
 								 {
 								 width: '7%',
 								 field: 'contact',
@@ -394,6 +418,13 @@ body {
 							.on('changeDate', function(e){
 								this.innerHTML = $(this).datepicker('getFormattedDate');
 						});
+                            $("#table td[class='special']").datepicker({
+                                                          todayHighlight: true,
+                                                          todayBtn: true,
+                                                          clearBtn: true,
+                                                          multidate: true,
+                                                          daysOfWeekDisabled: "0,6",
+                    });
 						// show the preselected date
 						$("#table td[class='registration']").datepicker()
 							.on('show', function(e){
