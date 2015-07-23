@@ -394,11 +394,22 @@
                         var currentstudent = students[j];
                         var myschool = currentstudent["school"];
                             var grade = currentstudent["grade"];
-                        
+                            var tempdate = currentstudent["tempdate"];
+                            var temploc = currentstudent["temploc"];
+                            var temptime = currentstudent["temptime"];
                             // step1 if student is registered today, if not registered then continue
                             if(studentisregistered(currentstudent) == false){
                                 continue;
                             }
+                            // step 1.1 if the stduent has temp/special date/time loc set
+                            // igonore the normal grade just use temp/speical daet/time/loc
+                            if(tempdate != undefined && temploc != undefined && temptime != undefined){
+                                if(tempdate.indexOf(todaystriing) > -1){
+                                    temptime = converttime(temptime);
+                                    schoolsource = pushstudenttoschoolsource(schoolsource,temptime,temploc,currentstudent);
+                                    continue;
+                                }
+                            } 
                             // step2 if student grade is TK K or something else
                         
                             if(grade == "TK"){
@@ -533,7 +544,13 @@
     // function insert student to school source and return school source
     // if the time: key is not created, then create it
     function pushstudenttoschoolsource(schoolsource,schooltimestring,schoolname,currentstudent){
-        var currentstudentarray = schoolsource[schoolname][schooltimestring];
+        var currentstudentarray = undefined;
+        if(schoolsource[schoolname]  == undefined){
+            schoolsource[schoolname] = {};
+        }
+        else{
+            currentstudentarray = schoolsource[schoolname][schooltimestring];
+        }
         if(currentstudentarray ==  undefined){
             schoolsource[schoolname][schooltimestring] = [currentstudent];
         }
