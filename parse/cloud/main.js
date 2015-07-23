@@ -205,6 +205,7 @@ Parse.Cloud.define("getobject", function(request, response) {
                    var objectname = request.params.objectname;
                    var Myobject = Parse.Object.extend(objectname);
                    var query = new Parse.Query(Myobject);
+                   query.descending("createdAt");
                    query.find({
                               success: function(objects) {
                                   response.success(objects);
