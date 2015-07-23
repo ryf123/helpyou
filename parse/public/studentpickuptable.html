@@ -439,7 +439,7 @@
                          schooldismissaltime = schooldismissaltime.replace("AM", " AM");
                          studentinfo = "";
                          for(sindex in studentarray){
-                            studentinfo += studentarray[sindex]["firstname"] + " "+ studentarray[sindex]["lastname"] + "<br>";
+                            studentinfo += studentarray[sindex]["firstname"] + " "+ studentarray[sindex]["lastname"] + "; ";
                          }                                                    
                          schoolinfo = "<li><div>"+"<i class='fa fa-clock-o'></i>"+schooldismissaltime+"--"+ schoolname +"--"+studentnumber+"</div></li>";
                          //$(".schools").append(schoolinfo);
