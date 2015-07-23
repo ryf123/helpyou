@@ -281,6 +281,11 @@
                                             <td>Temporary Location</td>
                                             <td><a href="#" id="temploc" class="myeditable" data-type="text"></a></td>
                                         </tr>
+                                        <tr>
+                                            <td align="right">临时时间</td>
+                                            <td>Temporary Time</td>
+                                            <td><a href="#" id="temptime" class="myeditable" data-type="combodate" data-format="HH:mm" data-template="HH : mm"></a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -428,6 +433,11 @@
 		  $('#altemail').editable();
 		  $('#firstdayatschool').editable();
           $('#temploc').editable();
+          $('#temptime').editable({
+            combodate:{
+                minuteStep: 1
+            }
+          });
 		  $('#contactmethod').editable({
 				 source: [
 						  {value: "email", text: 'Text 短信'},
