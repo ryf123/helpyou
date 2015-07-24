@@ -52,9 +52,8 @@ app.post('/processemail', function(request, response) {
   var sender = request.body.sender;
   var subject = request.body.subject;
   var plainbody = request.body["body-plain"];
-  console.log(request.body)
-  console.log(sender + ":"+subject+plainbody);
   objectvalue = {
+      subject: subject,
       mbody: plainbody,
       mfrom: sender,
       read: "false",
