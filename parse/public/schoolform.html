@@ -201,8 +201,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">School District / 学区 <span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12" id='schooldistrict' name='schooldistrict'>
-                                                    <select class="form-control">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select class="form-control"  id='schooldistrict' name='schooldistrict'>
                                                         <option value="PUSD">PUSD - Poway Unified School District</option>
                                                         <option value="SDUSD">SDUSD - San Diego Unified School District</option>
                                                         <option value="DMUSD">DMUSD - Del Mar Union School District</option>
@@ -623,7 +623,7 @@ body {
                               }
                               Parse.Cloud.run('saveobject', { objectname: 'School', objectvalue:submitdata,objectid:""}, {
                               success: function() {
-                              console.log("Saved!");
+                              alert("保存成功");
                               },
                               error: function(error) {
                               alert("Can't save, try again");
