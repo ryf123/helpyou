@@ -194,7 +194,6 @@
                         <div class="panel-heading" style="padding-left: 30px;">请将左栏中学校拖拽入右栏相应老师名下，形成排班表。 <br> Please drag the Schools from the left column to the right column under each teacher to create the pickup schedule.                        
                         </div>
                         <div class="panel-body">
-<<<<<<< HEAD
                             <div class="row-fluid" >
                                 <div class="container" id="printable">
                                     <div data-force="30" class="layer block" style="left: 14.5%; top: 80px; width: 30%;">
@@ -206,49 +205,6 @@
                                             <li>Yan</li>
                                             <li>Lu</li>
                                         </ul>
-=======
-                            <div class=:"row">
-                                <!-- row-fluid -->
-                                <div class="row-fluid" >
-                                    <div id="connected" class="row-fluid span12" style="width: 1052px">
-                                        <!--draggable school list -->
-                                        <div class="col-lg-6">
-                                            <ul>
-                                                <ol class="simple_with_animation vertical sortable schools" drag="false" style="padding-left: 0px;"></ol>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <ul>
-                                            <ol class="simple_with_animation vertical sortable teachers" style="padding-left: 0px;" id="printable">
-                                                <li>
-                                                    <div>Tang</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Koji</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Wu</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Yang</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Yan</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Lu</div>
-                                                    <ol></ol>
-                                                </li>
-                                            </ol>
-                                            </ul>
-                                        </div>
-                                        <!-- End of span5 -->
->>>>>>> origin/master
                                     </div>
 
                                     <div data-force="30" class="layer block" style="left: 50%; top: 80px; width: 30%;">
@@ -302,12 +258,8 @@
     <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
     <script src="vendors/select2.min.js"></script>
     <script src="bootstrap-editable/js/address.js"></script>
-<<<<<<< HEAD
     <script src="vendors/Sortable.js"></script>
     
-=======
-    <script src="vendors/jspdf.min.js"></script>
->>>>>>> origin/master
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -320,7 +272,7 @@
     <script src="vendors/Sortable.js"></script>
 
     
-	<script>
+    <script>
     // initialize constant
     var d = new Date();
     var currentyear = d.getFullYear();
@@ -330,13 +282,9 @@
     var registeryearmonth = "register"+currentyearmonth;
     var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
     var dayofweek = d.getDay();
-	$(function(){
-<<<<<<< HEAD
+    $(function(){
         // save button on click convert to pdf
         $("#save").click(function(){
-=======
-		$("#districtsave").click(function(){
->>>>>>> origin/master
             margins = {
                 top: 40,
                 bottom: 40,
@@ -359,7 +307,6 @@
                 margins
             );
         });
-<<<<<<< HEAD
         var teacherlist = $("#teacherlist")[0];
         var studentlist = $("#studentlist")[0];
         Sortable.create(teacherlist,{
@@ -370,29 +317,30 @@
             group: "connected",
             animation: 100
         });
-=======
->>>>>>> origin/master
-		Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-		Parse.Cloud.run('getobject', {objectname: 'School'}, {
-		success: function(schools) {
-				schools = JSON.parse(JSON.stringify(schools));
-				getStudent(schools);	
-		  },
-			error: function(error) {
-				console.log(error);
-		   }
-		});
-	});
-	function getStudent(schools){
+        Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+        Parse.Cloud.run('getobject', {objectname: 'School'}, {
+        success: function(schools) {
+                schools = JSON.parse(JSON.stringify(schools));
+                getStudent(schools);
+
+
+                
+          },
+            error: function(error) {
+                console.log(error);
+           }
+        });
+    });
+    function getStudent(schools){
         var schools =  convertdatatokeyvalue(schools,"schoolname"); // school can be accessed by name
-		var schoolsource = {}; // this will used to store students and school, the structure is {school1:{time1:{student},time2:{student},time3:studnet},school2:{time1:{student}},schooln:{time1:{student},timen:{student}}}
+        var schoolsource = {}; // this will used to store students and school, the structure is {school1:{time1:{student},time2:{student},time3:studnet},school2:{time1:{student}},schooln:{time1:{student},timen:{student}}}
         // initialize schoolsource
         Object.keys(schools).forEach(function (key) {
             schoolsource[key] = {};
         });
-		Parse.Cloud.run('getobject', {objectname: 'Student'}, {
-		success: function(students) {
-				students = JSON.parse(JSON.stringify(students));
+        Parse.Cloud.run('getobject', {objectname: 'Student'}, {
+        success: function(students) {
+                students = JSON.parse(JSON.stringify(students));
                 // step0 if today is saturday or sunday which is 0 or 6, if it is, then skip
                 if(dayofweek != 0 && dayofweek !=6){
                     for(j in students){
@@ -512,12 +460,12 @@
                       });
                     
                 }, // end of success
-			error: function(error) {
-				console.log(error);
-				return [];
-		   }
-		});
-	}
+            error: function(error) {
+                console.log(error);
+                return [];
+           }
+        });
+    }
     
     // this function converts data
     // input [{name:school1,city:NY,time:11:00},{name:school2,city:LA,time:12:00}]
@@ -575,6 +523,6 @@
         converted = converted.replace(/:/g, "_"); // replace whitespace
         return "time_"+converted;
     }
-	</script>
+    </script>
     </body>
 </html>
