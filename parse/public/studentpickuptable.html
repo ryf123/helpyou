@@ -12,18 +12,15 @@
         
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-        <link href='vendors/application.css' rel='stylesheet'>
         <!-- MetisMenu CSS -->
         <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
         <!-- Custom CSS -->
         <link href="vendors/sb-admin-2.css" rel="stylesheet">
         <!-- Custom Fonts -->
         <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
-        <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
         <link href="vendors/select2.min.css" rel="stylesheet">
-            
+        <link href='vendors/application.css' rel='stylesheet'>
+        <link href="vendors/app.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             body {
                 padding-top: 50px;
@@ -197,64 +194,35 @@
                         <div class="panel-heading" style="padding-left: 30px;">请将左栏中学校拖拽入右栏相应老师名下，形成排班表。 <br> Please drag the Schools from the left column to the right column under each teacher to create the pickup schedule.                        
                         </div>
                         <div class="panel-body">
-                            <div class=:"row">
-                                <!-- row-fluid -->
-                                <div class="row-fluid" >
-                                    <div id="connected" class="row-fluid span12" style="width: 1052px">
-                                        <!--draggable school list -->
-                                        <div class="col-lg-6">
-                                            <ul>
-                                                <ol class="simple_with_animation vertical sortable schools" drag="false" style="padding-left: 0px;"></ol>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <ul>
-                                            <ol class="simple_with_animation vertical sortable teachers" style="padding-left: 0px;">
-                                                <li>
-                                                    <div>Tang</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Koji</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Wu</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Yang</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Yan</div>
-                                                    <ol></ol>
-                                                </li>
-                                                <li>
-                                                    <div>Lu</div>
-                                                    <ol></ol>
-                                                </li>
-                                            </ol>
-                                            </ul>
-                                        </div>
-                                        <!-- End of span5 -->
+                            <div class="row-fluid" >
+                                <div class="container" id="printable">
+                                    <div data-force="30" class="layer block" style="left: 14.5%; top: 80px; width: 30%;">
+                                        <ul id="teacherlist" class="block__list block__list_words">
+                                            <li>Tang</li>
+                                            <li>Koji</li>
+                                            <li>Wu</li>
+                                            <li>Yang</li>
+                                            <li>Yan</li>
+                                            <li>Lu</li>
+                                        </ul>
                                     </div>
-                                    <!-- End of connected -->
+
+                                    <div data-force="30" class="layer block" style="left: 50%; top: 80px; width: 30%;">
+                                        <ul id="studentlist" class="block__list block__list_words">
+                                        </ul>
+                                    </div>
+
                                 </div>
-                                <!-- End of row-fluid -->
+                                <!-- Save Button -->
+                                <div class="col-lg-4" style="left: 90%; top: 100px; width: 30%;">
+                                    <span class="pull-left">
+                                    <button type="button" class="btn btn-outline btn-success" id="save">Save / 保存</button>
+                                    </span>                                
+                                </div>
+                                <!-- End of Save Button -->
+                                <!-- end of container -->
                             </div>
-                            <!-- End of panel-body 1st row -->
-                            <hr>
-                            <!-- Save Button -->
-                            <div class="col-lg-4"></div>
-                            <div class="col-lg-4">
-                                <span class="pull-left">
-                                <button type="button" class="btn btn-outline btn-success" id="districtsave">Save / 保存</button>
-                                </span>                                
-                            </div>
-                            <!-- End of Save Button -->
                         </div>
-                        <!-- End of Panel-body -->
                     </div>
                     <!-- End of Panel -->
                 </div>
@@ -290,67 +258,19 @@
     <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
     <script src="vendors/select2.min.js"></script>
     <script src="bootstrap-editable/js/address.js"></script>
-    
+    <script src="vendors/Sortable.js"></script>
     
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
      <![endif]-->
     <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="assets/scripts.js"></script>
     
     <script src="vendors/application.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="metisMenu/metisMenu.min.js"></script>
-    
-<style>
-    .navbar-default {
-        background-color: #d9edf7;
-        border-color: #bce8f1;
-    }
-    .sidebar ul li a.active {
-      background-color: #d9edf7;
-    }
-    .nav>li>a:focus, .nav>li>a:hover{
-      text-decoration: none;
-      background-color: #fff;
-    }
-    .sidebar ul li a.active {
-      background-color: #fff;
-    }
-    .navbar-default .navbar-brand {
-      color: #337ab7;
-    }
-    .panel-footer {
-      background-color: #fff;
-      border-top: 1px solid #fff;
-    }
-    body {
-        background-color: #d9edf7;
-    }
-    .form-control {
-      border: 1px solid #bce8f1;
-    }
-    .btn-default {
-      color: #337ab7;
-      background-color: #fff;
-      border-color: #bce8f1;
-    }
-    body {
-      color: #337ab7;
-    }
-    ol.vertical li {
-        background: transparent;
-        color: #337ab7;
-    }
-    /*#d9edf7*/
-    .teachers div {
-        background-color: #d9edf7;
-    }
-    .schools div {
-        background-color: transparent;
-    }
-</style>
+    <script src="vendors/Sortable.js"></script>
+
     
 	<script>
     // initialize constant
@@ -363,7 +283,40 @@
     var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
     var dayofweek = d.getDay();
 	$(function(){
-		
+        // save button on click convert to pdf
+        $("#save").click(function(){
+            margins = {
+                top: 40,
+                bottom: 40,
+                left: 40,
+                right: 40,
+                width: 522
+            };
+            var doc = new jsPDF();
+            source = $('#printable')[0],
+            doc.fromHTML(
+                source,
+                margins.left,
+                margins.top,
+                {
+                    'width': margins.width 
+                },
+                function (dispose) {
+                    doc.save('Test.pdf');
+                },
+                margins
+            );
+        });
+        var teacherlist = $("#teacherlist")[0];
+        var studentlist = $("#studentlist")[0];
+        Sortable.create(teacherlist,{
+            group: "connected",
+            animation: 100
+        });
+        Sortable.create(studentlist,{
+            group: "connected",
+            animation: 100
+        });
 		Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
 		Parse.Cloud.run('getobject', {objectname: 'School'}, {
 		success: function(schools) {
@@ -501,7 +454,8 @@
                          schooldismissaltime = schooldismissaltime.replace("AM", " AM");
 
                          schoolinfo = "<li><div>"+"<i class='fa fa-clock-o'></i>"+schooldismissaltime+"——"+ schoolname +"——"+studentnumber+"</div></li>";
-                         $(".schools").append(schoolinfo);
+                         //$(".schools").append(schoolinfo);
+                         $("#studentlist").append("<li>"+ schooldismissaltime+"——"+ schoolname +"——"+studentnumber +"</li>");
                        });
                       });
                     
