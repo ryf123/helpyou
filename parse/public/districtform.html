@@ -316,7 +316,7 @@
                     var objectid = $("#objectid")[0].innerHTML;
                     Parse.Cloud.run('saveobject', { objectname: 'SchoolDistrict', 'objectid':objectid,objectvalue:myobjectvalue}, {
                     success: function() {
-                        alert("保存成功");
+                        location.reload();
                     },
                     error: function(error) {
                         alert("Can't save, try again");
