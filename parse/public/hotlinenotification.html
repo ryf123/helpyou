@@ -130,6 +130,8 @@
                             </div>
                             <!-- Button -->
                             <br>
+                            <br>
+                            <br>
                             <table id="table" style="word-wrap:break-word;table-layout: fixed;" data-click-to-select="true"></table>
                         </div>
                     </div>
@@ -176,7 +178,6 @@
                         var stringify_data = JSON.stringify(msgs);
                         stringify_data = JSON.parse(stringify_data);
                         $('#table').bootstrapTable({
-                            search : 'true',
                             data: stringify_data,
                             columns: [
                                 {
