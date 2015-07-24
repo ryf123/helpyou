@@ -353,7 +353,6 @@
     
 
 <script src="vendors/select2.min.js"></script>
-<script src="bootstrap-editable/js/address.js"></script>
 
 </body>
 <script>
@@ -369,7 +368,7 @@
             }
             Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:submitdata,objectid:""}, {
             success: function() {
-            console.log("Saved!");
+                alert("保存成功");
             },
             error: function(error) {
             alert("Can't save, try again");
@@ -416,7 +415,6 @@
                 msgs = JSON.parse(JSON.stringify(msgs));
                 for(index in msgs){
                     var msg = msgs[index];
-                    console.log(msg);
                     mbody = msg["mbody"];
                     mfrom = msg["mfrom"];
                     msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
@@ -437,6 +435,10 @@
       });
 </script>
 <style>
+    .btn-default.active { 
+        background-color: #337ab7;
+        color:#fff; 
+    }
     .navbar-default {
         background-color: #d9edf7;
         border-color: #bce8f1;
