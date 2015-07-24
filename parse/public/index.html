@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>HYACSIS-Index</title>
+    <title>HYACSIS-Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +14,10 @@
     <link href="vendors/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 </head>
 
-<body>
-
+<body class="nav-md" style="padding-top: 0px">
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -38,7 +30,7 @@
                             HelpYouAchieve Student Information System
                         </div>
                     </div>
-                    </a>
+                </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -79,33 +71,17 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation" style="
-                width: 220px;
-                margin-top: 51px;
-                ">
-                <div class="sidebar-nav navbar-collapse" style="
-                width: 220px;
-                ">
+            <div class="navbar-default sidebar" role="navigation" style="width: 220px; margin-top: 51px;">
+                <div class="sidebar-nav navbar-collapse" style="width: 220px; ">
                     <ul class="nav" id="side-menu">
-                        
-                        
                         <li>
-                            <a href="index.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
+                            <a href="index.html" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
                         </li>
-
                         <li>
-                            <a href="hotlinenotification.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
+                            <a href="hotlinenotification.html" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a>
                         </li>
-                        
-                        
                         <!-- / Info inputs-->
                         <li>
                             <a href="#" style="
@@ -173,6 +149,13 @@
                                 padding-right: 10px;
                                 ">
                                 <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
+                        </li>
+                        <li>
+                            <a href="studentsignintable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-check-square-o fa-fw"></i> Student Sign In / 学生签到</a>
                         </li>
                     </ul>
                 </div>
@@ -391,7 +374,7 @@
             console.log(error);
         }
         });
-        Parse.Cloud.run('getobject',{objectname: 'Smsmessage'},{
+        Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
         success: function(msgs){
             msgs = JSON.parse(JSON.stringify(msgs));
             for(index in msgs){
@@ -400,18 +383,6 @@
                 mbody = msg["mbody"];
                 mfrom = msg["mfrom"];
                 msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
-                // msg format
-                // <li>
-                //             <a href="#">
-                //                 <div>
-                //                     <strong>John Smith</strong>
-                //                                     <span class="pull-right text-muted">
-                //                                         <em>Yesterday</em>
-                //                                     </span>
-                //                 </div>
-                //                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                //             </a>
-                // </li>
                 $("#messages").append(msginfo);        
             }
             //change badge number
@@ -437,6 +408,7 @@
         Parse.User.logOut();
         $(location).attr('href','login.html');
       }); 
+
       $('[data-toggle="tooltip"]').tooltip();  
     });
 
