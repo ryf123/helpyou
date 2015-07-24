@@ -209,7 +209,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <ul>
-                                            <ol class="simple_with_animation vertical sortable teachers" style="padding-left: 0px;">
+                                            <ol class="simple_with_animation vertical sortable teachers" style="padding-left: 0px;" id="printable">
                                                 <li>
                                                     <div>Tang</div>
                                                     <ol></ol>
@@ -290,8 +290,7 @@
     <script src="bootstrap-editable/js/bootstrap-editable.js"></script>
     <script src="vendors/select2.min.js"></script>
     <script src="bootstrap-editable/js/address.js"></script>
-    
-    
+    <script src="vendors/jspdf.min.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -363,15 +362,34 @@
     var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
     var dayofweek = d.getDay();
 	$(function(){
-		
+		$("#districtsave").click(function(){
+            margins = {
+                top: 40,
+                bottom: 40,
+                left: 40,
+                right: 40,
+                width: 522
+            };
+            var doc = new jsPDF();
+            source = $('#printable')[0],
+            doc.fromHTML(
+                source,
+                margins.left,
+                margins.top,
+                {
+                    'width': margins.width 
+                },
+                function (dispose) {
+                    doc.save('Test.pdf');
+                },
+                margins
+            );
+        });
 		Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
 		Parse.Cloud.run('getobject', {objectname: 'School'}, {
 		success: function(schools) {
 				schools = JSON.parse(JSON.stringify(schools));
-				getStudent(schools);
-
-
-				
+				getStudent(schools);	
 		  },
 			error: function(error) {
 				console.log(error);
