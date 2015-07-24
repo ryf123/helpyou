@@ -308,6 +308,7 @@ Parse.Cloud.define("getobjectwithkeyequal", function(request, response) {
   var keyname = request.params.keyname;
   var stringval = request.params.stringval;
   query.equalTo(keyname,stringval);
+  query.descending("createdAt");
   query.find({
     success: function(objects) {
       response.success(objects);
