@@ -57,11 +57,6 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
@@ -101,7 +96,7 @@
                                 ">School Inputs / 学校信息</a>
                                 </li>
                                 <li>
-                                    <a href="Studentinput.html" style="
+                                    <a href="Studentform.html" style="
                                 padding-left: 32px;
                                 ">Student Inputs / 学生信息</a>
                                 </li>
@@ -246,19 +241,19 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-danger">
-                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Tuition / 学费">
+                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Number of Students Signed In Today / 今日已签到学生数">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-check-square-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge" id="totaltuition">0</div>
-                                    <div class="strong">Tuition / 学费</div>
+                                    <div class="huge" id="totalsignin">0</div>
+                                    <div class="strong">Sign In / 签到</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
-                            <div class="panel-footer">
+                            <div class="panel-footer" id='dashboardsignin'>
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
@@ -270,38 +265,9 @@
             <!-- /.End of 2nd row - 4 Dashboard -->
             <hr>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Put something here
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <!-- /.End of 3rd row - -->
-            <hr>
-            <div class="row">
-                <div class="col-lg-12">
-                    
-                </div>
-            </div>
-            <!-- /.End of 4th row -->
-            <hr>
-            <div class="row">
-                <div class="col-lg-12">
-                    
-                </div>
-            </div>
-            <!-- /.End of 5th row -->
-            <hr>
-            <div class="row">
-                <div class="col-lg-12">
-                    
-                </div>
-            </div>
-            <!-- /.End of 6th row -->
-
-
         </div>
         <!-- /End of heading   #page-wrapper  -->   
     </div>
@@ -404,6 +370,9 @@
       $("#dashboardpickup").click(function(){
         $(location).attr('href','studentpickuptable.html')
         });
+      $("#dashboardsignin").click(function(){
+        $(location).attr('href','studentsignintable.html');
+      });
       $('#signoutbutton').click(function() {
         Parse.User.logOut();
         $(location).attr('href','login.html');

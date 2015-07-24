@@ -59,11 +59,6 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
@@ -104,7 +99,7 @@
                                 ">School Inputs / 学校信息</a>
                                 </li>
                                 <li>
-                                    <a href="Studentinput.html" style="
+                                    <a href="Studentform.html" style="
                                 padding-left: 32px;
                                 ">Student Inputs / 学生信息</a>
                                 </li>
@@ -186,16 +181,14 @@
                         <div class="panel-heading" style="padding-left: 30px;">Attendance Hotline Notification / 出勤热线通知                          
                         </div>
                         <div class="panel-body">
-                            <table id="table" style="word-wrap:break-word;table-layout: fixed;" data-click-to-select="true"></table>
-                           
-                            <hr>
-                            <div class="col-lg-4"></div>
                             <div class="col-lg-4">
                                 <span class="pull-left">
                                 <button type="button" class="btn btn-outline btn-success" id="messageread">Read / 已读</button>
                                 </span>                                
                             </div>
                             <!-- Button -->
+                            <br>
+                            <table id="table" style="word-wrap:break-word;table-layout: fixed;" data-click-to-select="true"></table>\
                         </div>
                     </div>
                 </div> 
@@ -237,6 +230,9 @@
 <script>
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     $( document ).ready(function() {
+        if(Parse.User.current() == undefined){
+            $(location).attr('href','login.html');
+        }  
         Parse.Cloud.run('getobject', {objectname: 'Smsmessage'}, {
                     success: function(msgs){
                         var stringify_data = JSON.stringify(msgs);
@@ -304,13 +300,6 @@
                         cosole.log(error);
                     }
         });
-
-        if(Parse.User.current() == undefined){
-            $(location).attr('href','login.html');
-        }   
-        
-        
-       
         Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
         success: function(msgs){
             msgs = JSON.parse(JSON.stringify(msgs));
@@ -346,23 +335,25 @@
         $(location).attr('href','login.html');
       }); 
       $('#messageread').click(function() {
-        rows = $('#table').bootstrapTable("getAllSelections");
-        for(index in rows){
-            objectid = rows[index]["objectId"];
-            myobjectvalue = {
-                read: "true"
-            };
-            Parse.Cloud.run('saveobject', { objectname: 'Smsmessage', 'objectid':objectid,objectvalue:myobjectvalue}, {
-                success: function() {
-                },
-                error: function(error) {
-                    console.log("success");
-                }
-            });  
-        }
+        var saveArr = [];
+            rows = $('#table').bootstrapTable("getAllSelections");
+            for(index in rows){
+                objectid = rows[index]["objectId"];
+                myobjectvalue = {
+                    read: "true"
+                };
+                saveArr.push({'objectid':objectid,objectvalue:myobjectvalue});
+            }
+        Parse.Cloud.run('savemanyobjects', { objectname: 'Smsmessage', objectarray:saveArr}, {
+            success: function() {
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });  
         location.reload();
-      });
-      $('[data-toggle="tooltip"]').tooltip();
+        });
+        $('[data-toggle="tooltip"]').tooltip();
         
     });
 

@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
                             
     <title>HYACSIS-School Info Input</title>
     
@@ -24,28 +19,6 @@
     <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
     <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
     <link href="vendors/select2.min.css" rel="stylesheet">
-        
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-            padding-bottom: 30px;
-        }
-    
-    table.table > tbody > tr > td {
-        height: 30px;
-        vertical-align: middle;
-    }
-    /* address.js css style for address*/
-    .editable-address {
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    .editable-address span {
-        width: 70px;
-        display: inline-block;
-    }
-    </style>
 </head>
 
 <body class="nav-md" style="padding-top: 0px">
@@ -125,7 +98,7 @@
                                 ">School Inputs / 学校信息</a>
                                 </li>
                                 <li>
-                                    <a href="Studentinput.html" style="
+                                    <a href="Studentform.html" style="
                                 padding-left: 32px;
                                 ">Student Inputs / 学生信息</a>
                                 </li>
@@ -244,7 +217,6 @@
                                     <div id="step-1">
                                         <div class="form-horizontal form-label-left" data-toggle="validator">
                                             <div class="form-group">
-<!--                                                    若在学区输入页面输入学校，则此选项应从后台load出-->
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="school">School / 学校 <span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="schoolname" name="schoolname" required="required" class="form-control col-md-7 col-xs-12">

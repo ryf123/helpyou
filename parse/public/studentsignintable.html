@@ -121,7 +121,7 @@
                                 ">School Inputs / 学校信息</a>
                                 </li>
                                 <li>
-                                    <a href="Studentinput.html" style="
+                                    <a href="Studentform.html" style="
                                 padding-left: 32px;
                                 ">Student Inputs / 学生信息</a>
                                 </li>
@@ -402,23 +402,27 @@ body {
             return "Total: "+data.length;
         }
         $('#studentsignin').click(function() {
+            var saveArr = [];
             rows = $('#table').bootstrapTable("getAllSelections");
             for(index in rows){
-                $('#table tbody tr .signinstatus i').remove();
-                $('#table tbody tr .signinstatus').append("<i class='fa fa-check-square-o'></i>");
                 objectid = rows[index]["objectId"];
                 myobjectvalue = {
                     signindate: todaystring
                 };
-                Parse.Cloud.run('objectadduniquevalue', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
+                saveArr.push({'objectid':objectid,objectvalue:myobjectvalue});
+            }
+            // save all students who are checked 
+            // call save all function to save
+            if(saveArr.length >0 ){
+                Parse.Cloud.run('objectsadduniquevalue', { objectname: 'Student', objectarray: saveArr}, {
                     success: function() {
                     },
                     error: function(error) {
-                        console.log("success");
+                        console.log(error);
                     }
-                });  
+                });                 
             }
-            //location.reload();
+            location.reload();
       });
 
     </script>
