@@ -360,6 +360,22 @@ body {
                                     $(this).datepicker('setDate',datearray);
                                 }
                         });
+                        $("#table td[class='tempdate']").datepicker()
+                            .on('show', function(e){
+                                var tempdatearray = this.innerHTML.split(",");
+                                var datearray = [];
+                                // if there is not date yet, then registerdate is undefined
+                                if(tempdatearray[0] != "-"){
+                                for (var i = 0; i < tempdatearray.length; i++){
+                                    if(tempdatearray[i] != ""){
+                                        datearray.push(new Date(tempdatearray[i]))
+                                    }
+                                }
+                                }
+                                if(datearray.length != 0){
+                                    $(this).datepicker('setDate',datearray);
+                                }
+                        });    
                     
                 },
                     error: function(error) {
