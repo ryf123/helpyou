@@ -235,6 +235,14 @@
 
 </body>
 <script>
+    // get date information
+    var d = new Date();
+    var currentyear = d.getFullYear();
+    var currentmonth = d.getMonth()+1;
+    var currentday = d.getDate();
+    var currentyearmonth = currentyear +""+currentmonth;
+    var registeryearmonth = "register"+currentyearmonth;
+    var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     $( document ).ready(function() {
         if(Parse.User.current() == undefined){
@@ -292,6 +300,32 @@
             console.log(error);
         }
         });
+        // get the number of sign in students
+         Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystring}, {
+            success: function(studentdata) {
+                studentdata = JSON.parse(JSON.stringify(studentdata));
+                var totalsignincount = 0;
+                for(index in studentdata){
+                    rowdata = studentdata[index];
+                    if("signindate" in rowdata){
+                        signinstatus = rowdata["signindate"];
+                        
+                        if(signinstatus.indexOf(todaystring) > -1){
+                            totalsignincount += 1;
+                        }
+                    }
+                }
+                $("#totalsignin")[0].innerText = totalsignincount;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+      $('#signoutbutton').click(function() {
+        Parse.User.logOut();
+        $(location).attr('href','login.html');
+      }); 
+
       $("#side-menu").metisMenu({
       toggle: false
       });
