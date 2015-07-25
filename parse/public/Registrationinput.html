@@ -314,67 +314,10 @@ body {
                         }
                         i++;
                      });
-                     var currentdate = new Date();
-                     var currentday= currentdate.getDate()-1;
-                     $("#table td[class='registration']").datepicker({
-                                                          todayHighlight: true,
-                                                          todayBtn: true,
-                                                          clearBtn: true,
-                                                          multidate: true,
-                                                          daysOfWeekDisabled: "0,6",
-                                                          startDate: "-"+currentday+"d",
-                                                          endDate: "+2m "+"-"+currentday+"d"+" -1d",
-                    });
-                    $("#table td[class='tempdate']").datepicker({
-                        todayHighlight: true,
-                        todayBtn: true,
-                        clearBtn: true,
-                        multidate: true,
-                        daysOfWeekDisabled: "0,6",
-                        startDate: "-"+currentday+"d",
-                        endDate: "+2m "+"-"+currentday+"d"+" -1d",
-                    });
-                        $("#table td[class='registration']").datepicker()
-                            .on('changeDate', function(e){
-                                this.innerHTML = $(this).datepicker('getFormattedDate');
+                        $('#table').bootstrapTable().on('post-body.bs.table', function (e, name, args) {
+                            enabledatepicker();
                         });
-                        $("#table td[class='tempdate']").datepicker()
-                            .on('changeDate', function(e){
-                                this.innerHTML = $(this).datepicker('getFormattedDate');
-                        });
-                        // show the preselected date
-                        $("#table td[class='registration']").datepicker()
-                            .on('show', function(e){
-                                var registerarray = this.innerHTML.split(",");
-                                var datearray = [];
-                                // if there is not date yet, then registerdate is undefined
-                                if(registerarray[0] != "-"){
-                                for (var i = 0; i < registerarray.length; i++){
-                                    if(registerarray[i] != ""){
-                                        datearray.push(new Date(registerarray[i]))
-                                    }
-                                }
-                                }
-                                if(datearray.length != 0){
-                                    $(this).datepicker('setDate',datearray);
-                                }
-                        });
-                        $("#table td[class='tempdate']").datepicker()
-                            .on('show', function(e){
-                                var tempdatearray = this.innerHTML.split(",");
-                                var datearray = [];
-                                // if there is not date yet, then registerdate is undefined
-                                if(tempdatearray[0] != "-"){
-                                for (var i = 0; i < tempdatearray.length; i++){
-                                    if(tempdatearray[i] != ""){
-                                        datearray.push(new Date(tempdatearray[i]))
-                                    }
-                                }
-                                }
-                                if(datearray.length != 0){
-                                    $(this).datepicker('setDate',datearray);
-                                }
-                        });    
+                        enabledatepicker();
                     
                 },
                     error: function(error) {
@@ -446,7 +389,7 @@ body {
                 myobjectvalue[monthname2] = month2.join();
                 Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
                     success: function() {
-                                alert("保存成功");
+                        location.reload();
                     },
                     error: function(error) {
                                 alert("Can't save, try again");
@@ -459,6 +402,71 @@ body {
     // this is used to display "Total:"+ number
     function totalNameFormatter(data) {
         return "Total: "+data.length;
+    }
+    // make registration filed and temp date datepickble
+
+    function enabledatepicker(){
+        var currentdate = new Date();
+        var currentday= currentdate.getDate()-1;
+        $("#table td[class='registration']").datepicker({
+              todayHighlight: true,
+              todayBtn: true,
+              clearBtn: true,
+              multidate: true,
+              daysOfWeekDisabled: "0,6",
+              startDate: "-"+currentday+"d",
+              endDate: "+2m "+"-"+currentday+"d"+" -1d",
+        });
+        $("#table td[class='tempdate']").datepicker({
+            todayHighlight: true,
+            todayBtn: true,
+            clearBtn: true,
+            multidate: true,
+            daysOfWeekDisabled: "0,6",
+            startDate: "-"+currentday+"d",
+            endDate: "+2m "+"-"+currentday+"d"+" -1d",
+        });
+        $("#table td[class='registration']").datepicker()
+            .on('changeDate', function(e){
+                this.innerHTML = $(this).datepicker('getFormattedDate');
+        });
+        $("#table td[class='tempdate']").datepicker()
+            .on('changeDate', function(e){
+                this.innerHTML = $(this).datepicker('getFormattedDate');
+        });
+        // show the preselected date
+        $("#table td[class='registration']").datepicker()
+            .on('show', function(e){
+                var registerarray = this.innerHTML.split(",");
+                var datearray = [];
+                // if there is not date yet, then registerdate is undefined
+                if(registerarray[0] != "-"){
+                for (var i = 0; i < registerarray.length; i++){
+                    if(registerarray[i] != ""){
+                        datearray.push(new Date(registerarray[i]))
+                    }
+                }
+                }
+                if(datearray.length != 0){
+                    $(this).datepicker('setDate',datearray);
+                }
+        });
+        $("#table td[class='tempdate']").datepicker()
+            .on('show', function(e){
+                var tempdatearray = this.innerHTML.split(",");
+                var datearray = [];
+                // if there is not date yet, then registerdate is undefined
+                if(tempdatearray[0] != "-"){
+                for (var i = 0; i < tempdatearray.length; i++){
+                    if(tempdatearray[i] != ""){
+                        datearray.push(new Date(tempdatearray[i]))
+                    }
+                }
+                }
+                if(datearray.length != 0){
+                    $(this).datepicker('setDate',datearray);
+                }
+        });           
     }
 </script>
 </html>
