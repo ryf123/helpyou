@@ -123,31 +123,39 @@
                         </div>
                         <div class="panel-body">
                             <div class="row-fluid" >
-                                <div class="container" id="printable">
-                                    <div data-force="30" class="layer block" style="left: 14.5%; top: 80px; width: 30%;">
-                                        <ul id="teacherlist" class="block__list block__list_words">
-                                            <li>Tang</li>
-                                            <li>Koji</li>
-                                            <li>Wu</li>
-                                            <li>Yang</li>
-                                            <li>Yan</li>
-                                            <li>Lu</li>
-                                        </ul>
+                                <div class="container" >
+                                    <div class="col-lg-12" >
+                                        <div class="col-lg-6" >
+                                        <div data-force="30"  >
+                                            <ul id="teacherlist" class="block__list block__list_words">
+                                                <li class="teacher">Tang</li>
+                                                <li class="teacher">Koji</li>
+                                                <li class="teacher">Wu</li>
+                                                <li class="teacher">Yang</li>
+                                                <li class="teacher">Yan</li>
+                                                <li class="teacher">Lu</li>
+                                            </ul>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-6" >
+                                        <div data-force="30" >
+                                            <ul id="studentlist" class="block__list block__list_words">
+                                            </ul>
+                                        </div>
+                                        </div>
                                     </div>
-
-                                    <div data-force="30" class="layer block" style="left: 50%; top: 80px; width: 30%;">
-                                        <ul id="studentlist" class="block__list block__list_words">
-                                        </ul>
+                                    <hr>
+                                    
+                                     <div class="col-lg-5" ></div>
+                                    <!-- Save Button -->
+                                    <div class="col-lg-4" >
+                                        <span class="pull-left">
+                                        <button type="button" class="btn btn-outline btn-success" id="save">Save / 保存</button>
+                                        </span>                                
                                     </div>
+                                    <!-- End of Save Button -->
+                                </div>
 
-                                </div>
-                                <!-- Save Button -->
-                                <div class="col-lg-4" style="left: 90%; top: 100px; width: 30%;">
-                                    <span class="pull-left">
-                                    <button type="button" class="btn btn-outline btn-success" id="save">Save / 保存</button>
-                                    </span>                                
-                                </div>
-                                <!-- End of Save Button -->
                                 <!-- end of container -->
                             </div>
                         </div>
@@ -195,8 +203,8 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="metisMenu/metisMenu.min.js"></script>
     <script src="vendors/Sortable.js"></script>
-    <script src="vendors/jspdf.min.js"></script>
-    
+    <script src="vendors/pdfmake.min.js"></script>
+    <script src="vendors/vfs_fonts.js"></script>
     <script>
     // initialize constant
     var d = new Date();
@@ -205,40 +213,92 @@
     var currentday = d.getDate();
     var currentyearmonth = currentyear +""+currentmonth;
     var registeryearmonth = "register"+currentyearmonth;
-    var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
+    var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
     var dayofweek = d.getDay();
     $(function(){
         // save button on click convert to pdf
         $("#save").click(function(){
-            margins = {
-                top: 40,
-                bottom: 40,
-                left: 40,
-                right: 40,
-                width: 522
-            };
-            var doc = new jsPDF();
-            source = $('#printable')[0],
-            doc.fromHTML(
-                source,
-                margins.left,
-                margins.top,
-                {
-                    'width': margins.width 
+        var teachername = "";
+        var pdfarray = {};
+        $("#teacherlist li").each(function(){
+            if($(this).hasClass("teacher")){
+                teachername = $(this)[0].innerText;
+                pdfarray[teachername] = [];
+            }
+            else if($(this).hasClass("pickupinfo")){
+                info = $(this)[0].innerText;
+                infos = info.split("--");
+                time = infos[0];
+                school = infos[1];
+                studentnumber = infos[2];
+                studentnames = $(this).find("div")[0].innerText;
+                pdfarray[teachername].push([time,school,studentnumber,studentnames]);
+            }
+        })
+        console.log(pdfarray);
+        var pdfcontent = [];
+        pdfcontent.push(
+        {
+                text: 'HelpYouAchieve Chinese School Pickup Schedule',
+                style: 'header',
+                alignment: 'center',
+        });
+        pdfcontent.push(
+        {
+                text: todaystring,
+                style: 'header',
+                alignment: 'center',
+        });
+        for(teacherkey in pdfarray){
+            pdfcontent.push({text: teacherkey, fontSize: 12, bold: true});
+            // insert table under teacher only when there is content
+            if(pdfarray[teacherkey].length > 0){
+                // sort by time ascending
+                pdfarray[teacherkey].sort();
+                // insert header
+                header = [{ text: 'Time', style: 'tableHeader' }, { text: 'School', style: 'tableHeader'}, { text: '#', style: 'tableHeader' }, { text: 'Students', style: 'tableHeader' }];
+                // insert at the beginning of table array
+                pdfarray[teacherkey].unshift(header);
+                pdfcontent.push({
+                    style: 'tablepickup',
+                    layout: 'lightHorizontalLines',
+                    table: {
+                        widths: [50, 80, 20, '*'],
+                        headerRows: 1,
+                        body: pdfarray[teacherkey]
+                    }
+                });
+            }
+        }
+        var ddtemp = {
+            content: pdfcontent,
+            styles: {
+                tablepickup: {
+                    fontSize: 10,
+                    margin: [0, 5, 0, 15]
                 },
-                function (dispose) {
-                    doc.save('Test.pdf');
+                header: {
+                    fontSize: 14,
+                    bold: true,
+                    margin: [0, 0, 0, 10]
                 },
-                margins
-            );
+                tableHeader: {
+                    bold: true,
+                    fontSize: 11,
+                    color: 'black'
+                }
+            },
+        };
+        pdfMake.createPdf(ddtemp).open();
         });
         var teacherlist = $("#teacherlist")[0];
         var studentlist = $("#studentlist")[0];
-        Sortable.create(teacherlist,{
+
+        teacherlistsortable = Sortable.create(teacherlist,{
             group: "connected",
             animation: 100
         });
-        Sortable.create(studentlist,{
+        studentlistsortable = Sortable.create(studentlist,{
             group: "connected",
             animation: 100
         });
@@ -282,7 +342,7 @@
                             // step 1.1 if the stduent has temp/special date/time loc set
                             // igonore the normal grade just use temp/speical daet/time/loc
                             if(tempdate != undefined && temploc != undefined && temptime != undefined){
-                                if(tempdate.indexOf(todaystriing) > -1){
+                                if(tempdate.indexOf(todaystring) > -1){
                                     temptime = converttime(temptime);
                                     schoolsource = pushstudenttoschoolsource(schoolsource,temptime,temploc,currentstudent);
                                     continue;
@@ -320,7 +380,7 @@
                                     // step 2.2.2 is today KtbdDismissalTimedate? actual date
                                     var KtbdDismissalTimedate = schools[myschool]["KtbdDismissalTimedate"];
                                     if(KtbdDismissalTimedate != undefined){
-                                        if(KtbdDismissalTimedate.indexOf(todaystriing)){
+                                        if(KtbdDismissalTimedate.indexOf(todaystring)){
                                             KtbdDismissalTime = converttime(schools[myschool]["KtbdDismissalTime"]);
                                             schoolsource = pushstudenttoschoolsource(schoolsource,KtbdDismissalTime,myschool,currentstudent);
                                             continue;
@@ -347,7 +407,7 @@
                             // everything else, which is "grade is not TK scheduleoption set, or grade is not K schedule option not set or anything else"
                             // step3 is today GtbdDismissalTimedate?
                             var GtbdDismissalTimedate = schools[myschool]["GtbdDismissalTimedate"];
-                            if(GtbdDismissalTimedate.indexOf(todaystriing) != -1){
+                            if(GtbdDismissalTimedate.indexOf(todaystring) != -1){
                                 var GtbdDismissalTime = converttime(schools[myschool]["GtbdDismissalTime"]);
                                 schoolsource = pushstudenttoschoolsource(schoolsource,GtbdDismissalTime,myschool,currentstudent);
                                 continue;
@@ -377,10 +437,13 @@
                          schooldismissaltime = schooldismissaltime.replace("_", ":");
                          schooldismissaltime = schooldismissaltime.replace("PM", " PM");
                          schooldismissaltime = schooldismissaltime.replace("AM", " AM");
-
-                         schoolinfo = "<li><div>"+"<i class='fa fa-clock-o'></i>"+schooldismissaltime+"——"+ schoolname +"——"+studentnumber+"</div></li>";
+                         studentinfo = "";
+                         for(sindex in studentarray){
+                            studentinfo += studentarray[sindex]["firstname"] + " "+ studentarray[sindex]["lastname"] + "<br>";
+                         }                                                    
+                         schoolinfo = "<li><div>"+"<i class='fa fa-clock-o'></i>"+schooldismissaltime+"--"+ schoolname +"--"+studentnumber+"</div></li>";
                          //$(".schools").append(schoolinfo);
-                         $("#studentlist").append("<li>"+ schooldismissaltime+"——"+ schoolname +"——"+studentnumber +"</li>");
+                         $("#studentlist").append("<li class='pickupinfo'>"+ schooldismissaltime+"--"+ schoolname +"--"+studentnumber +"<div hidden class='studentinfo'>"+studentinfo+"</div></li>");
                        });
                       });
                     
@@ -440,7 +503,7 @@
     // return true if it's registered else return false
     function studentisregistered(student){
         if(student[registeryearmonth] != undefined){
-            if(student[registeryearmonth].indexOf(todaystriing) != -1){
+            if(student[registeryearmonth].indexOf(todaystring) != -1){
                 return true;// if the register date contains today
             }
         }
