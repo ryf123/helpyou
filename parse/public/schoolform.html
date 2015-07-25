@@ -623,10 +623,10 @@ body {
                               }
                               Parse.Cloud.run('saveobject', { objectname: 'School', objectvalue:submitdata,objectid:""}, {
                               success: function() {
-                              alert("保存成功");
+                                location.reload(); 
                               },
                               error: function(error) {
-                              alert("Can't save, try again");
+                                alert("Can't save, try again");
                               }
                               });
                               console.log(submitdata);
