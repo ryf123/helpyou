@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>HYACSIS-Students</title>
 
@@ -19,29 +16,7 @@
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="vendors/bootstrap-table.min.css" rel="stylesheet">
-	<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
 
-    <style type="text/css">
-    body {
-            padding-top: 50px;
-            padding-bottom: 30px;
-    }
-    
-    table.table > tbody > tr > td {
-        height: 30px;
-        vertical-align: middle;
-    }
-    /* address.js css style for address*/
-    .editable-address {
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    .editable-address span {
-        width: 70px;
-        display: inline-block;
-    }
-    </style>
 </head>
 
 <body class="nav-md" style="padding-top: 0px">
@@ -66,110 +41,65 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i><span class="badge"></span>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages" id="messages">
+                        
+                        <li>
+                            <a class="text-center" href="hotlinenotification.html">
+                                <strong>Read All Messages</strong>
+
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /.dropdown-messages -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
+                <!-- /.dropdown-user -->
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation" style="
-                width: 220px;
-                margin-top: 51px;
-                ">
-                <div class="sidebar-nav navbar-collapse" style="
-                width: 220px;
-                ">
+            <div class="navbar-default sidebar" role="navigation" style="width: 220px; margin-top: 51px;">
+                <div class="sidebar-nav navbar-collapse" style="width: 220px;">
                     <ul class="nav" id="side-menu">
-                        
-                        
-                        <li>
-                            <a href="index.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
-                        </li>
-                        
-                        
+                        <li><a href="index.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a></li>
+                        <li><a href="hotlinenotification.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a></li>
                         <!-- / Info inputs-->
                         <li>
-                            <a href="#" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
+                            <a href="#" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="districtform.html" style="
-                                padding-left: 32px;
-                                ">District Inputs / 学区信息</a>
-                                </li>
-                                <li>
-                                    <a href="schoolform.html" style="
-                                padding-left: 32px;
-                                ">School Inputs / 学校信息</a>
-                                </li>
-                                <li>
-                                    <a href="Studentform.html" style="
-                                padding-left: 32px;
-                                ">Student Inputs / 学生信息</a>
-                                </li>
-                                <li>
-                                    <a href="Registrationinput.html" style="
-                                padding-left: 32px;
-                                padding-right: 0px;
-                                ">Registration Inputs / 注册信息</a>
-                                </li>
+                                <li><a href="districtform.html" style="padding-left: 32px;">District Inputs / 学区信息</a></li>
+                                <li><a href="schoolform.html" style="padding-left: 32px;">School Inputs / 学校信息</a></li>
+                                <li><a href="Studentform.html" style="padding-left: 32px;">Student Inputs / 学生信息</a></li>
+                                <li><a href="Registrationinput.html" style="padding-left: 32px; padding-right: 0px;">Registration Inputs / 注册信息</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <!-- /End of 1st - Info inputs-->
-                        <li>
-                            <a href="districtform.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-home fa-fw"></i> District / 学区</a>
-                        </li>
-                        <li>
-                            <a href="schooltable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a>
-                        </li>
-                        <li>
-                            <a href="studenttable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-users fa-fw"></i> Student / 学生</a>
-                        </li>
-                        <li>
-                            <a href="Registrationinput.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a>
-                        </li>
-                        <li>
-                            <a href="studentpickuptable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
-                        </li>
+                        <li><a href="districtform.html" style="padding-left: 10px; padding-right: 10px;">
+                            <i class="fa fa-home fa-fw"></i> District / 学区</a></li>
+                        <li><a href="schooltable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a></li>
+                        <li><a href="studenttable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-users fa-fw"></i> Student / 学生</a></li>
+                        <li><a href="Registrationinput.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a></li>
+                        <li><a href="studentpickuptable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a></li>
+                        <li><a href="studentsignintable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-check-square-o fa-fw"></i> Student Sign In / 学生签到</a></li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -222,7 +152,6 @@
     <!-- Custom Theme JavaScript -->
     <script src="vendors/sb-admin-2.js"></script>
 	<script src="vendors/bootstrap-table.min.js"></script>
-	<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
 	<script type="text/javascript" src="vendors/parse.js"></script>
 </body>
 <style>
@@ -279,13 +208,13 @@ body {
                                      {
                                          field: 'studentid',
                                          title: '学号',
-                                         sortable:'true',
-                                         footerFormatter: totalNameFormatter
+                                         sortable:'true'
                                      },                                                                          
                                      {
                                          field: 'firstname',
                                          title: '名',
                                          sortable:'true',
+                                         footerFormatter: totalNameFormatter
                                      },
                                      {
                                          field: 'lastname',
@@ -395,6 +324,34 @@ body {
                         alert("error");
                         }
         });
+
+        if(Parse.User.current() == undefined){
+            $(location).attr('href','login.html');
+        }
+        
+        Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
+            success: function(msgs){
+                msgs = JSON.parse(JSON.stringify(msgs));
+                for(index in msgs){
+                    var msg = msgs[index];
+                    console.log(msg);
+                    mbody = msg["mbody"];
+                    mfrom = msg["mfrom"];
+                    msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                    $("#messages").append(msginfo);        
+                }
+                //change badge number
+                $(".badge")[0].innerText = msgs.length;
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+      $('#signoutbutton').click(function() {
+        Parse.User.logOut();
+        $(location).attr('href','login.html');
+      }); 
+
         // draw the edit button
         // if "UpdateCell" is called, then initBody will be called
         // the initBody() function in bootstrap-table will call this to update icon

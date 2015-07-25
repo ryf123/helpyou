@@ -16,14 +16,12 @@
     <link href="vendors/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
     <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
     <link href="vendors/select2.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md" style="padding-top: 0px">
     <div id="wrapper">
-        
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -43,110 +41,62 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i><span class="badge"></span>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages" id="messages">
+                        <li>
+                            <a class="text-center" href="hotlinenotification.html">
+                                <strong>Read All Messages</strong><i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /.dropdown-messages -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
+                <!-- /.dropdown-user -->
             </ul>
             <!-- /.navbar-top-links -->
             
-            <div class="navbar-default sidebar" role="navigation" style="
-                width: 220px;
-                margin-top: 51px;
-                ">
-                <div class="sidebar-nav navbar-collapse" style="
-                width: 220px;
-                ">
+            <div class="navbar-default sidebar" role="navigation" style="width: 220px; margin-top: 51px;">
+                <div class="sidebar-nav navbar-collapse" style="width: 220px;">
                     <ul class="nav" id="side-menu">
-                        
-                        
-                        <li>
-                            <a href="index.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
-                        </li>
-                        
-                        
+                        <li><a href="index.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a></li>
+                        <li><a href="hotlinenotification.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a></li>
                         <!-- / Info inputs-->
                         <li>
-                            <a href="#" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
+                            <a href="#" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="districtform.html" style="
-                                padding-left: 32px;
-                                ">District Inputs / 学区信息</a>
-                                </li>
-                                <li>
-                                    <a href="schoolform.html" style="
-                                padding-left: 32px;
-                                ">School Inputs / 学校信息</a>
-                                </li>
-                                <li>
-                                    <a href="Studentform.html" style="
-                                padding-left: 32px;
-                                ">Student Inputs / 学生信息</a>
-                                </li>
-                                <li>
-                                    <a href="Registrationinput.html" style="
-                                padding-left: 32px;
-                                padding-right: 0px;
-                                ">Registration Inputs / 注册信息</a>
-                                </li>
+                                <li><a href="districtform.html" style="padding-left: 32px;">District Inputs / 学区信息</a></li>
+                                <li><a href="schoolform.html" style="padding-left: 32px;">School Inputs / 学校信息</a></li>
+                                <li><a href="Studentform.html" style="padding-left: 32px;">Student Inputs / 学生信息</a></li>
+                                <li><a href="Registrationinput.html" style="padding-left: 32px; padding-right: 0px;">Registration Inputs / 注册信息</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <!-- /End of 1st - Info inputs-->
-                        <li>
-                            <a href="districtform.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-home fa-fw"></i> District / 学区</a>
-                        </li>
-                        <li>
-                            <a href="schooltable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a>
-                        </li>
-                        <li>
-                            <a href="studenttable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-users fa-fw"></i> Student / 学生</a>
-                        </li>
-                        <li>
-                            <a href="Registrationinput.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a>
-                        </li>
-                        <li>
-                            <a href="studentpickuptable.html" style="
-                                padding-left: 10px;
-                                padding-right: 10px;
-                                ">
-                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
-                        </li>
+                        <li><a href="districtform.html" style="padding-left: 10px; padding-right: 10px;">
+                            <i class="fa fa-home fa-fw"></i> District / 学区</a></li>
+                        <li><a href="schooltable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a></li>
+                        <li><a href="studenttable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-users fa-fw"></i> Student / 学生</a></li>
+                        <li><a href="Registrationinput.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a></li>
+                        <li><a href="studentpickuptable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a></li>
+                        <li><a href="studentsignintable.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-check-square-o fa-fw"></i> Student Sign In / 学生签到</a></li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -157,7 +107,7 @@
         
         <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
             <div class="row">
-                 <br>
+                <br>
                 <div class="col-lg-1" style="padding-right: 0px; width:">
                     <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="55" height="55">
                         </div>
@@ -189,30 +139,14 @@
                             <form>
                                 <div id="wizard" class="form_wizard wizard_horizontal" >
                                     <ul class="wizard_steps">
-                                        <li>
-                                            <a href="#step-1">
-                                                <span class="step_no">1</span>
-                                                <span class="step_descr">School Basic Info</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#step-2">
-                                                <span class="step_no">2</span>
-                                                <span class="step_descr">School Dismissal Time (TK)</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#step-3">
-                                                <span class="step_no">3</span>
-                                                <span class="step_descr">School Dismissal Time (K)</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#step-4">
-                                                <span class="step_no">4</span>
-                                                <span class="step_descr">School Dismissal Time (G 1-5)</span>
-                                            </a>
-                                        </li>
+                                        <li><a href="#step-1"><span class="step_no">1</span><span class="step_descr">School Basic Info</span>
+                                        </a></li>
+                                        <li><a href="#step-2"><span class="step_no">2</span><span class="step_descr">School Dismissal Time(TK)</span>
+                                        </a></li>
+                                        <li><a href="#step-3"><span class="step_no">3</span><span class="step_descr">School Dismissal Time (K)</span>
+                                        </a></li>
+                                        <li><a href="#step-4"><span class="step_no">4</span><span class="step_descr">School Dismissal Time (G 1-5)</span>
+                                        </a></li>
                                     </ul>
                                     <div id="step-1">
                                         <div class="form-horizontal form-label-left" data-toggle="validator">
@@ -278,11 +212,11 @@
                                             </div>
                                             </div>
                                     </div>
+                                    <!-- End of Step-1 -->
                                     <div id="step-2">
                                         <div class="form-horizontal form-label-left">
                                             <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">TK是否有不同放学时间 /<br> Does TK has different schedule 
-                                                    <span class="required">*</span></span>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">TK是否有不同放学时间 /<br> Does TK has different schedule <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 35px;">
                                                     <div class="radio" id="TKscheduleY">
@@ -295,7 +229,7 @@
                                             </div>
                                             <br>
                                             <div class="form-group" id="TKDT">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-top: 0px;">TK放学时间 /<br> TK Dismissal Time <span class="required">*</span></span></label>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-top: 0px;">TK放学时间 /<br> TK Dismissal Time <span class="required">*</span></label>
                                                 <div class='col-md-6 col-sm-6 col-xs-12'>
                                                     <div class='input-group date ' id='TKDismissalTime' >
                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -305,6 +239,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End of Step-2 -->
                                     <div id="step-3">
                                         <div class="form-horizontal form-label-left">
                                             <form class="form-horizontal form-label-left">
@@ -387,9 +322,9 @@
                                                 </div>
                                         </div>
                                     </div>
+                                    <!-- End of Step-3 -->
                                     <div id="step-4">
                                         <div class="form-horizontal form-label-left">
-                                            
                                             <div class="form-group" id="GrDT">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" style="padding-top: 0px;">1-5年级正常放学时间 /<br>G 1-5 Regular Dismissal Time <span class="required">*</span></label>
                                                 <div class='col-md-6 col-sm-6 col-xs-12'>
@@ -434,15 +369,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                     </div>
-
+                                    <!-- End of Step-4 -->
                                 </div>
                             </form>
                             <!-- End of Smart Wizard -->
                         </div>
+                        <!-- End of pannel-body -->
                     </div>
+                    <!-- End of Panel-info -->
                 </div>
             </div>
             <!-- End of 2nd row -->
@@ -451,6 +387,7 @@
     <!--  /end of Page wraper -->
 </div>
 <!-- End -->
+
 <!-- footer content -->
 <footer>
     <div class="">
@@ -478,7 +415,6 @@
 <script src="vendors/sb-admin-2.js"></script>
 <!-- momentjs -->
 <script src="bootstrap-editable/js/moment.min.js"></script>
-<script src="bootstrap-editable/js/bootstrap-editable.js"></script>
 <script src="vendors/select2.min.js"></script>
 <script src="bootstrap-editable/js/address.js"></script>
 
@@ -654,6 +590,28 @@ body {
                             $('#wizard').smartWizard({
                                                     onFinish:onFinishCallback,
                                                     transitionEffect: 'slide'
+                            });
+
+                            if(Parse.User.current() == undefined){
+                                $(location).attr('href','login.html');
+                            }
+                            Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
+                            success: function(msgs){
+                                msgs = JSON.parse(JSON.stringify(msgs));
+                                for(index in msgs){
+                                var msg = msgs[index];
+                                console.log(msg);
+                                mbody = msg["mbody"];
+                                mfrom = msg["mfrom"];
+                                msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                                $("#messages").append(msginfo);        
+                                }
+                                //change badge number
+                                $(".badge")[0].innerText = msgs.length;
+                            },
+                            error: function(error){
+                                console.log(error);
+                            }
                             });
 
                             function onFinishCallback() {
