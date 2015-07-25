@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HYACSIS-Student Info Input</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="vendors/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Date & Datetime picker -->
+    <link href="vendors/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="vendors/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Not sure -->
+    <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <link href="vendors/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="vendors/select2.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md" style="padding-top: 0px">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="25" height="25">
+                        </div>
+                        <div class="col-lg-11">
+                            HelpYouAchieve Student Information System
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i><span class="badge"></span>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages" id="messages">
+                        
+                        <li>
+                            <a class="text-center" href="hotlinenotification.html">
+                                <strong>Read All Messages</strong>
+
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation" style="width: 220px; margin-top: 51px;">
+                <div class="sidebar-nav navbar-collapse" style="width: 220px; ">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a>
+                        </li>
+                        <li>
+                            <a href="hotlinenotification.html" style="padding-left: 10px; padding-right: 10px;">
+                                <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a>
+                        </li>
+                        <!-- / Info inputs-->
+                        <li>
+                            <a href="#" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="districtform.html" style="
+                                padding-left: 32px;
+                                ">District Inputs / 学区信息</a>
+                                </li>
+                                <li>
+                                    <a href="schoolform.html" style="
+                                padding-left: 32px;
+                                ">School Inputs / 学校信息</a>
+                                </li>
+                                <li>
+                                    <a href="Studentinput.html" style="
+                                padding-left: 32px;
+                                ">Student Inputs / 学生信息</a>
+                                </li>
+                                <li>
+                                    <a href="Registrationinput.html" style="
+                                padding-left: 32px;
+                                padding-right: 0px;
+                                ">Registration Inputs / 注册信息</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!-- /End of 1st - Info inputs-->
+                        <li>
+                            <a href="districtform.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-home fa-fw"></i> District / 学区</a>
+                        </li>
+                        <li>
+                            <a href="schooltable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a>
+                        </li>
+                        <li>
+                            <a href="studenttable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-users fa-fw"></i> Student / 学生</a>
+                        </li>
+                        <li>
+                            <a href="Registrationinput.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a>
+                        </li>
+                        <li>
+                            <a href="studentpickuptable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a>
+                        </li>
+                        <li>
+                            <a href="studentsignintable.html" style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                ">
+                                <i class="fa fa-check-square-o fa-fw"></i> Student Sign In / 学生签到</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!--End of Heading-->
+        <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
+            <div class="row">
+                <br>
+                <div class="col-lg-1">
+                    <img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="55" height="55">
+                        </div>
+                <div class="col-lg-11">
+                    <h1 class="text-primary">HelpYouAchieve Student Information System</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.End of 1st row -System Name -->
+			<hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="padding-left: 30px;">Student Information Input / 请输入学生信息</div>
+                        <div class="panel-body">
+                            <form class="form-horizontal form-label-left" id="studentform" data-toggle="validator">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">First Name / 名字 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="firstname" name="firstname" required="required" class="form-control col-md-7 col-xs-12" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastname">Last Name / 姓氏 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="lastname" name="lastname" required="required" class="form-control col-md-7 col-xs-12" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender / 性别 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="sex" value="male"> Male
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="sex" value="female" checked=""> Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth / 生日 <span class="required">*</span></span></label>
+                                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                                            <div class='input-group date ' id='dob' >
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                <input type='text' class="form-control" name="dob" placeholder="10/29/2010">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">School / 学校 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control" id='school' name='school'></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grade">Grade / 年级 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="TK"> TK
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="K"> K
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="1"> G 1
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="2"> G 2
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="3"> G 3
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="4"> G 4
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="5"> G 5
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="grade" value="6"> G 6
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="roomnumber">Room Number / 教室 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="roomnumber" name="roomnumber" class="form-control col-md-7 col-xs-12" placeholder="Room Number">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="studentaddress">Address / 地址 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="studentaddress" name="studentaddress" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="studentcity">City / 城市 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="studentcity" name="studentcity" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3" for="studentzip">Zipcode / 邮编 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="studentzip" name="studentzip" required="required" class="form-control" data-inputmask="'mask': '99999'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact / 联系人 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Method / 联系方式 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="contactmethod" value="text"> Text
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="contactmethod" value="email"> Email
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="contactmethod" value="nocontact"> No Contact
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone / 电话 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control" id="phonenumber" name="phonenumber" data-inputmask="'mask' : '(999) 999-9999'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone (Alt) / 电话(备用) </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control" id="altphonenumber" name="altphonenumber" data-inputmask="'mask' : '(999) 999-9999'">
+                                    </div>
+                                </div>      
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email" >Email / 邮箱 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="email" id="email" name="email" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@powayusd.com" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="altemail" >Email (Alt) / 邮箱(备用) </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="email" id="altemail" name="altemail" class="form-control col-md-7 col-xs-12" data-error="邮箱格式错误" placeholder="evereast@powayusd.com">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temploc" >Temp Location/临时地点 </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="temploc" class="form-control" name="temploc"  type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="temptime" >Temp Location/临时地点 </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="temptime" class="form-control" name="temptime" type="text">
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of form -->
+                            <hr>
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <span class="pull-left">
+                                <button type="button" class="btn btn-outline btn-success" id="save">Save / 保存</button>
+                                </span>                                
+                            </div>
+                            <!-- Button -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.End of 2nd row -->
+        </div>
+        <!-- /End of heading   #page-wrapper  -->   
+    </div>
+    <!-- /#wrapper -->
+    
+    
+    
+    
+
+    <!-- footer content -->
+    <footer>
+        <div class="">
+            <p class="pull-right">Copyright ©2015 Evereast All Rights Reserved |
+            <span class="lead"> <i class="fa fa-paw"></i> Evereast</span>
+            </p>
+        </div>
+    </footer>
+    <!-- /footer content -->
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="metisMenu/metisMenu.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="vendors/sb-admin-2.js"></script>
+    <script src="vendors/parse.js"></script>
+    <script type="text/javascript" src="vendors/wizard/jquery.smartWizard.js"></script>
+    <!-- momentjs -->
+    <script src="bootstrap-editable/js/moment.min.js"></script>
+
+    <script type="text/javascript" src="vendors/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendors/bootstrap-datepicker.js"></script>
+    <script src="vendors/inputmask.js"></script>
+    <script src="vendors/jquery.inputmask.js"></script>
+    
+    <script src="vendors/validator.js"></script>
+    <script type="text/javascript" src="vendors/parse.js"></script>
+    
+
+<script src="vendors/select2.min.js"></script>
+<script src="bootstrap-editable/js/address.js"></script>
+
+</body>
+<script>
+    Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+    $( document ).ready(function() {
+        // on save button click
+        $("#save").click(function(){
+            var submitdata = {}
+            var formarray = $("form").serializeArray();
+            for(index in formarray){
+              var ele = formarray[index];
+              submitdata[ele["name"]] = ele["value"];
+            }
+            Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:submitdata,objectid:""}, {
+            success: function() {
+            console.log("Saved!");
+            },
+            error: function(error) {
+            alert("Can't save, try again");
+            }
+            });
+            console.log(submitdata);
+        });
+        // enable validator
+        $("#phonenumber").inputmask();
+        $("#studentzip").inputmask();
+        $("#altphonenumber").inputmask();
+        //Datetimepicker
+        $("#dob").datepicker({
+            multidate: false,
+            startView: 2,
+            clearBtn: true,
+        });
+        // datetimepicker
+        $("#temptime").datetimepicker({
+            format: "LT",
+        });
+        // get school list
+        Parse.Cloud.run('getobject', {objectname: 'School'}, {
+            success: function(schools) {
+                var schoolsource = [];
+                schools = JSON.parse(JSON.stringify(schools));
+                for(index in schools){
+                var name = schools[index]["schoolname"];
+                schoolsource.push({"value":name,"text":name});
+                tobeappend = "<option value='"+name+"'>"+name+"</option>";
+                $("#school").append(tobeappend);
+                }
+            },
+            error: function(error) {
+                console.log(error);
+           }
+        });
+        if(Parse.User.current() == undefined){
+            $(location).attr('href','login.html');
+        }
+        
+        Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
+            success: function(msgs){
+                msgs = JSON.parse(JSON.stringify(msgs));
+                for(index in msgs){
+                    var msg = msgs[index];
+                    console.log(msg);
+                    mbody = msg["mbody"];
+                    mfrom = msg["mfrom"];
+                    msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                    $("#messages").append(msginfo);        
+                }
+                //change badge number
+                $(".badge")[0].innerText = msgs.length;
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+      $('#signoutbutton').click(function() {
+        Parse.User.logOut();
+        $(location).attr('href','login.html');
+      }); 
+
+      });
+</script>
+<style>
+    .navbar-default {
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+    }
+    .sidebar ul li a.active {
+      background-color: #d9edf7;
+    }
+    .nav>li>a:focus, .nav>li>a:hover{
+      text-decoration: none;
+      background-color: #fff;
+    }
+    .sidebar ul li a.active {
+      background-color: #fff;
+    }
+    .navbar-default .navbar-brand {
+      color: #337ab7;
+    }
+    .panel-footer {
+      background-color: #fff;
+      border-top: 1px solid #fff;
+    }
+    body {
+        background-color: #d9edf7;
+    }
+    .form-control {
+      border: 1px solid #bce8f1;
+    }
+    .btn-default {
+      color: #337ab7;
+      background-color: #fff;
+      border-color: #bce8f1;
+    }
+    body {
+      color: #337ab7;
+    }
+</style>
+</html>
