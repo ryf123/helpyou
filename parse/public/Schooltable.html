@@ -403,7 +403,7 @@ body {
         function operatesaveFormatter(value, row, index) {
             return [
                     '<a class="save" href="javascript:void(0)" title="save">',
-                    '<i class="glyphicon glyphicon-ok"></i>',
+                    '<i class="glyphicon glyphicon-remove"></i>',
                     '</a>'
                     ].join('');
         }
@@ -417,25 +417,21 @@ body {
         }
         // edit button event
         window.operateEvents = {
-            
-            
-            
             // Edit/save button Event
             'click .save': function (e, value, row, index) {
                 var objectid = row["objectId"];
                 var schoolerdate = $(this).parent().parent().find(".schoolerdate").html();
                 var myobjectvalue = {};
                 myobjectvalue["schoolerdate"] = schoolerdate;
-                Parse.Cloud.run('saveobject', { objectname: 'School', 'objectid':objectid,objectvalue:myobjectvalue}, {
-                                success: function() {
-                                console.log("Saved!");
-                                },
-                                error: function(error) {
-                                alert("Can't save, try again");
-                                }
-                                });
-                                
-            },
+                Parse.Cloud.run('deleteobject', { objectname: 'School', 'objectid':objectid}, {
+                    success: function() {
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.log("Can't save, try again");
+                    }
+                    });               
+                },
         };
         // this is used to display "Total:"+ number
         function totalNameFormatter(data) {
