@@ -9,6 +9,9 @@ app.use(express.bodyParser());  // Populate req.body
 // Create a route that will respond to am HTTP GET request with some
 // simple TwiML instructions
 app.post('/processinbound', function(request, response) {
+    if(twilio == undefined){
+      var twilio = require('twilio');
+    }
     var twiml = new twilio.TwimlResponse();
     var messagebody = request.body.Body;
     var messageid = request.body.MessageSid;
@@ -193,7 +196,7 @@ Parse.Cloud.define("getobject", function(request, response) {
                               },
                               error: function(object, error) {
                                   console.log(error);
-                                  response.fail("fail");
+                                  response.error("fail");
                               }
                   });
    });
