@@ -407,7 +407,11 @@ body {
             for(index in rows){
                 objectid = rows[index]["objectId"];
                 myobjectvalue = {
-                    signindate: todaystring
+                    signindate: todaystring,
+                    contactmethod : rows[index]["contactmethod"],
+                    email : rows[index]["email"],
+                    phonenumber : rows[index]["phonenumber"],
+                    messagebody: "Dear Parent of "+rows[index]["firstname"] +" "+ rows[index]["lastname"] + ", your child has been picked up by HelpYouAchieve Chinese School and will be at the school learning while having fun!"
                 };
                 saveArr.push({'objectid':objectid,objectvalue:myobjectvalue});
             }
@@ -420,9 +424,10 @@ body {
                     error: function(error) {
                         console.log(error);
                     }
-                });                 
+                });
+                location.reload();                 
             }
-            location.reload();
+            
       });
 
     </script>

@@ -1,7 +1,8 @@
+var config = require("cloud/config.js");
 // Include Cloud Code module dependencies
-var express = require('express'),
-    twilio = require('twilio');
- 
+var express = require('express');
+    //twilio = require('twilio')(tacccount,ttoken);
+var twilio = require('twilio')(config.tacccount, config.ttoken); 
 // Create an Express web app (more info: http://expressjs.com/)
 var app = express();
 app.use(express.bodyParser());  // Populate req.body 
@@ -83,28 +84,8 @@ app.post('/processemail', function(request, response) {
 });
 // Start the Express app
 app.listen();
-// Use Parse.Cloud.define to define as many cloud functions as you want.
-// For example:
-Parse.Cloud.define("hello", function(request, response) {
-  var client = require('twilio')('AC4eade14dc425607dbda5ed10afe31e42', '9ec495bd809bce37a729652257824066');
 
-// Send an SMS message
-client.calls.create({
-    to:'+16198176786',
-    from: '+18588882432',
-    body: 'Hello world!'
-  }, function(err, responseData) { 
-    if (err) {
-      response.success(err);
-    } else { 
-      console.log(responseData.from); 
-      console.log(responseData.body);
-      response.success("Hello world!");
-    }
-  }
-);
-  
-});
+
 Parse.Cloud.define("deleteobject", function(request, response) {
                    var objectname = request.params.objectname;
                    var objectid = request.params.objectid;
@@ -338,22 +319,39 @@ Parse.Cloud.define("objectsadduniquevalue", function(request, response) {
        if(objectid != undefined){
          var myinstance = new Myobject();
          myinstance.id = objectid;
-         for(key in values){
-            if (values.hasOwnProperty(key)){
-                 myinstance.addUnique(key,values[key]);
+         
+            if (values.hasOwnProperty("signindate")){
+                 myinstance.addUnique("signindate",values["signindate"]);
             }
-          }
+          
           saveArr.push(myinstance);        
        }
-       };
-       Parse.Object.saveAll(saveArr, {
-        success: function(objs) {
-          response.success();
-        },
-        error: function(error) {
-          response.error();
+    };
+    Parse.Object.saveAll(saveArr, {
+      success: function(objs) {
+        // on success send sms/email to parent
+        for(index in objarray){
+          currentobj = objarray[index];
+          contactmethod = undefined;
+          student = currentobj.objectvalue;
+          contactmethod = student["contactmethod"];
+          number = processPhone(student["phonenumber"]);
+          body = undefined;
+          if(student["messagebody"] != undefined  &&  contactmethod != undefined){
+              contactmethod = contactmethod.toLowerCase();
+              body  = student["messagebody"];
+              console.log(body); 
+              if(contactmethod == "text" && number != undefined && body != undefined){
+                console.log("sendMessage:"+ number);
+                sendSMS(number,body);
+              }
+          }
         }
-       
+        response.success();
+      },
+      error: function(error) {
+        response.error();
+      }
     });
 });
 // save many objects
@@ -383,7 +381,37 @@ Parse.Cloud.define("savemanyobjects", function(request, response) {
         },
         error: function(error) {
           response.error();
-        }
-       
-    });
+        }  
+      });
 });
+// return phone number with format 18888888888
+function processPhone(phonenumber){
+  if(phonenumber ==  undefined){
+    return undefined;
+  }
+  phonenumber = phonenumber.replace("(", "");
+  phonenumber = phonenumber.replace(")", ""); 
+  phonenumber = phonenumber.replace("-", "");
+  phonenumber = phonenumber.replace(/\s/g, "");
+  if(phonenumber.length == 10){
+    return "+1"+phonenumber;
+  } 
+  return undefined;
+}
+function sendSMS(tonumber,smsbody) {
+  console.log("tonumber:"+tonumber+" from:"+config.fromnumber);
+  // Send an SMS message
+  twilio.sendSms({
+      to: tonumber,
+      from: config.fromnumber,
+      body: smsbody
+  }, function(err, responseData) { 
+      if (err) {
+        console.log("success send sms");
+      } 
+      else { 
+        console.log(responseData.from); 
+        console.log(responseData.body); 
+      }
+  });
+}
