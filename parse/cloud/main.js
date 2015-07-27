@@ -80,7 +80,7 @@ app.post('/processemail', function(request, response) {
     error: function(gameScore, error) {
     // Execute any logic that should take place if the save fails.
     // error is a Parse.Error with an error code and message.
-      response.error(error);
+      console.log(error);
     }
   });
   response.type('text/xml');
