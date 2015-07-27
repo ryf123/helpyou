@@ -75,9 +75,7 @@ app.post('/processemail', function(request, response) {
     }
     smsmessage.save(null, {
     success: function(gameScore) {
-    // Execute any logic that should take place after the object is saved.
-      response.type('text/xml');
-      response.send(twiml.toString());
+        console.log("success");
     },
     error: function(gameScore, error) {
     // Execute any logic that should take place if the save fails.
