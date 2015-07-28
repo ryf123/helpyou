@@ -313,7 +313,7 @@ body {
                                          registerdate = registerdate +","+monthdata2;
                                          }
                                          if(monthdata3 != undefined){
-                                            registerdate = registerdate +","+monthdata2;
+                                            registerdate = registerdate +","+monthdata3;
                                          }
                                          if(registerdate != ""){
                                          $('#table').bootstrapTable("updateCell",{rowIndex: i-1, fieldName: "registrationdate", fieldValue: registerdate});
@@ -377,6 +377,10 @@ body {
                 var month1 = [];
                 var month2 = [];
                 var month3 = [];
+                nextmonth = nextmonthdate.getMonth()+1;
+                nextyear = nextmonthdate.getFullYear();
+                nextnextmonth = nextnextmonthdate.getMonth()+1;
+                nextnextyear = nextnextmonthdate.getFullYear();
                 var objectid = row["objectId"];
                 var studentid = row["studentid"];
                 var registerdate = $(this).parent().parent().find(".registration").html();
@@ -389,17 +393,13 @@ body {
                         month1.push(date);
                     }
                     else{
-                        month = nextmonthdate.getMonth();
-                        year = nextmonthdate.getFullYear();
-                        re = new RegExp(month+"\/[0-9]+\/"+year);
+                        re = new RegExp(nextmonth+"\/[0-9]+\/"+nextyear);
                         var match = date.match(re);
                         if(match != undefined){
                             month2.push(date);
                         }
                         else{
-                            month = nextnextmonthdate.getMonth();
-                            year = nextnextmonthdate.getFullYear();
-                            re = new RegExp(month+"\/[0-9]+\/"+year);
+                            re = new RegExp(nextnextmonth+"\/[0-9]+\/"+nextnextyear);
                             var match = date.match(re);
                             if(match != undefined){
                                 month3.push(date);
