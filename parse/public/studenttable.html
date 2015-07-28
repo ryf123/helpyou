@@ -262,19 +262,21 @@
             //Remove button Event
             
             'click .remove': function (e, value, row, index) {
-                if (confirm("确定要删除吗？") == true) {
-                    var myobjectid = row["objectId"];
-                    var studentid = row["studentid"];
-                    Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
-                                    success: function() {
-                                    $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
-                                    console.log("Delete!");
-                                    },
-                                    error: function(error) {
-                                    alert("Delete failed");
-                        }
-                    });
-                }
+                bootbox.confirm("确定要删除吗?", function(result) {
+                    if(result == true){
+                        var myobjectid = row["objectId"];
+                        var studentid = row["studentid"];
+                        Parse.Cloud.run('deleteobject', { objectname: 'Student',objectid:myobjectid}, {
+                            success: function() {
+                            $('#table').bootstrapTable('remove', {field: 'studentid',values: [studentid]});
+                            console.log("Delete!");
+                            },
+                            error: function(error) {
+                            alert("Delete failed");
+                            }
+                        });
+                    }
+                }); 
             }
         };
         // this is used to display "Total:"+ number
