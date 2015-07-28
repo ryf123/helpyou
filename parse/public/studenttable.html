@@ -30,8 +30,13 @@
                                 </div>
                                 <i class="fa fa-refresh fa-spin fa-5x"></i>
                             </div>
-                            <div id = "alertmessage">
-
+                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="infoModal">
+                                <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                     <div class='alert alert-info' align="center">保存成功!</div>
+                                </div>
+                                </div>
+                            </div>
                             </div>
                             <table id="table" data-show-footer="true"></table>
                         </div>
@@ -225,8 +230,8 @@
                     var myobjectid = row["objectId"];
                     Parse.Cloud.run('saveobject', { objectname: 'Student', objectvalue:row,objectid:myobjectid}, {
                         success: function(data) {
-                            var msg =   "<div class='alert alert-success'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>保存成功!</strong> </div>";
-                            $("#alertmessage").append(msg);
+                            // present modal on save success
+                            $('#infoModal').modal('toggle');
                         },
                         error: function(error) {
                             alert("Can't save, try again");
