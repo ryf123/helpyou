@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="scotchApp" lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HYACSIS-Dashboard</title>
+  <title>HYACSIS-Dashboard</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="vendors/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Bootstrap Core CSS -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- MetisMenu CSS -->
+  <link href="metisMenu/metisMenu.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="vendors/sb-admin-2.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- jQuery --> 
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="metisMenu/metisMenu.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="vendors/sb-admin-2.js"></script>
+  <script src="vendors/parse.js"></script>
+  <script src="vendors/bootstrap-table.min.js"></script>
+  <script src="vendors/date.js"></script>
+  <!-- load angular and angular route via CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+      <script src="js/approute.js"></script>
 </head>
+    <body ng-controller="mainController">
 
-<body class="nav-md" style="padding-top: 0px">
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div id="wrapper">
+        <!-- navigation  -->
+         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">
                     <div class="row">
@@ -36,12 +54,12 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope fa-fw"></i><span class="badge"></span>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages" id="messages">
                         <li>
-                            <a class="text-center" href="hotlinenotification.html">
+                            <a class="text-center" href="#hotlinenotification">
                                 <strong>Read All Messages</strong><i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -50,11 +68,11 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href='#' id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a id="signoutbutton"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -66,34 +84,34 @@
             <div class="navbar-default sidebar" role="navigation" style="width: 220px; margin-top: 51px;">
                 <div class="sidebar-nav navbar-collapse" style="width: 220px; ">
                     <ul class="nav" id="side-menu">
-                        <li><a href="index.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-dashboard fa-fw"></i> Dashboard / 首页</a></li>
-                        <li><a href="hotlinenotification.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#hotlinenotification" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-envelope fa-fw"></i> Hotline / 出勤热线</a></li>
                         <!-- / Info inputs-->
                         <li>
                             <a href="#" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-edit fa-fw"></i> Info Inputs / 信息录入<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li><a href="districtform.html" style="padding-left: 32px;">District Inputs / 学区信息</a></li>
-                                <li><a href="schoolform.html" style="padding-left: 32px;">School Inputs / 学校信息</a></li>
-                                <li><a href="studentform.html" style="padding-left: 32px;">Student Inputs / 学生信息</a></li>
-                                <li><a href="Registrationinput.html" style="padding-left: 32px; padding-right: 0px;">Registration Inputs / 注册信息</a></li>
+                                <li><a href="#districtform" style="padding-left: 32px;">District Inputs / 学区信息</a></li>
+                                <li><a href="#schoolform" style="padding-left: 32px;">School Inputs / 学校信息</a></li>
+                                <li><a href="#studentform" style="padding-left: 32px;">Student Inputs / 学生信息</a></li>
+                                <li><a href="#registrationinput" style="padding-left: 32px; padding-right: 0px;">Registration Inputs / 注册信息</a></li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <!-- /End of 1st - Info inputs-->
-                        <li><a href="districtform.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#districtform" style="padding-left: 10px; padding-right: 10px;">
                             <i class="fa fa-home fa-fw"></i> District / 学区</a></li>
-                        <li><a href="schooltable.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#schooltable" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-hospital-o fa-fw"></i> School / 学校</a></li>
-                        <li><a href="studenttable.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#studenttable" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-users fa-fw"></i> Student / 学生</a></li>
-                        <li><a href="Registrationinput.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#registrationinput" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-pencil fa-fw"></i> Registration / 注册</a></li>
-                        <li><a href="studentpickuptable.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#studentpickuptable" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-th-list fa-fw"></i> Pickup Schedule / 接送安排</a></li>
-                        <li><a href="studentsignintable.html" style="padding-left: 10px; padding-right: 10px;">
+                        <li><a href="#studentsignintable" style="padding-left: 10px; padding-right: 10px;">
                                 <i class="fa fa-check-square-o fa-fw"></i> Student Sign In / 学生签到</a></li>
                     </ul>
                 </div>
@@ -101,148 +119,10 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <!--End of Heading-->
         <div id="page-wrapper" style="min-height: 260px;margin-left: 220px;boder-left-width: 0px;">
-            <div class="row">
-                <br>
-                <div class="col-lg-1"><img src="hyaclogo.png" class="img-circle" alt="Cinque Terre" width="85" height="85"></div>
-                <div class="col-lg-11"><h1 class="text-primary">HelpYouAchieve Student Information System</h1></div>
-            </div>
-            <!-- /.End of 1st row -System Name -->
-			<div class="row">
-                <br>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Total Students / 学生总人数">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="studentcount"></div>
-                                    <div class="strong">Students / 学生</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer" id="dashboardstudents">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-info">
-                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="This Month's Registration / 本月学生数">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-pencil fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="monthlyregisterstudent"></div>
-                                    <div class="strong">Registration / 注册</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer" id="dashboardregistration">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Today's Registration / 今日学生数">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-th-list fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id='totalpickstudents'></div>
-                                    <div class="strong">Pickup / 接送</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer" id="dashboardpickup">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading" data-toggle="tooltip" data-placement="top" title="Number of Students Signed In Today / 今日已签到学生数">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-square-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge" id="totalsignin">0</div>
-                                    <div class="strong">Sign In / 签到</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer" id='dashboardsignin'>
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.End of 2nd row - 4 Dashboard -->
-            <hr>
-            <div>
-                <iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=32.964327&lon=-117.113250&name=San Diego"> </iframe>
-            </div>
-            <div class="row">
-            <!-- <div class="col-lg-12"> -->
-                <div id="myCarousel" class="carousel slide">
-                <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="active item">
-                            <img src="images/1.jpg" height="500">
-                        </div>
-                        <div class="item">
-                            <img src="images/2.jpg" height="500">
-                        </div>
-                        <div class="item">
-                            <img src="images/3.jpg" height="500">
-                        </div>
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            <!-- </div> -->
-            </div>
-            <!-- /.End of 3rd row - -->
+          <div ng-view></div>
         </div>
-        <!-- /End of #page-wrapper  -->   
-    </div>
-    <!-- /#wrapper -->
-
+      </div>
     <!-- footer content -->
     <footer>
         <div class="">
@@ -252,174 +132,91 @@
         </div>
     </footer>
     <!-- /footer content -->
+    </body>
+    <script>
+      // get date information
+      var d = new Date();
+      var currentyear = d.getFullYear();
+      var currentmonth = d.getMonth()+1;
+      var currentday = d.getDate();
+      var currentyearmonth = currentyear +""+currentmonth;
+      var registeryearmonth = "register"+currentyearmonth;
+      var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
+      Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
+      if(Parse.User.current() == undefined){
+          $(location).attr('href','login.html');
+      }  
+      $( document ).ready(function() {
+          Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
+          success: function(msgs){
+              msgs = JSON.parse(JSON.stringify(msgs));
+              for(index in msgs){
+                  var msg = msgs[index];
+                  mbody = msg["mbody"];
+                  mfrom = msg["mfrom"];
+                  msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
+                  $("#messages").append(msginfo);        
+              }
+              //change badge number
+              $(".badge")[0].innerText = msgs.length;
+          },
+          error: function(error){
+              console.log(error);
+          }
+          });
 
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        $('#signoutbutton').click(function() {
+          Parse.User.logOut();
+          $(location).attr('href','login.html');
+        }); 
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+        $("#side-menu").metisMenu({
+        toggle: false
+        });
+        $('#signoutbutton').click(function() {
+          Parse.User.logOut();
+          $(location).attr('href','login.html');
+        }); 
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="metisMenu/metisMenu.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="vendors/sb-admin-2.js"></script>
-    <script src="vendors/parse.js"></script>
-
-</body>
-<script>
-    // get date information
-    var d = new Date();
-    var currentyear = d.getFullYear();
-    var currentmonth = d.getMonth()+1;
-    var currentday = d.getDate();
-    var currentyearmonth = currentyear +""+currentmonth;
-    var registeryearmonth = "register"+currentyearmonth;
-    var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
-    Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
-    if(Parse.User.current() == undefined){
-        $(location).attr('href','login.html');
-    }  
-    $( document ).ready(function() {
- 
-        Parse.Cloud.run('countobject', {objectname: 'Student'}, {
-            success: function(count) {
-                $("#studentcount")[0].innerText = count;
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-        // get date information
-        var d = new Date();
-        var currentyear = d.getFullYear();
-        var currentmonth = d.getMonth()+1;
-        var currentday = d.getDate();
-        var currentyearmonth = currentyear +""+currentmonth;
-        var registeryearmonth = "register"+currentyearmonth;
-        var todaystriing = currentmonth+"/"+currentday+"/"+currentyear;
-        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystriing},{
-        success: function(Students){
-            $("#totalpickstudents")[0].innerText = String(Students.length);
-        },
-        error: function(error){
-            console.log(error);
-        }
-        });
-        // find the students who are registered this month, as long as it has registeryearmonth, and it contains currentmonth string
-        // then the student is registered this month
-        Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:String(currentmonth)},{
-        success: function(Students){
-            $("#monthlyregisterstudent")[0].innerText = String(Students.length);
-        },
-        error: function(error){
-            console.log(error);
-        }
-        });
-        Parse.Cloud.run('getobjectwithkeyequal',{objectname:"Smsmessage",keyname:"read",stringval:"false"},{
-        success: function(msgs){
-            msgs = JSON.parse(JSON.stringify(msgs));
-            for(index in msgs){
-                var msg = msgs[index];
-                console.log(msg);
-                mbody = msg["mbody"];
-                mfrom = msg["mfrom"];
-                msginfo = "<li><a href ='#'><div><strong>"+mfrom+"</strong></div><div>"+mbody+"</div></a></li><li class='divider'></li>";
-                $("#messages").append(msginfo);        
-            }
-            //change badge number
-            $(".badge")[0].innerText = msgs.length;
-        },
-        error: function(error){
-            console.log(error);
-        }
-        });
-        // get the number of sign in students
-         Parse.Cloud.run('findobjectcontains',{objectname: 'Student',keyname:registeryearmonth,stringval:todaystring}, {
-            success: function(studentdata) {
-                studentdata = JSON.parse(JSON.stringify(studentdata));
-                var totalsignincount = 0;
-                for(index in studentdata){
-                    rowdata = studentdata[index];
-                    if("signindate" in rowdata){
-                        signinstatus = rowdata["signindate"];
-                        
-                        if(signinstatus.indexOf(todaystring) > -1){
-                            totalsignincount += 1;
-                        }
-                    }
-                }
-                $("#totalsignin")[0].innerText = totalsignincount;
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-      $('#signoutbutton').click(function() {
-        Parse.User.logOut();
-        $(location).attr('href','login.html');
-      }); 
-
-      $("#side-menu").metisMenu({
-      toggle: false
+        $('[data-toggle="tooltip"]').tooltip();  
       });
-      $("#dashboardstudents").click(function(){
-        $(location).attr('href','studenttable.html');
-      });
-      $("#dashboardregistration").click(function(){
-        $(location).attr('href','Registrationinput.html');
-      });
-      $("#dashboardpickup").click(function(){
-        $(location).attr('href','studentpickuptable.html')
-        });
-      $("#dashboardsignin").click(function(){
-        $(location).attr('href','studentsignintable.html');
-      });
-      $('#signoutbutton').click(function() {
-        Parse.User.logOut();
-        $(location).attr('href','login.html');
-      }); 
 
-      $('[data-toggle="tooltip"]').tooltip();  
-    });
-
-</script>
-
-<!-- Chenge the color and style of the Nav Bar -->
-<style>
-    .navbar-default {
+    </script>
+    <style>
+      .navbar-default {
+          background-color: #d9edf7;
+          border-color: #bce8f1;
+      }
+      .sidebar ul li a.active {
         background-color: #d9edf7;
+      }
+      .nav>li>a:focus, .nav>li>a:hover{
+        text-decoration: none;
+        background-color: #fff;
+      }
+      .sidebar ul li a.active {
+        background-color: #fff;
+      }
+      .navbar-default .navbar-brand {
+        color: #337ab7;
+      }
+      .panel-footer {
+        background-color: #fff;
+        border-top: 1px solid #fff;
+      }
+      body {
+          background-color: #d9edf7;
+      }
+      .form-control {
+        border: 1px solid #bce8f1;
+      }
+      .btn-default {
+        color: #337ab7;
+        background-color: #fff;
         border-color: #bce8f1;
-    }
-    .sidebar ul li a.active {
-      background-color: #d9edf7;
-    }
-    .nav>li>a:focus, .nav>li>a:hover{
-      text-decoration: none;
-      background-color: #fff;
-    }
-    .sidebar ul li a.active {
-      background-color: #fff;
-    }
-    .navbar-default .navbar-brand {
-      color: #337ab7;
-    }
-    .panel-footer {
-      background-color: #fff;
-      border-top: 1px solid #fff;
-    }
-    body {
-        background-color: #d9edf7;
-    }
-    .form-control {
-      border: 1px solid #bce8f1;
-    }
-    .btn-default {
-      color: #337ab7;
-      background-color: #fff;
-      border-color: #bce8f1;
-    }
-    body {
-      color: #337ab7;
-    }
-</style>
-</html>
+      }
+      body {
+        color: #337ab7;
+      }
+    </style>
+    </html>
