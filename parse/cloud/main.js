@@ -1,8 +1,11 @@
+var Mailgun = require('mailgun');
 var config = require("cloud/config.js");
 // Include Cloud Code module dependencies
 var express = require('express');
-    //twilio = require('twilio')(tacccount,ttoken);
+// twilio
 var twilio = require('twilio')(config.tacccount, config.ttoken); 
+// mail gun
+Mailgun.initialize(config.mgundomainname, config.mgunapikey);
 // Create an Express web app (more info: http://expressjs.com/)
 var app = express();
 app.use(express.bodyParser());  // Populate req.body 
@@ -339,6 +342,7 @@ Parse.Cloud.define("objectsadduniquevalue", function(request, response) {
           student = currentobj.objectvalue;
           contactmethod = student["contactmethod"];
           number = processPhone(student["phonenumber"]);
+          email  = student["email"];
           body = undefined;
           if(student["messagebody"] != undefined  &&  contactmethod != undefined){
               contactmethod = contactmethod.toLowerCase();
@@ -348,9 +352,13 @@ Parse.Cloud.define("objectsadduniquevalue", function(request, response) {
                 console.log("sendMessage:"+ number);
                 sendSMS(number,body);
               }
+              if(contactmethod == "email" && email != undefined && body != undefined){
+                console.log("sendEmail:"+ email);
+                sendEmail(email,body);
+              }
           }
         }
-        response.success();
+        response.success("success");
       },
       error: function(error) {
         response.error();
@@ -416,5 +424,21 @@ function sendSMS(tonumber,smsbody) {
         console.log(responseData.from); 
         console.log(responseData.body); 
       }
+  });
+}
+function sendEmail(toemail,emailbody){
+  console.log("toemail" + toemail + "subject:"+emailbody);
+  Mailgun.sendEmail({
+    to: toemail,
+    from: config.emailfrom,
+    subject: emailbody,
+    text: "DO-NOT-REPLY"
+  }, {
+  success: function(httpResponse) {
+    console.log(httpResponse);
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+  }
   });
 }
