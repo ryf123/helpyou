@@ -190,6 +190,7 @@ Parse.Cloud.define("getobject", function(request, response) {
                    var objectname = request.params.objectname;
                    var Myobject = Parse.Object.extend(objectname);
                    var query = new Parse.Query(Myobject);
+                   query  = query.limit(500);
                    query.descending("createdAt");
                    query.find({
                               success: function(objects) {
@@ -293,7 +294,7 @@ Parse.Cloud.define("getobjectwithkeyequal", function(request, response) {
   var query = new Parse.Query(Myobject);
   var keyname = request.params.keyname;
   var stringval = request.params.stringval;
-  query.limit = 1000;
+  query  = query.limit(500);
   query.equalTo(keyname,stringval);
   query.descending("createdAt");
   query.find({
