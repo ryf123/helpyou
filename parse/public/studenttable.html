@@ -151,7 +151,7 @@
     </footer>
     <!-- /footer content --> 
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="vendors/jquery-2.1.4.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -212,6 +212,8 @@ body {
                         var stringify_data = JSON.stringify(schooldata);
                         stringify_data = JSON.parse(stringify_data);
                         $('#table').bootstrapTable({
+                           pagination : "true",
+                           pageSize: 100, 
                            search : 'true',
                            data: stringify_data,
                            columns: [
@@ -291,11 +293,11 @@ body {
                                          title: '年龄',
                                          sortable:'true'
                                      },
-                                     {
-                                         field: 'dob',
-                                         sortable:'true',
-                                         title: '生日'
-                                     },
+                                     // {
+                                     //     field: 'dob',
+                                     //     sortable:'true',
+                                     //     title: '生日'
+                                     // },
                                      {
                                          field: 'edit',
                                          formatter: 'operateeditFormatter',
@@ -309,21 +311,20 @@ body {
                                      ]
                            });
                         //update cell with current age
-                        var data = $('#table').bootstrapTable('getData');
-                        for(index in data){
-                            // calculate the age difference
-                            var rowdata = data[index];
-                            var dob = rowdata['dob'];
-                                if(dob != undefined){
-                                var d = new Date(dob);
-                                var diff = Date.now() - d.getTime();
-                                var ageDate = new Date(diff);
-                                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
-                                fieldname = 'age';
-                                $('#table').bootstrapTable("updateCell",{rowIndex: index, fieldName: fieldname, fieldValue: age});
-                            }
-                            
-                        }
+                        // var data = $('#table').bootstrapTable('getData');
+                        // for(index in data){
+                        //     // calculate the age difference
+                        //     var rowdata = data[index];
+                        //     var dob = rowdata['dob'];
+                        //         if(dob != undefined){
+                        //         var d = new Date(dob);
+                        //         var diff = Date.now() - d.getTime();
+                        //         var ageDate = new Date(diff);
+                        //         var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                        //         fieldname = 'age';
+                        //         $('#table').bootstrapTable("updateCell",{rowIndex: index, fieldName: fieldname, fieldValue: age});
+                        //     }
+                        // }
                         },
                         error: function(error) {
                         alert("error");
