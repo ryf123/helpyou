@@ -245,6 +245,7 @@ body {
                                          title: '年级',
                                          sortable:'true',
                                          width: '1%',
+                                         class: "grade"
                                      },
                                      {
                                          field: 'roomnumber',
@@ -254,12 +255,13 @@ body {
                                      {
                                          field: 'contactmethod',
                                          title: '联系方式',
-                                         sortable:'true'
+                                         sortable:'true',
+                                         class: "contactmethod"
                                      },
                                      {
                                          field: 'contact',
                                          title: '联系人',
-                                         sortable:'true'
+                                         sortable:'true',
                                      },
                                      {
                                          field: 'phonenumber',
@@ -401,6 +403,8 @@ body {
             'click .edit': function (e, value, row, index) {
                 var button = "#table tr[data-index='"+index+"'] td .edit i";
                 var trindex = "#table tr[data-index='"+index+"'] td"; // all tds in the row
+                $(trindex).eq(6).editable({type: "select",source: [{value: "email", text: 'email'},{value: "text", text: 'text'}]}); 
+                $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'}]});
                 $(trindex).slice( 1, -2 ).editable('toggleDisabled'); // toggle disable
                 //if ok button is clicked
                 if($(button).attr("class") == "glyphicon glyphicon-ok"){
@@ -413,7 +417,7 @@ body {
                             $("#alertmessage").append(msg);
                         },
                         error: function(error) {
-                                    alert("Can't save, try again");
+                            alert("Can't save, try again");
                         }
                     });
                 }
@@ -425,10 +429,11 @@ body {
                     }
                     $(button).attr("class","glyphicon glyphicon-ok");
                 // do not selec the last two items which are edit and remove
-                $(trindex).slice( 1, -2 ).editable({
-                    title: 'enter name',
-                    mode: 'inline'
-                });
+                // $(trindex).slice( 1, -2 ).editable({
+                //     title: 'enter name',
+                //     mode: 'inline'
+                // });
+                
                 console.log(value, row, index);
                 // on save event, if the value is saved then update row value
                 // save mean the the tick icon, or "enter" is pressed∂up
@@ -472,6 +477,8 @@ body {
             $('#table tr').each(function(){
              icon = $(this).find("td a i").first();
              if(icon.attr("class") =="glyphicon glyphicon-ok"){
+                 $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'}]}); // make grade to be selectable
+                 $(trindex).eq(6).editable({type: "select",source: [{value: "email", text: 'email'},{value: "text", text: 'text'}]}); // make contactmethod to be selectable       
                  $(this).find("td").slice(1, -2).editable();
                  $(trindex).slice( 1, -2 ).on('save',onsave);
              }
