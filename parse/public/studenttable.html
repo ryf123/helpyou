@@ -212,86 +212,69 @@ body {
                         var stringify_data = JSON.stringify(schooldata);
                         stringify_data = JSON.parse(stringify_data);
                         $('#table').bootstrapTable({
-                           pagination : "true",
-                           pageSize: 100, 
-                           search : 'true',
                            data: stringify_data,
                            columns: [
                                      {
                                          field: 'studentid',
                                          title: '学号',
-                                         sortable:'true',
                                          width: '2%',
                                      },                                                                          
                                      {
                                          field: 'firstname',
                                          title: '名',
-                                         sortable:'true',
                                          footerFormatter: totalNameFormatter,
                                      },
                                      {
                                          field: 'lastname',
                                          title: '姓',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'school',
                                          title: '学校',
-                                         sortable:'true',
                                          width: '5%',
                                      },
                                      {
                                          field: 'grade',
                                          title: '年级',
-                                         sortable:'true',
                                          width: '1%',
                                          class: "grade"
                                      },
                                      {
                                          field: 'roomnumber',
                                          title: '教室',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'contactmethod',
                                          title: '联系方式',
-                                         sortable:'true',
                                          class: "contactmethod"
                                      },
                                      {
                                          field: 'contact',
                                          title: '联系人',
-                                         sortable:'true',
                                      },
                                      {
                                          field: 'phonenumber',
                                          title: '联系电话',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'altphonenumber',
                                          title: '联系电话（备用）',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'email',
                                          title: '邮箱',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'altemail',
                                          title: '电子邮箱（备用）',
-                                         sortable:'true'
                                      },                                     
                                      {
                                          field: 'studentaddress',
                                          title: '家庭地址',
-                                         sortable:'true'
                                      },
                                      {
                                          field: 'sex',
                                          title: '性别',
-                                         sortable:'true'
                                      },
                                      // {
                                      //     field: 'age',
@@ -404,7 +387,7 @@ body {
                 var button = "#table tr[data-index='"+index+"'] td .edit i";
                 var trindex = "#table tr[data-index='"+index+"'] td"; // all tds in the row
                 $(trindex).eq(6).editable({type: "select",source: [{value: "email", text: 'email'},{value: "text", text: 'text'}]}); 
-                $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'}]});
+                $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'},{value: "6", text: '6'}]});
                 $(trindex).slice( 1, -2 ).editable('toggleDisabled'); // toggle disable
                 //if ok button is clicked
                 if($(button).attr("class") == "glyphicon glyphicon-ok"){
@@ -477,7 +460,7 @@ body {
             $('#table tr').each(function(){
              icon = $(this).find("td a i").first();
              if(icon.attr("class") =="glyphicon glyphicon-ok"){
-                 $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'}]}); // make grade to be selectable
+                 $(trindex).eq(4).editable({type: "select",source: [{value: "TK", text: 'TK'},{value: "K", text: 'K'},{value: "1", text: '1'},{value: "2", text: '2'},{value: "3", text: '3'},{value: "4", text: '4'},{value: "5", text: '5'},{value: "6", text: '6'}]}); // make grade to be selectable
                  $(trindex).eq(6).editable({type: "select",source: [{value: "email", text: 'email'},{value: "text", text: 'text'}]}); // make contactmethod to be selectable       
                  $(this).find("td").slice(1, -2).editable();
                  $(trindex).slice( 1, -2 ).on('save',onsave);
