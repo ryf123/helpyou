@@ -195,6 +195,7 @@
     <script src="vendors/Sortable.js"></script>
     <script src="vendors/pdfmake.min.js"></script>
     <script src="vendors/vfs_fonts.js"></script>
+    <script src="vendors/date.js"></script>
     <script>
     // initialize constant
     var d = new Date();
@@ -203,7 +204,7 @@
     var currentday = d.getDate();
     var currentyearmonth = currentyear +""+currentmonth;
     var registeryearmonth = "register"+currentyearmonth;
-    var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
+    var todaystring = new Date().toString('MM/dd/yyyy'); 
     var dayofweek = d.getDay();
     $(function(){
         // save button on click convert to pdf

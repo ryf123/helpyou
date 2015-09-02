@@ -151,7 +151,6 @@
     <!-- /footer content --> 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
@@ -161,6 +160,7 @@
     <script src="vendors/sb-admin-2.js"></script>
 	<script src="vendors/bootstrap-table.min.js"></script>
 	<script type="text/javascript" src="vendors/parse.js"></script>
+    <script src="vendors/date.js"></script>
 </body>
 <style>
 .navbar-default {
@@ -208,7 +208,7 @@ body {
         var currentday = d.getDate();
         var currentyearmonth = currentyear +""+currentmonth;
         var registeryearmonth = "register"+currentyearmonth;
-        var todaystring = currentmonth+"/"+currentday+"/"+currentyear;
+        var todaystring = new Date().toString('MM/dd/yyyy'); 
 
         // disable editable
         columnnamearray = ['studentid','firstname','lastname','grade','sex','contact','email','phonenumber','edit','remove'];
