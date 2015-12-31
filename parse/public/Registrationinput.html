@@ -169,6 +169,7 @@
     <script src="vendors/bootstrap-datepicker.js"></script>
     <script src="vendors/jquery.dataTables.min.js"></script>
     <script src="vendors/select2.min.js"></script>
+    <script src="vendors/date.js"></script>
 
 </body>
 <style>
@@ -214,9 +215,12 @@ body {
     var d = new Date();
     var month = d.getMonth()+1;
     var year = d.getFullYear();
-    var nextmonth = month+1;
-    var monthname1 = "register"+year+""+month;
-    var monthname2 = "register"+year+""+nextmonth;
+    var nextmonthdate = Date.today().add(1).months(); 
+    var nextnextmonthdate = Date.today().add(2).months(); 
+    var nextmonth = nextmonthdate.getMonth()+1;
+    var monthname1 = "register"+d.toString('yyyyM')
+    var monthname2 = "register"+nextmonthdate.toString('yyyyM');
+    var monthname3 = "register"+nextnextmonthdate.toString('yyyyM');
     // load initial data from database
     Parse.initialize("IMxHY4AEmtrLwyxSSrBx7fVdPAyCqUCIVczJZPWl","vT6GeGbec8Do6EZ3Wdny68iFFitjBGjus6ZOjpu0");
     Parse.Cloud.run('getobject', {objectname: 'Student'}, {
@@ -301,11 +305,15 @@ body {
                                          var registerdate = "";
                                          var monthdata1 = $('#table').bootstrapTable("getData")[i-1][monthname1];
                                          var monthdata2 = $('#table').bootstrapTable("getData")[i-1][monthname2];
+                                         var monthdata3 = $('#table').bootstrapTable("getData")[i-1][monthname3];
                                          if(monthdata1 != undefined){
                                              registerdate+=monthdata1;
                                          }
                                          if(monthdata2 != undefined){
                                          registerdate = registerdate +","+monthdata2;
+                                         }
+                                         if(monthdata3 != undefined){
+                                            registerdate = registerdate +","+monthdata2;
                                          }
                                          if(registerdate != ""){
                                          $('#table').bootstrapTable("updateCell",{rowIndex: i-1, fieldName: "registrationdate", fieldValue: registerdate});
@@ -368,6 +376,7 @@ body {
         'click .save': function (e, value, row, index) {
                 var month1 = [];
                 var month2 = [];
+                var month3 = [];
                 var objectid = row["objectId"];
                 var studentid = row["studentid"];
                 var registerdate = $(this).parent().parent().find(".registration").html();
@@ -380,13 +389,29 @@ body {
                         month1.push(date);
                     }
                     else{
-                        month2.push(date);
+                        month = nextmonthdate.getMonth();
+                        year = nextmonthdate.getFullYear();
+                        re = new RegExp(month+"\/[0-9]+\/"+year);
+                        var match = date.match(re);
+                        if(match != undefined){
+                            month2.push(date);
+                        }
+                        else{
+                            month = nextnextmonthdate.getMonth();
+                            year = nextnextmonthdate.getFullYear();
+                            re = new RegExp(month+"\/[0-9]+\/"+year);
+                            var match = date.match(re);
+                            if(match != undefined){
+                                month3.push(date);
+                            }
+                        }
                     }
                 }
                 var tempdate = $(this).parent().parent().find(".tempdate").html();
                 var myobjectvalue = {'studentid':studentid,'tempdate':tempdate};
                 myobjectvalue[monthname1] = month1.join();
                 myobjectvalue[monthname2] = month2.join();
+                myobjectvalue[monthname3] = month3.join();
                 Parse.Cloud.run('saveobject', { objectname: 'Student', 'objectid':objectid,objectvalue:myobjectvalue}, {
                     success: function() {
                         location.reload();
@@ -407,7 +432,7 @@ body {
 
     function enabledatepicker(){
         var currentdate = new Date();
-        var currentday= currentdate.getDate()-1;
+        var currentday= currentdate.getDate();
         $("#table td[class='registration']").datepicker({
               todayHighlight: true,
               todayBtn: true,
@@ -415,7 +440,7 @@ body {
               multidate: true,
               daysOfWeekDisabled: "0,6",
               startDate: "-"+currentday+"d",
-              endDate: "+2m "+"-"+currentday+"d"+" -1d",
+              endDate: "+3m "+"-"+currentday+"d"+" -1d",
         });
         $("#table td[class='tempdate']").datepicker({
             todayHighlight: true,
@@ -424,7 +449,7 @@ body {
             multidate: true,
             daysOfWeekDisabled: "0,6",
             startDate: "-"+currentday+"d",
-            endDate: "+2m "+"-"+currentday+"d"+" -1d",
+            endDate: "+3m "+"-"+currentday+"d"+" -1d",
         });
         $("#table td[class='registration']").datepicker()
             .on('changeDate', function(e){
